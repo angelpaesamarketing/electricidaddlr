@@ -98,7 +98,8 @@
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       const d = new FormData(form);
-      const texto = `Hola, soy ${d.get('nombre') || ''} (${d.get('telefono') || ''}). ${d.get('mensaje') || 'Quiero un presupuesto.'}`;
+      const serv = form.dataset.servicio ? ` [${form.dataset.servicio}]` : '';
+      const texto = `Hola, soy ${d.get('nombre') || ''} (${d.get('telefono') || ''}).${serv} ${d.get('mensaje') || 'Quiero un presupuesto.'}`;
       open('https://wa.me/34652967349?text=' + encodeURIComponent(texto), '_blank', 'noopener');
     });
   }
