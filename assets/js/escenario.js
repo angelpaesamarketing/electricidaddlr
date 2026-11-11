@@ -1,14 +1,16 @@
 /* Electricidad y Antenas DLR — la placa se instala conforme bajas.
 
    Cómo funciona:
-   - Una sola imagen frontal del panel. Un panel es un plano, así que su
-     posición en cada fotograma se describe con las cuatro esquinas que ocupa
-     en pantalla, y de ahí sale la matrix3d que lo deforma. No hace falta una
-     secuencia de fotogramas.
-   - En vuelo, las esquinas salen de proyectar el panel girado en 3D.
-   - Al posarse, las esquinas se llevan hasta las cuatro esquinas exactas de
-     una de las placas de la foto (medidas sobre la imagen), así que encaja al
-     píxel en cualquier tamaño de pantalla y el fundido final no se nota.
+   - La placa es un objeto 3D de verdad: una caja con su cara de células, su
+     dorso, y los cuatro cantos del marco de aluminio. Son seis capas HTML.
+   - En cada fotograma se calculan los ocho vértices de la caja girada, se
+     proyectan a pantalla con perspectiva, y cada cara se deforma con la
+     matrix3d que lleva su rectángulo a los cuatro vértices que le tocan.
+     Solo se pintan las caras que miran al espectador, y cada una se sombrea
+     según cómo le da la luz.
+   - Al posarse, los vértices de la cara de células se llevan a las cuatro
+     esquinas exactas de una de las placas de la foto (medidas sobre la
+     imagen), así que encaja al píxel en cualquier pantalla.
    - El panel fijo se ancla con position:sticky. Si un contenedor lo rompe
      (GoHighLevel envuelve los bloques en capas con overflow oculto), se
      arregla el contenedor o, si no se puede, se ancla a mano.
@@ -29,9 +31,8 @@
   if (!fijo || !placa || !casa || !bloques.length) return;
 
   /* Esquinas de la quinta placa del tejado en la foto, en fracción del ancho
-     y el alto de la imagen. El orden es el de las esquinas del panel en
-     vuelo: arriba-izquierda, arriba-derecha, abajo-derecha, abajo-izquierda.
-     El lado largo del panel queda sobre el lado largo de la placa de la foto. */
+     y el alto de la imagen, en el orden de las esquinas de la cara de
+     células: arriba-izquierda, arriba-derecha, abajo-derecha, abajo-izquierda. */
   var DIANA = [
     [0.50716, 0.34619],
     [0.54720, 0.27783],
@@ -39,6 +40,11 @@
     [0.57031, 0.35400]
   ];
   var PERSPECTIVA = 1500;
+  var GROSOR = 0.03;                 /* grosor del marco respecto al ancho */
+  var LUZ = (function () {           /* de dónde viene la luz: arriba-izquierda, de frente */
+    var v = [-0.42, -0.55, 0.72], n = Math.hypot(v[0], v[1], v[2]);
+    return [v[0] / n, v[1] / n, v[2] / n];
+  })();
 
   var sinMovimiento = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -98,6 +104,40 @@
     return;
   }
 
+  /* ---------- la placa como caja de seis caras ---------- */
+
+  function crea(clase, dentro) {
+    var d = document.createElement('div');
+    d.className = 'cara ' + clase;
+    d.innerHTML = (dentro || '') + '<b class="luz"></b>';
+    placa.appendChild(d);
+    return d;
+  }
+  var foto = placa.querySelector('img');
+  var sombra = document.createElement('div');
+  sombra.className = 'cara cara-sombra';
+  placa.appendChild(sombra);
+  var elDorso = crea('cara-dorso', '<i class="dorso-caja"></i><i class="dorso-cable c1"></i><i class="dorso-cable c2"></i><i class="dorso-etq"></i>');
+  var elArriba = crea('cara-canto canto-h');
+  var elAbajo = crea('cara-canto canto-h');
+  var elIzq = crea('cara-canto canto-v');
+  var elDcha = crea('cara-canto canto-v');
+  var elFrente = crea('cara-frente', '<i class="brillo"></i>');
+  if (foto) elFrente.insertBefore(foto, elFrente.firstChild);
+  placa.classList.add('esc-3d');
+
+  /* vértices: 0-3 la cara de células (AI, AD, BD, BI), 4-7 el dorso, mismos x,y.
+     Cada cara lista sus vértices de forma que, vista desde fuera, su rectángulo
+     HTML (0,0)-(ancho,0)-(ancho,alto)-(0,alto) caiga sobre ellos en ese orden. */
+  var CARAS = [
+    { el: elFrente, v: [0, 1, 2, 3], n: [0, 0, 1], t: 'wh' },
+    { el: elDorso, v: [5, 4, 7, 6], n: [0, 0, -1], t: 'wh' },
+    { el: elDcha, v: [1, 5, 6, 2], n: [1, 0, 0], t: 'dh' },
+    { el: elIzq, v: [4, 0, 3, 7], n: [-1, 0, 0], t: 'dh' },
+    { el: elArriba, v: [4, 5, 1, 0], n: [0, -1, 0], t: 'wd' },
+    { el: elAbajo, v: [3, 2, 6, 7], n: [0, 1, 0], t: 'wd' }
+  ];
+
   /* ---------- utilidades ---------- */
 
   function entre(a, b, t) { return a + (b - a) * t; }
@@ -106,28 +146,35 @@
   function tramo(v, a, b) { return limita((v - a) / (b - a), 0, 1); }
   var RAD = Math.PI / 180;
 
-  /* esquinas en pantalla de un panel w×h con una pose dada */
-  function proyecta(pose, w, h, ox, oy) {
-    var ry = pose.ry;
-    /* de canto exacto el panel no tiene área y la matriz degenera */
-    var c = Math.cos(ry * RAD);
-    if (Math.abs(c) < 0.03) ry += 2;
-    var sx = Math.sin(pose.rx * RAD), cx = Math.cos(pose.rx * RAD);
-    var sy = Math.sin(ry * RAD), cy = Math.cos(ry * RAD);
-    var sz = Math.sin(pose.rz * RAD), cz = Math.cos(pose.rz * RAD);
-    var hw = w * pose.s / 2, hh = h * pose.s / 2;
+  function trig(pose) {
+    return { sx: Math.sin(pose.rx * RAD), cx: Math.cos(pose.rx * RAD),
+             sy: Math.sin(pose.ry * RAD), cy: Math.cos(pose.ry * RAD),
+             sz: Math.sin(pose.rz * RAD), cz: Math.cos(pose.rz * RAD) };
+  }
+  function gira(x, y, z, T) {
+    var x1 = x * T.cz - y * T.sz, y1 = x * T.sz + y * T.cz;   /* giro en Z */
+    var x2 = x1 * T.cy + z * T.sy, z2 = -x1 * T.sy + z * T.cy; /* giro en Y */
+    return [x2, y1 * T.cx - z2 * T.sx, y1 * T.sx + z2 * T.cx]; /* giro en X */
+  }
+
+  /* los ocho vértices de la caja, proyectados a pantalla */
+  function proyecta(pose, T, w, h, d, ox, oy) {
+    var hw = w * pose.s / 2, hh = h * pose.s / 2, hd = d * pose.s / 2;
     var base = [[-hw, -hh], [hw, -hh], [hw, hh], [-hw, hh]];
     var out = [];
-    for (var i = 0; i < 4; i++) {
-      var x = base[i][0], y = base[i][1];
-      var x1 = x * cz - y * sz, y1 = x * sz + y * cz;      /* giro en Z */
-      var x2 = x1 * cy, z2 = -x1 * sy;                     /* giro en Y */
-      var y3 = y1 * cx - z2 * sx, z3 = y1 * sx + z2 * cx;  /* giro en X */
-      var X = pose.x + x2, Y = pose.y + y3;
-      var k = PERSPECTIVA / (PERSPECTIVA - z3);
-      out.push([ox + (X - ox) * k, oy + (Y - oy) * k]);
+    for (var i = 0; i < 8; i++) {
+      var b = base[i % 4];
+      var g = gira(b[0], b[1], i < 4 ? hd : -hd, T);
+      var k = PERSPECTIVA / (PERSPECTIVA - g[2]);
+      out.push([ox + (pose.x + g[0] - ox) * k, oy + (pose.y + g[1] - oy) * k]);
     }
     return out;
+  }
+
+  function area2(q) {
+    var s = 0;
+    for (var i = 0; i < 4; i++) { var a = q[i], b = q[(i + 1) % 4]; s += a[0] * b[1] - b[0] * a[1]; }
+    return s;
   }
 
   /* matrix3d que lleva la caja w×h (origen 0,0) a las cuatro esquinas q */
@@ -175,7 +222,16 @@
       else if (movil) textoAbajo = Math.max(textoAbajo, arriba + 16 + alto * k);
     });
 
-    var w = placa.offsetWidth || 1, h = placa.offsetHeight || 1;
+    /* tamaño de la caja y de cada cara */
+    var w = placa.offsetWidth || 1, h = placa.offsetHeight || 1, d = Math.max(6, w * GROSOR);
+    CARAS.forEach(function (c) {
+      c.fw = c.t === 'dh' ? d : w;
+      c.fh = c.t === 'wd' ? d : h;
+      c.el.style.width = c.fw + 'px';
+      c.el.style.height = c.fh + 'px';
+    });
+    sombra.style.width = w + 'px';
+    sombra.style.height = h + 'px';
 
     /* la diana, en coordenadas del panel fijo */
     var cx0 = casa.offsetLeft, cy0 = casa.offsetTop, cw = casa.offsetWidth, ch = casa.offsetHeight;
@@ -185,23 +241,26 @@
     var ladoLargo = Math.hypot(diana[1][0] - diana[0][0], diana[1][1] - diana[0][1]);
     var escalaFin = ladoLargo * 1.5 / w;
 
-    /* las poses del vuelo */
+    /* las poses del vuelo: la placa arranca flotando sobre la casa, que ya se ve */
     var P;
     if (!movil) {
+      /* arriba, en el cielo, para que la casa y el paisaje queden a la vista */
+      var s0d = 0.86;
+      var y0d = Math.max(arriba + h * s0d * 0.5 + 18, cy0 + ch * 0.03);
       P = [
-        { p: 0.00, x: sw * 0.725, y: arriba + util * 0.40, rx: -14, ry: -26, rz: 5, s: 1 },
-        { p: 0.22, x: sw * 0.735, y: arriba + util * 0.42, rx: -6, ry: 70, rz: 2, s: 0.95 }
+        { p: 0.00, x: Math.max(dcx + sw * 0.03, sw * 0.71), y: y0d, rx: -16, ry: -30, rz: 6, s: s0d },
+        { p: 0.22, x: Math.max(dcx + sw * 0.03, sw * 0.71), y: y0d + util * 0.02, rx: -4, ry: 70, rz: 2, s: s0d * 0.96 }
       ];
     } else {
       /* en pantallas muy bajas el aviso de bajar no cabe: se quita y la placa gana sitio */
       var sinPista = (arriba + util - 58) - (hueroAbajo + 12) < 150;
       if (pista) pista.style.display = sinPista ? 'none' : '';
       var techo = hueroAbajo + 12, suelo = arriba + util - (sinPista ? 16 : 58);
-      var s0 = limita((suelo - techo) * 0.74 / h, 0.4, 1);
+      var s0 = limita((suelo - techo) * 0.70 / h, 0.4, 0.9);
       var y0 = (techo + suelo) / 2;
       P = [
-        { p: 0.00, x: sw * 0.50, y: y0, rx: -14, ry: -24, rz: 5, s: s0 },
-        { p: 0.22, x: sw * 0.52, y: y0, rx: -6, ry: 70, rz: 2, s: s0 * 0.96 }
+        { p: 0.00, x: sw * 0.50, y: y0, rx: -16, ry: -28, rz: 6, s: s0 },
+        { p: 0.22, x: sw * 0.52, y: y0, rx: -4, ry: 70, rz: 2, s: s0 * 0.96 }
       ];
     }
     var alza = movil ? util * 0.17 : util * 0.20;
@@ -211,19 +270,25 @@
       if (k3.y < minimo) k3.y = Math.min(minimo, dcy - 12);
     }
     var k1 = P[1];
-    P.push({ p: 0.46, x: entre(k1.x, k3.x, 0.5), y: entre(k1.y, k3.y, 0.42), rx: 12, ry: 190, rz: -5,
+    P.push({ p: 0.46, x: entre(k1.x, k3.x, 0.5), y: entre(k1.y, k3.y, 0.42), rx: 14, ry: 190, rz: -5,
              s: entre(k1.s, k3.s, 0.5) });
     P.push(k3);
     /* pose de aproximación: ya orientada como el tejado, encima de la diana */
-    P.push({ p: 0.86, x: dcx, y: dcy, rx: 56, ry: 360, rz: -34, s: escalaFin });
+    var fin = { p: 0.86, x: dcx, y: dcy, rx: 56, ry: 360, rz: -34, s: escalaFin };
+    P.push(fin);
 
-    M = { sw: sw, sh: sh, w: w, h: h, movil: movil, diana: diana, P: P,
-          ox: sw * 0.6, oy: arriba + util * 0.42 };
+    var ox = sw * 0.6, oy = arriba + util * 0.42;
+    /* cuánto asoma el dorso por detrás de la cara al posarse */
+    var pf = proyecta(fin, trig(fin), w, h, d, ox, oy), grosorFin = [];
+    for (var i = 0; i < 4; i++) grosorFin.push([pf[i + 4][0] - pf[i][0], pf[i + 4][1] - pf[i][1]]);
+
+    M = { sw: sw, sh: sh, w: w, h: h, d: d, movil: movil, diana: diana, grosorFin: grosorFin,
+          P: P, ox: ox, oy: oy };
   }
 
   /* ---------- fotograma ---------- */
 
-  var manual = false, ultimoP = -1, ultimaMatriz = '', visible = true, pendiente = false;
+  var manual = false, ultimoP = -1, visible = true, pendiente = false;
 
   function pinta() {
     pendiente = false;
@@ -245,11 +310,6 @@
     if (!flota && Math.abs(p - ultimoP) < 0.0002) return;
     ultimoP = p;
 
-    /* la casa entra desde abajo y se queda */
-    var entra = suave(tramo(p, 0.26, 0.48));
-    casa.style.opacity = entra.toFixed(3);
-    casa.style.transform = 'translate3d(0,' + ((1 - entra) * 46).toFixed(1) + 'px,0)';
-
     /* pose del vuelo */
     var P = M.P, i = 0;
     while (i < P.length - 2 && p > P[i + 1].p) i++;
@@ -258,23 +318,48 @@
     var pose = { x: entre(a.x, b.x, t), y: entre(a.y, b.y, t), rx: entre(a.rx, b.rx, t),
                  ry: entre(a.ry, b.ry, t), rz: entre(a.rz, b.rz, t), s: entre(a.s, b.s, t) };
     if (flota) {
-      var osc = Math.sin(Date.now() / 1300) * (1 - p / 0.2);
-      pose.y += osc * (M.movil ? 4 : 8); pose.rz += osc * 1.3; pose.rx += osc * 1.6;
+      var ahora = Date.now(), peso = 1 - p / 0.2;
+      var osc = Math.sin(ahora / 1300) * peso, osc2 = Math.sin(ahora / 2100) * peso;
+      pose.y += osc * (M.movil ? 4 : 8); pose.rz += osc * 1.3; pose.rx += osc * 2; pose.ry += osc2 * 7;
     }
-    var q = proyecta(pose, M.w, M.h, M.ox, M.oy);
+    var T = trig(pose);
+    var q = proyecta(pose, T, M.w, M.h, M.d, M.ox, M.oy);
 
-    /* al final las esquinas se llevan a las de la placa de la foto */
+    /* al final los vértices se llevan a las esquinas de la placa de la foto */
     if (i === P.length - 2) {
       var e = suave(tramo(t, 0.3, 1));
       for (var n = 0; n < 4; n++) {
-        q[n][0] = entre(q[n][0], M.diana[n][0], e);
-        q[n][1] = entre(q[n][1], M.diana[n][1], e);
+        var dx = M.diana[n][0], dy = M.diana[n][1];
+        q[n][0] = entre(q[n][0], dx, e);
+        q[n][1] = entre(q[n][1], dy, e);
+        q[n + 4][0] = entre(q[n + 4][0], dx + M.grosorFin[n][0], e);
+        q[n + 4][1] = entre(q[n + 4][1], dy + M.grosorFin[n][1], e);
       }
     }
-    var m = matriz(M.w, M.h, q);
-    if (m && m !== ultimaMatriz) { placa.style.transform = m; ultimaMatriz = m; }
 
-    placa.style.setProperty('--sombra', entre(1, 0.1, tramo(p, 0.66, 0.86)).toFixed(3));
+    /* cada cara: se pinta solo si mira al espectador, deformada y sombreada */
+    for (var c = 0; c < CARAS.length; c++) {
+      var cara = CARAS[c], v = cara.v;
+      var cq = [q[v[0]], q[v[1]], q[v[2]], q[v[3]]];
+      var m = area2(cq) > 3 ? matriz(cara.fw, cara.fh, cq) : null;
+      if (!m) { if (cara.vis !== false) { cara.el.style.visibility = 'hidden'; cara.vis = false; } continue; }
+      if (cara.vis !== true) { cara.el.style.visibility = 'visible'; cara.vis = true; }
+      cara.el.style.transform = m;
+      var g = gira(cara.n[0], cara.n[1], cara.n[2], T);
+      var luz = Math.max(0, g[0] * LUZ[0] + g[1] * LUZ[1] + g[2] * LUZ[2]);
+      cara.el.style.setProperty('--oscuro', ((1 - luz) * 0.5).toFixed(3));
+    }
+    /* el reflejo del cristal se desplaza con el giro */
+    var giro = ((pose.ry % 360) + 360) % 360;
+    elFrente.style.setProperty('--bx', (130 - (giro > 180 ? giro - 360 : giro) * 1.6).toFixed(1) + '%');
+
+    /* sombra en el aire: la silueta de la placa, desplazada y difuminada */
+    var fs = 1 - tramo(p, 0.62, 0.86), sq = [];
+    for (var s = 0; s < 4; s++) sq.push([q[s][0] + 16 * fs + 2, q[s][1] + 44 * fs * pose.s + 3]);
+    var ms = Math.abs(area2(sq)) > 3 ? matriz(M.w, M.h, sq) : null;
+    if (ms) sombra.style.transform = ms;
+    sombra.style.opacity = ms ? (0.1 + 0.2 * fs).toFixed(3) : '0';
+
     if (capa) capa.style.opacity = tramo(p, 0.875, 0.94).toFixed(3);
     placa.style.opacity = (1 - tramo(p, 0.915, 0.965)).toFixed(3);
 
