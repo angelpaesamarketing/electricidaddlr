@@ -285,3 +285,12 @@ body.ck-visible .barra-movil{display:none}
   .ck-botones{flex-direction:column;align-items:stretch}
   .ck-botones .btn{width:100%}
 }
+
+/* ===== microcopia sobre el botón de llamar ===== */
+.acciones{align-items:flex-end}
+.accion-llamar{display:flex;flex-direction:column;gap:8px;align-items:flex-start;min-width:0}
+.micro{font-size:.82rem;font-weight:650;color:var(--suave);padding-left:6px;line-height:1.3}
+@media (max-width:420px){
+  .accion-llamar{width:100%}
+  .micro{text-align:center;width:100%;padding-left:0}
+}
