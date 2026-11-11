@@ -373,3 +373,9 @@ select option{background:#0b1626;color:#fff}
   .pasos.pasos-4{grid-template-columns:1fr}
   .aviso-precio{padding:20px}
 }
+
+/* factores del presupuesto, en la landing solar */
+.intro-precio{font-size:1rem;margin-bottom:1.1em}
+.factores{margin:0;padding-left:1.25em;display:flex;flex-direction:column;gap:11px}
+.factores li{font-size:1rem}
+.factores li b{color:var(--tinta)}
