@@ -161,7 +161,6 @@
 
   function entre(a, b, t) { return a + (b - a) * t; }
   function limita(v, a, b) { return v < a ? a : (v > b ? b : v); }
-  function suave(t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
   function tramo(v, a, b) { return limita((v - a) / (b - a), 0, 1); }
   var RAD = Math.PI / 180;
 
@@ -307,11 +306,28 @@
 
   /* ---------- fotograma ---------- */
 
-  var manual = false, ultimoP = -1, visible = true, pendiente = false;
+  var manual = false, pM = -1, tAnterior = 0, visible = true, pendiente = false;
+  /* Tiempo de respuesta del amortiguado, en segundos. La rueda del ratón mueve
+     el scroll a saltos de unos 100 px; con esto la placa los recorre de forma
+     continua en vez de teletransportarse. En táctil el scroll ya es continuo y
+     basta con menos. */
+  var TAU = matchMedia('(hover: none)').matches ? 0.07 : 0.15;
 
-  function pinta() {
+  /* curva suave que pasa por todas las poses sin detenerse en ninguna
+     (Hermite con tangentes por diferencias; sale y llega con velocidad cero) */
+  function curva(P, clave, i, u) {
+    var a = P[i], b = P[i + 1], h = b.p - a.p;
+    var ma = i > 0 ? (b[clave] - P[i - 1][clave]) / (b.p - P[i - 1].p) : 0;
+    var mb = i < P.length - 2 ? (P[i + 2][clave] - a[clave]) / (P[i + 2].p - a.p) : 0;
+    var u2 = u * u, u3 = u2 * u;
+    return (2 * u3 - 3 * u2 + 1) * a[clave] + (u3 - 2 * u2 + u) * h * ma +
+           (-2 * u3 + 3 * u2) * b[clave] + (u3 - u2) * h * mb;
+  }
+
+  function pinta(ahora) {
     pendiente = false;
     if (!M) mide();
+    if (!ahora) ahora = performance.now();
     var caja = escenario.getBoundingClientRect();
     var recorrido = escenario.offsetHeight - fijo.offsetHeight;
     var avance = limita(-caja.top, 0, recorrido);
@@ -325,28 +341,37 @@
     }
     if (manual) fijo.style.transform = 'translate3d(0,' + avance.toFixed(1) + 'px,0)';
 
-    var flota = p < 0.2;
-    if (!flota && Math.abs(p - ultimoP) < 0.0002) return;
-    ultimoP = p;
+    /* el progreso que se pinta persigue al del scroll */
+    if (pM < 0) pM = p;
+    else {
+      var dt = Math.min(0.05, Math.max(0, (ahora - tAnterior) / 1000));
+      pM += (p - pM) * (1 - Math.exp(-dt / TAU));
+      if (Math.abs(p - pM) < 0.0003) pM = p;
+    }
+    tAnterior = ahora;
+    p = pM;
 
-    /* pose del vuelo */
+    /* pose del vuelo, sobre una curva continua */
     var P = M.P, i = 0;
     while (i < P.length - 2 && p > P[i + 1].p) i++;
     var a = P[i], b = P[i + 1];
-    var t = suave(tramo(p, a.p, b.p));
-    var pose = { x: entre(a.x, b.x, t), y: entre(a.y, b.y, t), rx: entre(a.rx, b.rx, t),
-                 ry: entre(a.ry, b.ry, t), rz: entre(a.rz, b.rz, t), s: entre(a.s, b.s, t) };
-    if (flota) {
-      var ahora = Date.now(), peso = 1 - p / 0.2;
-      var osc = Math.sin(ahora / 1300) * peso, osc2 = Math.sin(ahora / 2100) * peso;
-      pose.y += osc * (M.movil ? 4 : 8); pose.rz += osc * 1.3; pose.rx += osc * 2; pose.ry += osc2 * 7;
+    var t = tramo(p, a.p, b.p);
+    var pose = { x: curva(P, 'x', i, t), y: curva(P, 'y', i, t), rx: curva(P, 'rx', i, t),
+                 ry: curva(P, 'ry', i, t), rz: curva(P, 'rz', i, t),
+                 s: Math.max(0.05, curva(P, 's', i, t)) };
+    /* flota mientras vuela; se va calmando al acercarse al tejado */
+    var peso = 1 - tramo(p, 0.45, 0.8);
+    if (peso > 0) {
+      var osc = Math.sin(ahora / 1300) * peso, osc2 = Math.sin(ahora / 2100) * (1 - tramo(p, 0, 0.2));
+      pose.y += osc * (M.movil ? 4 : 7); pose.rz += osc * 1.2; pose.rx += osc * 1.8; pose.ry += osc2 * 6;
     }
     var T = trig(pose);
     var q = proyecta(pose, T, M.w, M.h, M.d, M.ox, M.oy);
 
     /* al final los vértices se llevan a las esquinas de la placa de la foto */
     if (i === P.length - 2) {
-      var e = suave(tramo(t, 0.3, 1));
+      /* se posa frenando: rápido al principio, suave al llegar */
+      var e = 1 - Math.pow(1 - tramo(t, 0.2, 1), 3);
       for (var n = 0; n < 4; n++) {
         var dx = M.diana[n][0], dy = M.diana[n][1];
         q[n][0] = entre(q[n][0], dx, e);
@@ -392,13 +417,14 @@
 
   function pide() { if (!pendiente) { pendiente = true; requestAnimationFrame(pinta); } }
 
-  /* mientras la placa flota hay que repintar aunque nadie haga scroll */
+  /* mientras el escenario está a la vista se pinta cada fotograma: la placa
+     flota y además va alcanzando al scroll. Fuera de la vista, se para. */
   function late() {
-    if (visible && ultimoP < 0.2) pide();
+    if (visible) pide();
     requestAnimationFrame(late);
   }
 
-  function remide() { M = null; ultimoP = -1; pide(); }
+  function remide() { M = null; pide(); }
 
   document.addEventListener('scroll', pide, { passive: true, capture: true });
   addEventListener('resize', remide, { passive: true });
