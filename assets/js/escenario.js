@@ -81,6 +81,15 @@
     }
   }
 
+  /* atajos: aparecen con el primer scroll y ya no se van */
+  var atajos = document.getElementById('atajos');
+  function vigilaAtajos() {
+    if (!atajos) return;
+    var y = window.pageYOffset || document.documentElement.scrollTop || 0;
+    atajos.classList.toggle('visible', y > 24 || escenario.getBoundingClientRect().top < -24);
+  }
+  document.addEventListener('scroll', vigilaAtajos, { passive: true, capture: true });
+
   /* huecos que tapan la cabecera fija y la barra inferior del móvil */
   function mideHuecos() {
     var arriba = 0, abajo = 0;
@@ -88,6 +97,15 @@
     if (cab) {
       var pc = getComputedStyle(cab).position;
       if (pc === 'sticky' || pc === 'fixed') arriba = cab.offsetHeight;
+    }
+    /* los atajos flotantes: si ya hay cabecera fija con sus botones, sobran;
+       si no, en móvil se les reserva sitio arriba para que no pisen los rótulos */
+    if (atajos) {
+      if (arriba > 0) atajos.style.display = 'none';
+      else {
+        atajos.style.display = '';
+        if (window.innerWidth <= 900) arriba = atajos.offsetHeight + 22;
+      }
     }
     var barra = document.querySelector('.barra-movil');
     if (barra && getComputedStyle(barra).display !== 'none') abajo = barra.offsetHeight;
@@ -98,6 +116,7 @@
 
   arreglaEntorno();
   var huecos = mideHuecos();
+  vigilaAtajos();
 
   if (sinMovimiento) {
     addEventListener('resize', function () { arreglaEntorno(); mideHuecos(); });

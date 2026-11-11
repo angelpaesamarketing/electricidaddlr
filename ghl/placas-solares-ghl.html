@@ -274,9 +274,32 @@
   .dlr-solar .esc-casa .casa-capa{opacity:1}
   .dlr-solar .esc-placa,.dlr-solar .esc-pista{display:none}
 }
+
+/* ===== atajos: llamar y presupuesto, arriba a la derecha tras el primer scroll ===== */
+.dlr-solar .atajos{position:fixed;top:calc(12px + env(safe-area-inset-top,0px));
+  right:max(14px,env(safe-area-inset-right,0px));z-index:45;display:flex;gap:8px;
+  opacity:0;visibility:hidden;transform:translateY(-10px);
+  transition:opacity .3s ease,transform .3s ease,visibility 0s linear .3s}
+.dlr-solar .atajos.visible{opacity:1;visibility:visible;transform:none;
+  transition:opacity .3s ease,transform .3s ease,visibility 0s}
+.dlr-solar .atajos .btn{padding:11px 18px;font-size:.93rem;box-shadow:0 10px 26px -12px rgba(13,34,59,.55)}
+.dlr-solar .atajos .btn svg{width:17px;height:17px}
+@media (max-width:520px){
+  .dlr-solar .atajos{gap:6px;right:10px}
+  .dlr-solar .atajos .btn{padding:10px 13px;font-size:.86rem}
+}
 </style>
 
 <div class="dlr-solar">
+
+<!-- ===== ATAJOS: llamar y presupuesto, siempre a mano tras el primer scroll ===== -->
+<div class="atajos" id="atajos">
+  <a class="btn btn-linea" href="tel:+34652967349" aria-label="Llamar al 652 967 349">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
+    Llamar
+  </a>
+  <a class="btn btn-azul" href="#estudio">Solicita presupuesto</a>
+</div>
 
 <!-- ===== ESCENARIO: la placa se instala al bajar ===== -->
 <section class="escenario" id="escenario">
@@ -650,6 +673,15 @@
     }
   }
 
+  /* atajos: aparecen con el primer scroll y ya no se van */
+  var atajos = document.getElementById('atajos');
+  function vigilaAtajos() {
+    if (!atajos) return;
+    var y = window.pageYOffset || document.documentElement.scrollTop || 0;
+    atajos.classList.toggle('visible', y > 24 || escenario.getBoundingClientRect().top < -24);
+  }
+  document.addEventListener('scroll', vigilaAtajos, { passive: true, capture: true });
+
   /* huecos que tapan la cabecera fija y la barra inferior del móvil */
   function mideHuecos() {
     var arriba = 0, abajo = 0;
@@ -657,6 +689,15 @@
     if (cab) {
       var pc = getComputedStyle(cab).position;
       if (pc === 'sticky' || pc === 'fixed') arriba = cab.offsetHeight;
+    }
+    /* los atajos flotantes: si ya hay cabecera fija con sus botones, sobran;
+       si no, en móvil se les reserva sitio arriba para que no pisen los rótulos */
+    if (atajos) {
+      if (arriba > 0) atajos.style.display = 'none';
+      else {
+        atajos.style.display = '';
+        if (window.innerWidth <= 900) arriba = atajos.offsetHeight + 22;
+      }
     }
     var barra = document.querySelector('.barra-movil');
     if (barra && getComputedStyle(barra).display !== 'none') abajo = barra.offsetHeight;
@@ -667,6 +708,7 @@
 
   arreglaEntorno();
   var huecos = mideHuecos();
+  vigilaAtajos();
 
   if (sinMovimiento) {
     addEventListener('resize', function () { arreglaEntorno(); mideHuecos(); });

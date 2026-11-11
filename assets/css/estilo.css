@@ -504,3 +504,17 @@ select option{background:#0b1626;color:#fff}
   .esc-casa .casa-capa{opacity:1}
   .esc-placa,.esc-pista{display:none}
 }
+
+/* ===== atajos: llamar y presupuesto, arriba a la derecha tras el primer scroll ===== */
+.atajos{position:fixed;top:calc(12px + env(safe-area-inset-top,0px));
+  right:max(14px,env(safe-area-inset-right,0px));z-index:45;display:flex;gap:8px;
+  opacity:0;visibility:hidden;transform:translateY(-10px);
+  transition:opacity .3s ease,transform .3s ease,visibility 0s linear .3s}
+.atajos.visible{opacity:1;visibility:visible;transform:none;
+  transition:opacity .3s ease,transform .3s ease,visibility 0s}
+.atajos .btn{padding:11px 18px;font-size:.93rem;box-shadow:0 10px 26px -12px rgba(13,34,59,.55)}
+.atajos .btn svg{width:17px;height:17px}
+@media (max-width:520px){
+  .atajos{gap:6px;right:10px}
+  .atajos .btn{padding:10px 13px;font-size:.86rem}
+}
