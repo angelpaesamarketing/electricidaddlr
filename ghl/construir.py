@@ -147,8 +147,12 @@ cuerpo_sol = re.sub(r'\s(?:srcset|sizes|fetchpriority)="[^"]*"', '', cuerpo_sol)
 
 # versiones ligeras de las imagenes, que son las que se incrustan
 LIGERAS = {'placa-1200.webp': 'placa-700.webp',
-           'casa-vacia-1600.webp': 'casa-vacia-1280.webp',
-           'casa-capa-instalada.webp': 'casa-capa-instalada-1280.webp'}
+           'caso-general-vacia-1600.webp': 'caso-general-vacia-960.webp',
+           'caso-tejado-vacio-1600.webp': 'caso-tejado-vacio-960.webp',
+           'caso-tejado-real.webp': 'caso-tejado-real-1200.webp',
+           'caso-real-general.webp': 'caso-real-general-900.webp',
+           'caso-real-tejado.webp': 'caso-real-tejado-600.webp',
+           'caso-real-lateral.webp': 'caso-real-lateral-600.webp'}
 PESO_IMG = [0]
 def _incrusta(mm):
     nombre = os.path.basename(mm.group(1))
