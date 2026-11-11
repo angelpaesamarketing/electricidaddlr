@@ -8,12 +8,9 @@
      matrix3d que lleva su rectángulo a los cuatro vértices que le tocan.
      Solo se pintan las caras que miran al espectador, y cada una se sombrea
      según cómo le da la luz.
-   - La casa es una obra real de DLR, en dos planos: el general, que se ve al
-     entrar, y la cubierta de cerca, a la que la cámara se acerca al bajar.
    - Al posarse, los vértices de la cara de células se llevan a las cuatro
-     esquinas exactas de una placa de la foto real (medidas sobre la imagen),
-     así que encaja al píxel en cualquier pantalla. Después la instalación
-     aparece grupo a grupo hasta quedar la foto real completa.
+     esquinas exactas de una de las placas de la foto (medidas sobre la
+     imagen), así que encaja al píxel en cualquier pantalla.
    - El panel fijo se ancla con position:sticky. Si un contenedor lo rompe
      (GoHighLevel envuelve los bloques en capas con overflow oculto), se
      arregla el contenedor o, si no se puede, se ancla a mano.
@@ -29,28 +26,18 @@
   var placa = document.getElementById('escPlaca');
   var casa = document.getElementById('escCasa');
   var capa = casa && casa.querySelector('.casa-capa');
-  var planoA = document.getElementById('planoA');
   var pista = escenario.querySelector('.esc-pista');
   var bloques = [].slice.call(escenario.querySelectorAll('.esc-bloque'));
   if (!fijo || !placa || !casa || !bloques.length) return;
 
-  /* Esquinas de la placa donde se posa (la fila más cercana del grupo central
-     de la foto de cerca), en fracción del ancho y el alto de la imagen, en el
-     orden de las esquinas de la cara de células: arriba-izquierda,
-     arriba-derecha, abajo-derecha, abajo-izquierda. */
+  /* Esquinas de la quinta placa del tejado en la foto, en fracción del ancho
+     y el alto de la imagen, en el orden de las esquinas de la cara de
+     células: arriba-izquierda, arriba-derecha, abajo-derecha, abajo-izquierda. */
   var DIANA = [
-    [0.57417, 0.64056],
-    [0.67625, 0.60472],
-    [0.71, 0.6525],
-    [0.60062, 0.69]
-  ];
-  /* Los cuatro grupos de placas de la obra, en el orden en que aparecen: cada
-     uno es un recorte (clip-path, en % de la capa) de la foto real. */
-  var GRUPOS = [
-    'polygon(37.46% 43.82%,52.61% 35.84%,70.13% 71.06%,51.20% 80.28%)',
-    'polygon(7.39% 10.39%,19.62% 4.45%,46.88% 81.66%,23.08% 91.69%)',
-    'polygon(44.55% 19.81%,57.10% 13.67%,82.96% 48.69%,67.92% 61.18%)',
-    'polygon(23.42% 6.88%,34.45% 1.14%,39.21% 12.20%,36.62% 20.40%,31.21% 28.38%)'
+    [0.50716, 0.34619],
+    [0.54720, 0.27783],
+    [0.60840, 0.28271],
+    [0.57031, 0.35400]
   ];
   var PERSPECTIVA = 1500;
   var GROSOR = 0.03;                 /* grosor del marco respecto al ancho */
@@ -148,20 +135,6 @@
     placa.appendChild(d);
     return d;
   }
-  /* un recorte de la foto real por cada grupo de placas, bajo la capa completa */
-  var grupos = [];
-  if (capa) {
-    GRUPOS.forEach(function (recorte) {
-      var g = capa.cloneNode(false);
-      g.removeAttribute('id');
-      g.className = 'casa-capa casa-grupo';
-      g.style.clipPath = recorte;
-      g.style.webkitClipPath = recorte;
-      capa.parentNode.insertBefore(g, capa);
-      grupos.push(g);
-    });
-  }
-
   var foto = placa.querySelector('img');
   var sombra = document.createElement('div');
   sombra.className = 'cara cara-sombra';
@@ -287,7 +260,7 @@
     var dcx = (diana[0][0] + diana[1][0] + diana[2][0] + diana[3][0]) / 4;
     var dcy = (diana[0][1] + diana[1][1] + diana[2][1] + diana[3][1]) / 4;
     var ladoLargo = Math.hypot(diana[1][0] - diana[0][0], diana[1][1] - diana[0][1]);
-    var escalaFin = ladoLargo * 1.06 / w;
+    var escalaFin = ladoLargo * 1.5 / w;
 
     /* las poses del vuelo: la placa arranca flotando sobre la casa, que ya se ve */
     var P;
@@ -297,7 +270,7 @@
       var y0d = Math.max(arriba + h * s0d * 0.5 + 18, cy0 + ch * 0.03);
       P = [
         { p: 0.00, x: Math.max(dcx + sw * 0.03, sw * 0.71), y: y0d, rx: -16, ry: -30, rz: 6, s: s0d },
-        { p: 0.16, x: Math.max(dcx + sw * 0.03, sw * 0.71), y: y0d + util * 0.02, rx: -4, ry: 70, rz: 2, s: s0d * 0.96 }
+        { p: 0.22, x: Math.max(dcx + sw * 0.03, sw * 0.71), y: y0d + util * 0.02, rx: -4, ry: 70, rz: 2, s: s0d * 0.96 }
       ];
     } else {
       /* en pantallas muy bajas el aviso de bajar no cabe: se quita y la placa gana sitio */
@@ -308,21 +281,21 @@
       var y0 = (techo + suelo) / 2;
       P = [
         { p: 0.00, x: sw * 0.50, y: y0, rx: -16, ry: -28, rz: 6, s: s0 },
-        { p: 0.16, x: sw * 0.52, y: y0, rx: -4, ry: 70, rz: 2, s: s0 * 0.96 }
+        { p: 0.22, x: sw * 0.52, y: y0, rx: -4, ry: 70, rz: 2, s: s0 * 0.96 }
       ];
     }
     var alza = movil ? util * 0.17 : util * 0.20;
-    var k3 = { p: 0.54, x: dcx - sw * 0.01, y: dcy - alza, rx: 34, ry: 292, rz: -10, s: Math.max(escalaFin * 1.7, 0.34) };
+    var k3 = { p: 0.68, x: dcx - sw * 0.01, y: dcy - alza, rx: 34, ry: 292, rz: -16, s: Math.max(escalaFin * 1.9, 0.34) };
     if (movil && textoAbajo) {
       var minimo = textoAbajo + 8 + h * k3.s * 0.5;
       if (k3.y < minimo) k3.y = Math.min(minimo, dcy - 12);
     }
     var k1 = P[1];
-    P.push({ p: 0.36, x: entre(k1.x, k3.x, 0.5), y: entre(k1.y, k3.y, 0.42), rx: 14, ry: 190, rz: -5,
+    P.push({ p: 0.46, x: entre(k1.x, k3.x, 0.5), y: entre(k1.y, k3.y, 0.42), rx: 14, ry: 190, rz: -5,
              s: entre(k1.s, k3.s, 0.5) });
     P.push(k3);
     /* pose de aproximación: ya orientada como el tejado, encima de la diana */
-    var fin = { p: 0.72, x: dcx, y: dcy, rx: 58, ry: 360, rz: -15, s: escalaFin };
+    var fin = { p: 0.86, x: dcx, y: dcy, rx: 56, ry: 360, rz: -34, s: escalaFin };
     P.push(fin);
 
     var ox = sw * 0.6, oy = arriba + util * 0.42;
@@ -390,9 +363,9 @@
                  ry: curva(P, 'ry', i, t), rz: curva(P, 'rz', i, t),
                  s: Math.max(0.05, curva(P, 's', i, t)) };
     /* flota mientras vuela; se va calmando al acercarse al tejado */
-    var peso = 1 - tramo(p, 0.36, 0.64);
+    var peso = 1 - tramo(p, 0.45, 0.8);
     if (peso > 0) {
-      var osc = Math.sin(ahora / 1300) * peso, osc2 = Math.sin(ahora / 2100) * (1 - tramo(p, 0, 0.16));
+      var osc = Math.sin(ahora / 1300) * peso, osc2 = Math.sin(ahora / 2100) * (1 - tramo(p, 0, 0.2));
       pose.y += osc * (M.movil ? 4 : 7); pose.rz += osc * 1.2; pose.rx += osc * 1.8; pose.ry += osc2 * 6;
     }
     var T = trig(pose);
@@ -428,29 +401,14 @@
     elFrente.style.setProperty('--bx', (130 - (giro > 180 ? giro - 360 : giro) * 1.6).toFixed(1) + '%');
 
     /* sombra en el aire: la silueta de la placa, desplazada y difuminada */
-    var fs = 1 - tramo(p, 0.5, 0.72), sq = [];
+    var fs = 1 - tramo(p, 0.62, 0.86), sq = [];
     for (var s = 0; s < 4; s++) sq.push([q[s][0] + 16 * fs + 2, q[s][1] + 44 * fs * pose.s + 3]);
     var ms = Math.abs(area2(sq)) > 3 ? matriz(M.w, M.h, sq) : null;
     if (ms) sombra.style.transform = ms;
     sombra.style.opacity = ms ? (0.1 + 0.2 * fs).toFixed(3) : '0';
 
-    /* la cámara: el plano general se acerca a la cubierta y funde con el de cerca */
-    if (planoA) {
-      var cam = tramo(p, 0.11, 0.34), ce = cam * cam * (3 - 2 * cam);
-      var opA = 1 - tramo(p, 0.2, 0.34);
-      planoA.style.transform = 'scale(' + (1 + 1.3 * ce).toFixed(4) + ')';
-      planoA.style.opacity = opA.toFixed(3);
-      planoA.style.visibility = opA > 0 ? 'visible' : 'hidden';
-    }
-    /* el montaje: los grupos de placas van saliendo uno tras otro y, al final,
-       la capa completa deja la foto real tal cual */
-    for (var gi = 0; gi < grupos.length; gi++) {
-      var g0 = 0.74 + gi * 0.036;
-      grupos[gi].style.opacity = tramo(p, g0, g0 + 0.045).toFixed(3);
-    }
-    if (capa) capa.style.opacity = tramo(p, 0.89, 0.94).toFixed(3);
-    /* la placa que ha volado se funde con el primer grupo, que la contiene */
-    placa.style.opacity = (1 - tramo(p, 0.745, 0.785)).toFixed(3);
+    if (capa) capa.style.opacity = tramo(p, 0.875, 0.94).toFixed(3);
+    placa.style.opacity = (1 - tramo(p, 0.915, 0.965)).toFixed(3);
 
     for (var j = 0; j < bloques.length; j++) {
       var bl = bloques[j];

@@ -72,23 +72,13 @@
     </a>
 
     <div class="esc-casa" id="escCasa">
-      <!-- plano de cerca: la cubierta. Debajo, la foto con el tejado vacío; encima,
-           la capa que devuelve la foto real (escenario.js la saca grupo a grupo) -->
-      <div class="plano plano-b">
-        <img class="casa-base" src="assets/img/caso-tejado-vacio-1600.webp"
-             srcset="assets/img/caso-tejado-vacio-960.webp 960w, assets/img/caso-tejado-vacio-1600.webp 1600w"
-             sizes="(max-width:900px) 120vw, 64vw" width="1600" height="1200"
-             alt="La cubierta plana de grava del chalet, vista desde el dron" decoding="async">
-        <img class="casa-capa" id="tejadoReal" src="assets/img/caso-tejado-real.webp" width="1026" height="542"
-             alt="" decoding="async">
-      </div>
-      <!-- plano general: la casa, la piscina y el mar. Se ve al entrar y funde con el de cerca -->
-      <div class="plano plano-a" id="planoA">
-        <img class="casa-base" src="assets/img/caso-general-vacia-1600.webp"
-             srcset="assets/img/caso-general-vacia-960.webp 960w, assets/img/caso-general-vacia-1600.webp 1600w"
-             sizes="(max-width:900px) 120vw, 64vw" width="1600" height="1200"
-             alt="Chalet con piscina cerca del mar, visto desde el aire" decoding="async">
-      </div>
+      <img class="casa-base" src="assets/img/casa-vacia-1600.webp"
+           srcset="assets/img/casa-vacia-960.webp 960w, assets/img/casa-vacia-1600.webp 1600w"
+           sizes="(max-width:900px) 120vw, 62vw" width="1600" height="1067"
+           alt="Chalet de la Costa Blanca visto desde arriba, con la cubierta plana donde se instala la fotovoltaica"
+           decoding="async">
+      <img class="casa-capa" src="assets/img/casa-capa-instalada.webp" width="1063" height="204"
+           alt="" decoding="async">
     </div>
 
     <div class="esc-placa" id="escPlaca" aria-hidden="true">
@@ -99,7 +89,7 @@
     </div>
 
     <div class="esc-texto">
-      <article class="esc-bloque" data-ini="0" data-fin="0.13">
+      <article class="esc-bloque" data-ini="0" data-fin="0.20">
         <span class="etq">Torrevieja · Orihuela Costa · Vega Baja</span>
         <h1>Placas solares <span>instaladas por quien te las vende</span></h1>
         <p class="lead">Somos el electricista de toda la vida de la zona, instalador autorizado desde 2003. Ni call center, ni comercial a comisión, ni subcontratas: el que sube a tu tejado es el mismo que te coge el teléfono.</p>
@@ -120,28 +110,28 @@
         </div>
       </article>
 
-      <article class="esc-bloque" data-ini="0.17" data-fin="0.33">
+      <article class="esc-bloque" data-ini="0.26" data-fin="0.46">
         <span class="esc-num">01 · Estudio</span>
         <h2>Primero tu factura, después el tejado</h2>
         <p>Miramos tu consumo hora a hora, no una media. Subimos a ver la cubierta, medimos sombras y revisamos el cuadro. De ahí sale cuántos paneles necesitas de verdad.</p>
       </article>
 
-      <article class="esc-bloque" data-ini="0.37" data-fin="0.55">
+      <article class="esc-bloque" data-ini="0.50" data-fin="0.70">
         <span class="esc-num">02 · Proyecto</span>
         <h2>Ni un panel de más</h2>
         <p>Dimensionamos para tu consumo real. Sobredimensionar es la forma más común de que una instalación no se amortice nunca, y vender de más es muy fácil cuando nadie va a volver a verte.</p>
       </article>
 
-      <article class="esc-bloque" data-ini="0.59" data-fin="0.87">
+      <article class="esc-bloque" data-ini="0.74" data-fin="0.95">
         <span class="esc-num">03 · Instalación</span>
         <h2>Montada y legalizada</h2>
         <p>Uno o dos días de montaje. Después, la memoria técnica, el registro de autoconsumo y el alta de compensación de excedentes. Eso lo hacemos nosotros: tú no tramitas nada.</p>
       </article>
 
-      <article class="esc-bloque esc-cierre" data-ini="0.90" data-fin="1">
+      <article class="esc-bloque esc-cierre" data-ini="0.955" data-fin="1">
         <span class="esc-num">Y ya está</span>
         <h2>A producir</h2>
-        <p>Te dejamos la monitorización en el móvil y te enseñamos a leerla. Y esta casa existe: es una instalación nuestra. Las fotos reales, justo debajo.</p>
+        <p>Te dejamos la monitorización en el móvil y te enseñamos a leerla, para que veas lo que produces y lo que vuelcas a la red. Si algo falla, viene el mismo que lo instaló.</p>
       </article>
     </div>
 
@@ -158,8 +148,8 @@
   <div class="env">
     <div class="centro">
       <span class="etq">Caso real</span>
-      <h2>La instalación que acabas de ver existe</h2>
-      <p class="plomo">No es un render. Es un chalet junto al mar en el que montamos la fotovoltaica sobre la cubierta plana de grava, con las placas sobre soportes lastrados. Estas son las fotos, tal como salieron del dron.</p>
+      <h2>Una instalación nuestra, tal como quedó</h2>
+      <p class="plomo">Chalet junto al mar, con la fotovoltaica montada sobre la cubierta plana de grava y las placas sobre soportes lastrados. Las fotos son del dron, sin retocar.</p>
     </div>
     <div class="caso-fotos rev">
       <figure class="caso-grande">
@@ -178,7 +168,6 @@
         <figcaption>La misma cubierta desde el otro lado.</figcaption>
       </figure>
     </div>
-    <p class="caso-nota">En la animación de arriba, la cubierta vacía del principio es una reconstrucción hecha sobre estas mismas fotos para enseñar el antes. Todo lo demás es la obra real.</p>
   </div>
 </section>
 
