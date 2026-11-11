@@ -518,3 +518,22 @@ select option{background:#0b1626;color:#fff}
   .atajos{gap:6px;right:10px}
   .atajos .btn{padding:10px 13px;font-size:.86rem}
 }
+
+/* ===== logo del escenario, arriba a la izquierda (cuando no hay cabecera fija) ===== */
+.esc-logo{position:absolute;z-index:6;top:calc(12px + env(safe-area-inset-top,0px));
+  left:max(22px,calc((100% - var(--ancho))/2 + 22px));display:block;line-height:0}
+.esc-logo img{height:46px;width:auto;display:block}
+@media (max-width:900px){
+  .esc-logo{left:16px}
+  .esc-logo img{height:36px}
+}
+@media (max-width:400px){
+  .esc-logo{left:12px}
+  .esc-logo img{height:31px}
+  /* en pantallas estrechas el botón de llamar se queda en icono para dejar sitio al logo */
+  .atajos .atajo-txt{display:none}
+  .atajos .btn-linea{padding:10px 12px}
+}
+@media (prefers-reduced-motion:reduce){
+  .esc-logo{position:static;margin:0 22px 24px}
+}

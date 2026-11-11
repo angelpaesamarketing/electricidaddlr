@@ -98,14 +98,17 @@
       var pc = getComputedStyle(cab).position;
       if (pc === 'sticky' || pc === 'fixed') arriba = cab.offsetHeight;
     }
-    /* los atajos flotantes: si ya hay cabecera fija con sus botones, sobran;
-       si no, en móvil se les reserva sitio arriba para que no pisen los rótulos */
-    if (atajos) {
-      if (arriba > 0) atajos.style.display = 'none';
-      else {
-        atajos.style.display = '';
-        if (window.innerWidth <= 900) arriba = atajos.offsetHeight + 22;
-      }
+    /* el logo y los atajos flotantes: si ya hay cabecera fija con su logo y sus
+       botones, sobran; si no, se les reserva la franja de arriba para que los
+       rótulos no los pisen */
+    var logo = document.getElementById('escLogo');
+    if (arriba > 0) {
+      if (atajos) atajos.style.display = 'none';
+      if (logo) logo.style.display = 'none';
+    } else if (atajos || logo) {
+      if (atajos) atajos.style.display = '';
+      if (logo) logo.style.display = '';
+      arriba = Math.max(atajos ? atajos.offsetHeight : 0, logo ? logo.offsetHeight : 0) + 26;
     }
     var barra = document.querySelector('.barra-movil');
     if (barra && getComputedStyle(barra).display !== 'none') abajo = barra.offsetHeight;
