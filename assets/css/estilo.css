@@ -380,72 +380,93 @@ select option{background:#0b1626;color:#fff}
 .factores li{font-size:1rem}
 .factores li b{color:var(--tinta)}
 
-/* ===== escenario: la placa se instala al bajar ===== */
-.escenario{padding:0;height:460vh;position:relative}
-.esc-fijo{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;
-  display:flex;align-items:center}
+/* ===== escenario: la placa se instala conforme se baja ===== */
+/* La altura extra es el recorrido de la animación. El panel fijo se ancla con
+   sticky; si algún contenedor lo impide (pasa en GoHighLevel), escenario.js
+   lo detecta y lo ancla a mano con la clase .esc-manual. */
+.escenario{padding:0;height:420vh;position:relative;--esc-arriba:0px;--esc-abajo:0px;--esc-vh:100vh}
+@supports (height:100svh){.escenario{--esc-vh:100svh}}
+.esc-fijo{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+.esc-manual .esc-fijo{position:absolute;left:0;right:0;top:0;will-change:transform}
 .esc-cielo{position:absolute;inset:0;
   background:linear-gradient(176deg,#dbeaff 0%,#eef5ff 42%,#ffffff 78%)}
 .esc-cielo::after{content:"";position:absolute;inset:auto -10% -30% auto;width:70%;aspect-ratio:1;
   border-radius:50%;background:radial-gradient(circle,rgba(1,109,253,.13),transparent 68%)}
 
-/* la casa, anclada abajo a la derecha */
-.esc-casa{position:absolute;right:-2%;bottom:0;width:64%;max-width:1060px;
-  -webkit-mask-image:linear-gradient(to right,transparent 0,#000 14%);
-  mask-image:linear-gradient(to right,transparent 0,#000 14%);
-  opacity:0;will-change:opacity,transform}
-.esc-casa img{position:absolute;inset:0;width:100%;height:auto;display:block}
-.esc-casa .casa-base{position:relative}
-.esc-casa .casa-final{opacity:0}
+/* la casa: nunca más alta que el hueco libre de la pantalla */
+.esc-casa{--casa-w:min(62%,1040px,calc((var(--esc-vh) - var(--esc-arriba) - var(--esc-abajo) - 20px)*1.5));
+  position:absolute;right:0;bottom:var(--esc-abajo);width:var(--casa-w);opacity:0;
+  -webkit-mask-image:linear-gradient(to right,transparent 0,#000 13%);
+  mask-image:linear-gradient(to right,transparent 0,#000 13%);will-change:opacity,transform}
+.esc-casa .casa-base{display:block;width:100%;height:auto}
+/* la franja del tejado ya instalado, colocada sobre la foto base */
+.esc-casa .casa-capa{position:absolute;left:20.703%;top:22.266%;width:66.406%;height:auto;
+  opacity:0;will-change:opacity}
 
-/* la placa en vuelo */
-.esc-placa{position:absolute;left:50%;top:50%;width:34vw;max-width:460px;
-  margin:-11vw 0 0 -17vw;transform-style:preserve-3d;will-change:transform;
-  pointer-events:none;z-index:3}
-.esc-placa img{width:100%;height:auto;display:block;
-  filter:drop-shadow(0 34px 44px rgba(13,34,59,.34))}
+/* la placa en vuelo: escenario.js le pone una matrix3d en cada fotograma */
+.esc-placa{--placa-w:min(34vw,460px);position:absolute;left:0;top:0;width:var(--placa-w);
+  aspect-ratio:1200/737;transform-origin:0 0;will-change:transform,opacity;pointer-events:none;
+  z-index:3;transform:translate(56vw,24vh) rotate(-5deg);--sombra:1}
+.esc-placa img{width:100%;height:100%;display:block;
+  filter:drop-shadow(0 calc(var(--sombra)*30px) calc(var(--sombra)*40px + 2px) rgba(13,34,59,calc(var(--sombra)*.34)))}
 
 /* los rótulos */
-.esc-texto{position:relative;z-index:4;width:100%;max-width:var(--ancho);
-  margin:0 auto;padding:0 22px;pointer-events:none}
-.esc-bloque{position:absolute;top:50%;left:22px;width:min(33em,34%);
-  transform:translateY(-50%);opacity:0;visibility:hidden;pointer-events:none}
-.esc-bloque.activo{opacity:1;visibility:visible;pointer-events:auto}
-/* el héroe puede ser más ancho: todavía no ha entrado la foto */
-.esc-bloque:first-child{width:min(36em,45%)}
-.esc-bloque h1{margin-bottom:.3em}
+.esc-texto{position:absolute;top:var(--esc-arriba);bottom:var(--esc-abajo);left:0;right:0;
+  max-width:var(--ancho);margin:0 auto;z-index:4;pointer-events:none}
+.esc-bloque{position:absolute;top:50%;left:22px;width:min(34em,36%);--k:1;--dy:16px;
+  transform:translateY(calc(-50% + var(--dy))) scale(var(--k));transform-origin:left center;
+  opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity .4s ease,transform .5s cubic-bezier(.2,.7,.3,1),visibility 0s linear .4s}
+.esc-bloque.activo{opacity:1;visibility:visible;pointer-events:auto;--dy:0px;
+  transition:opacity .45s ease .08s,transform .55s cubic-bezier(.2,.7,.3,1) .08s,visibility 0s}
+.esc-bloque:first-child{width:min(37em,47%)}
+.esc-bloque h1{font-size:clamp(1.9rem,min(4.3vw,7.4vh),3.5rem);margin-bottom:.3em}
 .esc-bloque h1 span{color:var(--azul)}
-.esc-bloque h2{font-size:clamp(1.5rem,3.4vw,2.2rem);margin-bottom:.4em}
-.esc-bloque p{font-size:1.1rem;max-width:27em;color:var(--texto)}
-.esc-bloque .lead{font-size:1.12rem;max-width:30em}
+.esc-bloque h2{font-size:clamp(1.5rem,min(3.3vw,5.6vh),2.25rem);margin-bottom:.4em}
+.esc-bloque p{font-size:clamp(1rem,min(1.2vw,2.4vh),1.1rem);max-width:27em;color:var(--texto)}
+.esc-bloque .lead{font-size:clamp(1rem,min(1.25vw,2.5vh),1.13rem);max-width:31em}
+.esc-bloque .acciones{margin:clamp(14px,3vh,30px) 0 clamp(10px,2.2vh,22px)}
+.esc-bloque .etq{margin-bottom:clamp(8px,1.8vh,18px)}
 .esc-num{display:inline-block;font-size:.78rem;font-weight:800;letter-spacing:.12em;
   text-transform:uppercase;color:var(--azul);background:var(--azul-claro);
   padding:7px 14px;border-radius:999px;margin-bottom:16px}
 
-.esc-pista{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:5;
-  display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--suave);
-  font-size:.8rem;font-weight:650;transition:opacity .4s}
+.esc-pista{position:absolute;left:72.5%;bottom:calc(var(--esc-abajo) + 16px);transform:translateX(-50%);
+  z-index:5;display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--suave);
+  font-size:.8rem;font-weight:650;transition:opacity .4s;pointer-events:none}
 .esc-pista svg{width:19px;height:19px;animation:escBaja 1.9s ease-in-out infinite}
 @keyframes escBaja{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
 
 @media (max-width:900px){
-  .escenario{height:380vh}
-  .esc-fijo{align-items:flex-start}
-  .esc-casa{width:124%;right:-12%;max-width:none}
-  .esc-placa{width:56vw;margin:-18vw 0 0 -28vw}
-  .esc-bloque{top:12vh;transform:none;width:auto;right:22px}
-  .esc-bloque h1{font-size:clamp(1.9rem,8vw,2.6rem)}
-  .esc-bloque p{font-size:1rem}
-  .esc-bloque .avales{display:none}
+  .escenario{height:360vh}
+  /* en vertical la casa ocupa la parte baja y los rótulos la alta */
+  .esc-casa{--casa-w:max(106%,min(150%,calc((var(--esc-vh) - var(--esc-arriba) - var(--esc-abajo))*.63)));
+    right:auto;left:50%;
+    margin-left:clamp(calc(50% - var(--casa-w)),calc(var(--casa-w)*-.557),-50%);
+    -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 16%);
+    mask-image:linear-gradient(to bottom,transparent 0,#000 16%)}
+  .esc-placa{--placa-w:min(60vw,290px)}
+  .esc-pista{left:50%}
+  .esc-bloque,.esc-bloque:first-child{top:16px;left:20px;right:20px;width:auto;--dy:12px;
+    transform:translateY(var(--dy)) scale(var(--k));transform-origin:left top}
+  .esc-bloque h1{font-size:clamp(1.65rem,7.4vw,2.5rem)}
+  .esc-bloque h2{font-size:clamp(1.4rem,6vw,1.9rem)}
+  .esc-bloque p,.esc-bloque .lead{font-size:1rem}
+  .esc-bloque .avales,.esc-bloque .btn-linea{display:none}
+  .esc-bloque .acciones{margin:16px 0 0}
+  .esc-bloque .accion-llamar{width:100%}
+  .esc-bloque .accion-llamar .btn{width:100%}
+  .esc-bloque .micro{text-align:center;width:100%;padding-left:0}
 }
+/* sin animación: el escenario pasa a ser una sección normal, con todo a la vista */
 @media (prefers-reduced-motion:reduce){
   .escenario{height:auto}
-  .esc-fijo{position:static;height:auto;padding:48px 0 0}
-  .esc-casa{position:relative;right:auto;width:100%;max-width:none;opacity:1;margin-top:32px}
-  .esc-casa .casa-final{opacity:1}
-  .esc-placa{display:none}
-  .esc-pista{display:none}
-  .esc-texto{display:flex;flex-direction:column;gap:40px}
-  .esc-bloque{position:static;transform:none;opacity:1;visibility:visible;pointer-events:auto}
+  .esc-fijo{position:relative;height:auto;overflow:hidden;padding:28px 0 0}
+  .esc-texto{position:static;display:flex;flex-direction:column;gap:38px;padding:0 22px}
+  .esc-bloque,.esc-bloque:first-child{position:static;width:auto;max-width:36em;transform:none;
+    opacity:1;visibility:visible;pointer-events:auto;transition:none}
+  .esc-casa{position:relative;left:auto;right:auto;bottom:auto;margin:36px 0 0;width:100%;opacity:1;
+    -webkit-mask-image:none;mask-image:none}
+  .esc-casa .casa-capa{opacity:1}
+  .esc-placa,.esc-pista{display:none}
 }
-.esc-fijo{perspective:1500px;perspective-origin:60% 40%}

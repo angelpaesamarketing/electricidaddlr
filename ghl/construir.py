@@ -104,63 +104,84 @@ escribir('gracias-ghl.html', 'Pagina de gracias', 'gracias.html',
          cuerpo('gracias.html', 'gracias'), clase_extra='centro')
 
 # --- landing de placas solares ---------------------------------------------
-# Es una pagina entera, no una seccion. En GoHighLevel no existe app.js, asi
-# que: las clases .rev se quitan (si no, la pagina entera quedaria con
-# opacity 0) y la escena 3D del heroe la mueve ghl/escena-solar.js, que se
-# pega en linea al final del bloque. Las imagenes van incrustadas como data
-# URI, porque alli no existe assets/img y asi el bloque no depende de ningun
-# archivo ni de ningun servidor externo.
+# Es una pagina entera. En GoHighLevel no existen ni estilo.css ni app.js, asi
+# que el bloque lleva TODO dentro: estilos acotados bajo .dlr-solar, las tres
+# imagenes de la animacion incrustadas y los dos scripts en linea. No depende
+# de subir nada a la galeria ni de ningun servidor externo.
+def acota(css, prefijo='.dlr-solar'):
+    """Antepone el prefijo a cada selector, entrando en @media y @supports."""
+    out = []; i = 0; n = len(css)
+    while i < n:
+        j = css.find('{', i)
+        if j < 0:
+            out.append(css[i:]); break
+        cab = css[i:j]
+        prof = 1; k = j + 1
+        while k < n and prof:
+            if css[k] == '{': prof += 1
+            elif css[k] == '}': prof -= 1
+            k += 1
+        cuerpo = css[j + 1:k - 1]
+        limpio = re.sub(r'/\*.*?\*/', '', cab, flags=re.S).strip()
+        coment = cab[:len(cab) - len(cab.lstrip())] + ''.join(re.findall(r'/\*.*?\*/\s*', cab, flags=re.S))
+        if limpio.startswith(('@media', '@supports')):
+            out.append(coment + limpio + '{' + acota(cuerpo, prefijo) + '}')
+        elif limpio.startswith('@'):
+            out.append(coment + limpio + '{' + cuerpo + '}')
+        else:
+            sel = ','.join(prefijo + ' ' + s.strip() for s in limpio.split(','))
+            out.append(coment + sel + '{' + cuerpo + '}')
+        i = k
+    return ''.join(out)
+
 sol = io.open(os.path.join(RAIZ, 'placas-solares.html'), encoding='utf-8').read()
 m = re.search(r'</header>(.*?)<footer>', sol, re.S)
-if not m:
-    sys.exit('No encuentro el cuerpo de placas-solares.html')
-cuerpo_sol = m.group(1)
+mb = re.search(r'<div class="barra-movil">.*?\n</div>', sol, re.S)
+if not m or not mb:
+    sys.exit('No encuentro el cuerpo o la barra movil de placas-solares.html')
+cuerpo_sol = m.group(1).rstrip() + '\n\n' + mb.group(0)
+# sin app.js las clases .rev dejarian la pagina con opacity 0
 cuerpo_sol = re.sub(r'\s(?:rev|tilt)(?=["\s])', '', cuerpo_sol)
-cuerpo_sol = cuerpo_sol.replace('class="filtro "', 'class="filtro"')
 cuerpo_sol = cuerpo_sol.replace('/aviso-legal.html', '/aviso-legal').replace('/privacidad.html', '/privacidad')
-cuerpo_sol = cuerpo_sol.replace('id="escena"', 'id="dlr-escena"')
-
-# Las fotos de la casa pesan demasiado para incrustarlas (el bloque se iria a
-# mas de 1 MB y la landing cargaria lenta, que en una campana de pago se paga
-# en conversion). Se suben a la galeria de GoHighLevel y aqui se deja la ruta
-# marcada para sustituir. La placa, que es pequena y critica para la animacion,
-# si va incrustada: asi la secuencia funciona aunque falte subir alguna foto.
-IMAGENES_A_SUBIR = []
-
-def _imagen(mm):
-    rel = mm.group(1)
-    nombre = os.path.basename(rel)
-    ruta_abs = os.path.join(RAIZ, rel)
-    if os.path.getsize(ruta_abs) <= 80 * 1024:
-        datos = base64.b64encode(io.open(ruta_abs, 'rb').read()).decode('ascii')
-        return 'src="data:image/webp;base64,' + datos + '"'
-    if nombre not in IMAGENES_A_SUBIR:
-        IMAGENES_A_SUBIR.append(nombre)
-    return 'src="SUBE_ESTA_IMAGEN_A_GHL/' + nombre + '"'
-
-cuerpo_sol = re.sub(r'src="(assets/img/[a-z0-9-]+\.webp)"', _imagen, cuerpo_sol)
 cuerpo_sol = re.sub(r'\s(?:srcset|sizes|fetchpriority)="[^"]*"', '', cuerpo_sol)
-cuerpo_sol = re.sub(r'\ssrcset="[^"]*"', '', cuerpo_sol)
+
+# versiones ligeras de las imagenes, que son las que se incrustan
+LIGERAS = {'placa-1200.webp': 'placa-700.webp',
+           'casa-vacia-1600.webp': 'casa-vacia-1280.webp',
+           'casa-capa-instalada.webp': 'casa-capa-instalada-1280.webp'}
+PESO_IMG = [0]
+def _incrusta(mm):
+    nombre = os.path.basename(mm.group(1))
+    datos = io.open(os.path.join(RAIZ, 'assets', 'img', LIGERAS.get(nombre, nombre)), 'rb').read()
+    PESO_IMG[0] += len(datos)
+    return 'src="data:image/webp;base64,' + base64.b64encode(datos).decode('ascii') + '"'
+cuerpo_sol = re.sub(r'src="(assets/img/[a-z0-9-]+\.webp)"', _incrusta, cuerpo_sol)
 if 'assets/' in cuerpo_sol:
     sys.exit('ERROR: quedan rutas a assets/ en el bloque de GHL: ' +
              str(re.findall(r'assets/[^"\')]+', cuerpo_sol)[:5]))
 if 'class="rev' in cuerpo_sol or ' rev"' in cuerpo_sol:
     sys.exit('ERROR: quedan clases rev; en GHL la pagina saldria invisible.')
-css_sol = io.open(os.path.join(RAIZ, 'ghl', 'estilo-solar.css'), encoding='utf-8').read().strip()
-js_escena = io.open(os.path.join(RAIZ, 'assets', 'js', 'escenario.js'), encoding='utf-8').read()
-if ('<' + '/script>') in js_escena or ('<' + '/script>') in css_sol:
-    sys.exit('ERROR: el script o el CSS de la landing llevan una etiqueta de cierre de script.')
+
+# estilos: la base escrita a mano + los bloques del sitio que la landing comparte,
+# acotados automaticamente para no mantener dos copias que se desincronicen
+estilo = io.open(os.path.join(RAIZ, 'assets', 'css', 'estilo.css'), encoding='utf-8').read()
+ini_f = estilo.index('/* factores del presupuesto, en la landing solar */')
+ini_e = estilo.index('/* ===== escenario: la placa se instala conforme se baja ===== */')
+css_sol = (io.open(os.path.join(RAIZ, 'ghl', 'estilo-solar.css'), encoding='utf-8').read().strip() +
+           '\n\n' + acota(estilo[ini_f:ini_e].strip()) + '\n\n' + acota(estilo[ini_e:].strip()))
+js_sol = (io.open(os.path.join(RAIZ, 'assets', 'js', 'escenario.js'), encoding='utf-8').read().strip() +
+          '\n\n' +
+          io.open(os.path.join(RAIZ, 'assets', 'js', 'formulario-solar.js'), encoding='utf-8').read().strip())
+if ('<' + '/script>') in js_sol or ('<' + '/script>') in css_sol or ('<' + '/style>') in css_sol:
+    sys.exit('ERROR: el script o el CSS de la landing llevan una etiqueta de cierre.')
 ruta = os.path.join(RAIZ, 'ghl', 'placas-solares-ghl.html')
 io.open(ruta, 'w', encoding='utf-8').write(
     "<!-- Electricidad y Antenas DLR - landing de placas solares\n"
-    "     Pegar en GoHighLevel en un elemento Custom Code / HTML.\n"
-    "     Generado por ghl/construir.py a partir de placas-solares.html y de\n"
-    "     ghl/estilo-solar.css: no editar a mano. -->\n"
+    "     Pegar en GoHighLevel en un elemento Custom Code / HTML. Va todo dentro:\n"
+    "     estilos, imagenes y scripts. Generado por ghl/construir.py: no editar a mano. -->\n"
     "<style>\n" + css_sol + "\n</style>\n\n<div class=\"dlr-solar\">" + cuerpo_sol.rstrip() +
-    "\n</div>\n\n<script>\n" + js_escena.strip() + "\n</script>\n")
-print('%-28s %6d bytes' % ('placas-solares-ghl.html', os.path.getsize(ruta)))
-if IMAGENES_A_SUBIR:
-    print('   sube a la galeria de GHL: ' + ', '.join(IMAGENES_A_SUBIR))
+    "\n</div>\n\n<script>\n" + js_sol + "\n</script>\n")
+print('%-28s %6d bytes  (imagenes incrustadas: %d KB)' % ('placas-solares-ghl.html', os.path.getsize(ruta), PESO_IMG[0] // 1024))
 
 # --- banner de consentimiento: CSS extraido de estilo.css + el script ---
 css = io.open(os.path.join(RAIZ, 'assets/css/estilo.css'), encoding='utf-8').read()
