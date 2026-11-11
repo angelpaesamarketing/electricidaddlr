@@ -52,50 +52,83 @@
   </div>
 </header>
 
-<!-- ===== HÉROE ===== -->
-<section class="heroe">
-  <div class="env heroe-rej">
-    <div>
-      <span class="etq">Torrevieja · Orihuela Costa · Vega Baja</span>
-      <h1>Placas solares <span>instaladas por quien te las vende</span></h1>
-      <p class="lead">Somos el electricista de toda la vida de la zona, instalador autorizado desde 2003. Hacemos el estudio, la instalación y toda la legalización. Ni call center, ni comercial a comisión, ni subcontratas: el que sube a tu tejado es el mismo que te coge el teléfono.</p>
-      <div class="acciones">
-        <div class="accion-llamar">
-          <span class="micro">Te decimos por teléfono si te compensa</span>
-          <a class="btn btn-azul btn-g" href="tel:+34652967349">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
-            Llamar al 652 967 349
-          </a>
-        </div>
-        <a class="btn btn-linea btn-g" href="#estudio">Pedir estudio</a>
-      </div>
-      <div class="avales">
-        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="m20 6-11 11-5-5"/></svg> Instalador autorizado</span>
-        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="m20 6-11 11-5-5"/></svg> Desde 2003</span>
-        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="m20 6-11 11-5-5"/></svg> Legalización incluida</span>
-        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="m20 6-11 11-5-5"/></svg> Sin subcontratas</span>
-      </div>
+<!-- ===== ESCENARIO: la placa se instala al bajar ===== -->
+<section class="escenario" id="escenario">
+  <div class="esc-fijo">
+
+    <div class="esc-cielo" aria-hidden="true"></div>
+
+    <div class="esc-casa" id="escCasa" aria-hidden="true">
+      <img class="casa-base" src="assets/img/casa-vacia-1600.webp"
+           srcset="assets/img/casa-vacia-960.webp 960w, assets/img/casa-vacia-1600.webp 1600w"
+           sizes="(max-width:900px) 100vw, 62vw" width="1600" height="1067"
+           alt="" loading="lazy" decoding="async">
+      <img class="casa-final" src="assets/img/casa-placas-1600.webp"
+           srcset="assets/img/casa-placas-960.webp 960w, assets/img/casa-placas-1600.webp 1600w"
+           sizes="(max-width:900px) 100vw, 62vw" width="1600" height="1067"
+           alt="Chalet de la Costa Blanca con la instalación fotovoltaica terminada"
+           loading="lazy" decoding="async">
     </div>
 
-    <div class="escena" id="escena">
-      <div class="aura"></div>
-      <div class="anillo"></div>
-      <div class="anillo dos"></div>
-      <svg class="chispa" viewBox="0 0 400 400" aria-hidden="true">
-        <path d="M30 210 C 110 120, 290 300, 372 190"/>
-        <path d="M60 320 C 150 250, 260 360, 350 270"/>
-        <path d="M46 110 C 140 60, 250 140, 356 86"/>
-      </svg>
-      <div class="pieza pieza-principal" data-prof="26">
-        <img src="assets/img/solar-960.webp" width="960" height="960" alt="Placa solar fotovoltaica instalada por DLR" fetchpriority="high">
-      </div>
-      <div class="pieza pieza-chica p-bombilla" data-prof="52">
-        <img src="assets/img/bombilla-480.webp" width="480" height="480" alt="Iluminación LED" loading="lazy">
-      </div>
-      <div class="pieza pieza-chica p-cuadro" data-prof="60">
-        <img src="assets/img/cuadro-480.webp" width="480" height="480" alt="Cuadro eléctrico" loading="lazy">
-      </div>
+    <div class="esc-placa" id="escPlaca">
+      <img src="assets/img/placa-1200.webp"
+           srcset="assets/img/placa-700.webp 700w, assets/img/placa-1200.webp 1200w"
+           sizes="(max-width:900px) 62vw, 34vw" width="1200" height="737"
+           alt="Panel solar fotovoltaico monocristalino" fetchpriority="high">
     </div>
+
+    <div class="esc-texto">
+      <article class="esc-bloque" data-ini="0" data-fin="0.20">
+        <span class="etq">Torrevieja · Orihuela Costa · Vega Baja</span>
+        <h1>Placas solares <span>instaladas por quien te las vende</span></h1>
+        <p class="lead">Somos el electricista de toda la vida de la zona, instalador autorizado desde 2003. Ni call center, ni comercial a comisión, ni subcontratas: el que sube a tu tejado es el mismo que te coge el teléfono.</p>
+        <div class="acciones">
+          <div class="accion-llamar">
+            <span class="micro">Te decimos por teléfono si te compensa</span>
+            <a class="btn btn-azul btn-g" href="tel:+34652967349">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
+              Llamar al 652 967 349
+            </a>
+          </div>
+          <a class="btn btn-linea btn-g" href="#estudio">Pedir estudio</a>
+        </div>
+        <div class="avales">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="m20 6-11 11-5-5"/></svg> Instalador autorizado</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="m20 6-11 11-5-5"/></svg> Desde 2003</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="m20 6-11 11-5-5"/></svg> Legalización incluida</span>
+        </div>
+      </article>
+
+      <article class="esc-bloque" data-ini="0.26" data-fin="0.46">
+        <span class="esc-num">01 · Estudio</span>
+        <h2>Primero tu factura, después el tejado</h2>
+        <p>Miramos tu consumo hora a hora, no una media. Subimos a ver la cubierta, medimos sombras y revisamos el cuadro. De ahí sale cuántos paneles necesitas de verdad.</p>
+      </article>
+
+      <article class="esc-bloque" data-ini="0.50" data-fin="0.70">
+        <span class="esc-num">02 · Proyecto</span>
+        <h2>Ni un panel de más</h2>
+        <p>Dimensionamos para tu consumo real. Sobredimensionar es la forma más común de que una instalación no se amortice nunca, y vender de más es muy fácil cuando nadie va a volver a verte.</p>
+      </article>
+
+      <article class="esc-bloque" data-ini="0.74" data-fin="0.95">
+        <span class="esc-num">03 · Instalación</span>
+        <h2>Montada y legalizada</h2>
+        <p>Uno o dos días de montaje. Después, la memoria técnica, el registro de autoconsumo y el alta de compensación de excedentes. Eso lo hacemos nosotros: tú no tramitas nada.</p>
+      </article>
+
+      <article class="esc-bloque esc-cierre" data-ini="0.955" data-fin="1">
+        <span class="esc-num">Y ya está</span>
+        <h2>A producir</h2>
+        <p>Te dejamos la monitorización en el móvil y te enseñamos a leerla, para que veas lo que produces y lo que vuelcas a la red. Si algo falla, viene el mismo que lo instaló.</p>
+      </article>
+    </div>
+
+    <div class="esc-pista" id="escPista" aria-hidden="true">
+      <span>Baja para verlo</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
+    </div>
+
   </div>
 </section>
 
@@ -193,22 +226,6 @@
       <p>Vas a encontrar webs que te prometen un porcentaje concreto de subvención antes de saber siquiera dónde vives. Nosotros no vamos a hacer eso, porque <b>las ayudas cambian cada año y son distintas en cada municipio</b>: las bonificaciones de IBI y de ICIO las decide cada ayuntamiento en su ordenanza fiscal, las convocatorias autonómicas abren y cierran, y las deducciones estatales se prorrogan o se dejan caer.</p>
       <p>Lo que sí hacemos: <b>en el estudio te decimos exactamente qué tienes disponible el día que lo pides</b>, en tu municipio y para tu caso, con el importe calculado y los plazos de solicitud. Y presentamos nosotros la documentación.</p>
       <p>Una advertencia que te ahorrará disgustos: <b>las bonificaciones de IBI casi nunca son automáticas</b>. Hay que pedirlas al ayuntamiento, y muchos dan un plazo corto desde que termina la instalación. Si se pasa, se pierde el año entero.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ===== CÓMO TRABAJAMOS ===== -->
-<section>
-  <div class="env">
-    <div class="centro">
-      <span class="etq">Cómo va</span>
-      <h2>Cuatro pasos y a producir</h2>
-    </div>
-    <div class="pasos pasos-4">
-      <div class="paso rev"><h3>Llamada de 10 minutos</h3><p>Nos dices dónde vives, qué tipo de casa es y cuánto pagas de luz. Ahí mismo te decimos si te compensa.</p></div>
-      <div class="paso rev"><h3>Visita y estudio</h3><p>Subimos a ver la cubierta, medimos y revisamos el cuadro. Salimos con el dimensionado hecho.</p></div>
-      <div class="paso rev"><h3>Presupuesto cerrado</h3><p>Por escrito, con el ahorro estimado y las ayudas que te corresponden. Sin letra pequeña.</p></div>
-      <div class="paso rev"><h3>Instalación y papeles</h3><p>Uno o dos días de montaje. La legalización y el alta de excedentes los llevamos nosotros.</p></div>
     </div>
   </div>
 </section>
@@ -330,5 +347,6 @@
 </div>
 
 <script src="assets/js/app.js" defer></script>
+<script src="assets/js/escenario.js" defer></script>
 </body>
 </html>

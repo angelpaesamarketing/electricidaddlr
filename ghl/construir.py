@@ -120,19 +120,34 @@ cuerpo_sol = cuerpo_sol.replace('class="filtro "', 'class="filtro"')
 cuerpo_sol = cuerpo_sol.replace('/aviso-legal.html', '/aviso-legal').replace('/privacidad.html', '/privacidad')
 cuerpo_sol = cuerpo_sol.replace('id="escena"', 'id="dlr-escena"')
 
-def _incrusta(mm):
-    datos = base64.b64encode(io.open(os.path.join(RAIZ, mm.group(1)), 'rb').read()).decode('ascii')
-    return 'src="data:image/webp;base64,' + datos + '"'
+# Las fotos de la casa pesan demasiado para incrustarlas (el bloque se iria a
+# mas de 1 MB y la landing cargaria lenta, que en una campana de pago se paga
+# en conversion). Se suben a la galeria de GoHighLevel y aqui se deja la ruta
+# marcada para sustituir. La placa, que es pequena y critica para la animacion,
+# si va incrustada: asi la secuencia funciona aunque falte subir alguna foto.
+IMAGENES_A_SUBIR = []
 
-cuerpo_sol = re.sub(r'src="(assets/img/[a-z0-9-]+\.webp)"', _incrusta, cuerpo_sol)
+def _imagen(mm):
+    rel = mm.group(1)
+    nombre = os.path.basename(rel)
+    ruta_abs = os.path.join(RAIZ, rel)
+    if os.path.getsize(ruta_abs) <= 80 * 1024:
+        datos = base64.b64encode(io.open(ruta_abs, 'rb').read()).decode('ascii')
+        return 'src="data:image/webp;base64,' + datos + '"'
+    if nombre not in IMAGENES_A_SUBIR:
+        IMAGENES_A_SUBIR.append(nombre)
+    return 'src="SUBE_ESTA_IMAGEN_A_GHL/' + nombre + '"'
+
+cuerpo_sol = re.sub(r'src="(assets/img/[a-z0-9-]+\.webp)"', _imagen, cuerpo_sol)
 cuerpo_sol = re.sub(r'\s(?:srcset|sizes|fetchpriority)="[^"]*"', '', cuerpo_sol)
+cuerpo_sol = re.sub(r'\ssrcset="[^"]*"', '', cuerpo_sol)
 if 'assets/' in cuerpo_sol:
     sys.exit('ERROR: quedan rutas a assets/ en el bloque de GHL: ' +
              str(re.findall(r'assets/[^"\')]+', cuerpo_sol)[:5]))
 if 'class="rev' in cuerpo_sol or ' rev"' in cuerpo_sol:
     sys.exit('ERROR: quedan clases rev; en GHL la pagina saldria invisible.')
 css_sol = io.open(os.path.join(RAIZ, 'ghl', 'estilo-solar.css'), encoding='utf-8').read().strip()
-js_escena = io.open(os.path.join(RAIZ, 'ghl', 'escena-solar.js'), encoding='utf-8').read()
+js_escena = io.open(os.path.join(RAIZ, 'assets', 'js', 'escenario.js'), encoding='utf-8').read()
 if ('<' + '/script>') in js_escena or ('<' + '/script>') in css_sol:
     sys.exit('ERROR: el script o el CSS de la landing llevan una etiqueta de cierre de script.')
 ruta = os.path.join(RAIZ, 'ghl', 'placas-solares-ghl.html')
@@ -144,6 +159,8 @@ io.open(ruta, 'w', encoding='utf-8').write(
     "<style>\n" + css_sol + "\n</style>\n\n<div class=\"dlr-solar\">" + cuerpo_sol.rstrip() +
     "\n</div>\n\n<script>\n" + js_escena.strip() + "\n</script>\n")
 print('%-28s %6d bytes' % ('placas-solares-ghl.html', os.path.getsize(ruta)))
+if IMAGENES_A_SUBIR:
+    print('   sube a la galeria de GHL: ' + ', '.join(IMAGENES_A_SUBIR))
 
 # --- banner de consentimiento: CSS extraido de estilo.css + el script ---
 css = io.open(os.path.join(RAIZ, 'assets/css/estilo.css'), encoding='utf-8').read()
