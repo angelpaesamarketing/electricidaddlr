@@ -2,7 +2,11 @@
    IMPORTANTE: este archivo debe cargarse SIEMPRE ANTES de la etiqueta de Google
    (gtag.js o Google Tag Manager). Si se carga después, las etiquetas se disparan
    sin consentimiento y la implementación deja de ser válida.
-   Uso:  <script src="assets/js/consentimiento.js"></script>
+   Uso: cargarlo con una etiqueta <script src="assets/js/consentimiento.js">
+   en el <head>. OJO: este archivo tambien se pega EN LINEA dentro de una
+   etiqueta <script> en GoHighLevel, asi que no puede contener en ningun
+   sitio la cadena de cierre de script, ni siquiera en un comentario:
+   el navegador cerraria el bloque ahi y romperia el banner.
    Reabrir el panel:  window.dlrConsent.abrir()  o cualquier enlace con [data-cookies]
 */
 (function () {
