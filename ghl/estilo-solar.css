@@ -1,0 +1,113 @@
+/* Electricidad y Antenas DLR - landing de placas solares, bloque autonomo.
+   Todo acotado bajo .dlr-solar para no chocar con la plantilla de GoHighLevel. */
+.dlr-solar{--tinta:#0d223b;--texto:#48566b;--suave:#7a8699;--linea:#e3e8f0;--crema:#f5f8fc;
+  --noche:#07101f;--azul:#016dfd;--azul-claro:#e8f1ff;--verde:#13b981;--radio:16px;--radio-g:26px;
+  font:17px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  color:var(--texto);text-align:left;box-sizing:border-box}
+.dlr-solar *{box-sizing:border-box}
+.dlr-solar .env{max-width:1140px;margin:0 auto;padding:0 22px}
+.dlr-solar section{padding:clamp(48px,7vw,88px) 0;position:relative}
+.dlr-solar .crema{background:var(--crema)}
+.dlr-solar .centro{text-align:center}
+.dlr-solar h1,.dlr-solar h2,.dlr-solar h3{color:var(--tinta);line-height:1.13;margin:0 0 .45em;
+  letter-spacing:-.025em}
+.dlr-solar h1{font-size:clamp(2rem,5.4vw,3.3rem);font-weight:850}
+.dlr-solar h1 span{color:var(--azul)}
+.dlr-solar h2{font-size:clamp(1.6rem,3.6vw,2.3rem);font-weight:800}
+.dlr-solar h3{font-size:1.1rem;font-weight:750;letter-spacing:-.015em}
+.dlr-solar p{margin:0 0 1em}
+.dlr-solar a{color:var(--azul);text-decoration:none}
+.dlr-solar .plomo{max-width:620px;margin:0 auto 44px;color:var(--suave);font-size:1.06rem}
+.dlr-solar .etq{display:inline-flex;align-items:center;gap:8px;font-size:.76rem;font-weight:750;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--azul);background:var(--azul-claro);
+  padding:7px 14px;border-radius:999px;margin-bottom:18px}
+.dlr-solar .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:15px 26px;border-radius:999px;font-weight:750;font-size:1rem;border:1px solid transparent;
+  cursor:pointer;text-decoration:none;white-space:nowrap}
+.dlr-solar .btn svg{width:20px;height:20px;flex:none}
+.dlr-solar .btn-azul{background:var(--azul);color:#fff;box-shadow:0 14px 30px -12px rgba(1,109,253,.8)}
+.dlr-solar .btn-linea{background:#fff;color:var(--tinta);border-color:var(--linea)}
+.dlr-solar .btn-g{padding:18px 32px;font-size:1.06rem}
+.dlr-solar .heroe{padding:clamp(34px,5vw,64px) 0 clamp(48px,7vw,80px)}
+.dlr-solar .heroe .lead{font-size:1.14rem;max-width:36em;color:var(--texto)}
+.dlr-solar .acciones{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;margin:30px 0 22px}
+.dlr-solar .accion-llamar{display:flex;flex-direction:column;gap:8px;align-items:flex-start;min-width:0}
+.dlr-solar .micro{font-size:.82rem;font-weight:650;color:var(--suave);padding-left:6px;line-height:1.3}
+.dlr-solar .avales{display:flex;flex-wrap:wrap;gap:10px 22px;font-size:.92rem;color:var(--suave);
+  font-weight:600}
+.dlr-solar .avales span{display:flex;align-items:center;gap:7px}
+.dlr-solar .avales svg{width:17px;height:17px;color:var(--verde)}
+.dlr-solar .filtro{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.dlr-solar .filtro>div{background:#fff;border:1px solid var(--linea);border-radius:var(--radio-g);
+  padding:26px 28px}
+.dlr-solar .filtro-si{border-color:rgba(19,185,129,.4)}
+.dlr-solar .filtro h3{margin-bottom:.8em}
+.dlr-solar .filtro ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:11px}
+.dlr-solar .filtro li{font-size:.98rem}
+.dlr-solar .filtro li b{color:var(--tinta)}
+.dlr-solar .filtro-no li{color:var(--suave)}
+.dlr-solar .rejilla{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.dlr-solar .tarjeta{background:#fff;border:1px solid var(--linea);border-radius:var(--radio-g);padding:26px}
+.dlr-solar .tarjeta h3{margin-bottom:.35em}
+.dlr-solar .tarjeta p{font-size:.97rem;margin:0}
+.dlr-solar .aviso-precio{margin-top:40px;background:var(--crema);border:1px solid var(--linea);
+  border-radius:var(--radio-g);padding:28px}
+.dlr-solar .aviso-precio h3{margin-bottom:1em}
+.dlr-solar .tabla-env{overflow-x:auto;border:1px solid var(--linea);border-radius:var(--radio);background:#fff}
+.dlr-solar table{border-collapse:collapse;width:100%;font-size:.95rem;min-width:480px}
+.dlr-solar th,.dlr-solar td{text-align:left;padding:12px 15px;border-bottom:1px solid var(--linea);
+  vertical-align:top}
+.dlr-solar th{background:var(--crema);color:var(--tinta);font-weight:750;font-size:.85rem}
+.dlr-solar tr:last-child td{border-bottom:none}
+.dlr-solar .nota-precio{font-size:.95rem;color:var(--suave);margin:16px 0 0}
+.dlr-solar .nota-precio b{color:var(--tinta)}
+.dlr-solar .texto-ancho{max-width:720px;margin:0 auto}
+.dlr-solar .texto-ancho p{font-size:1.06rem}
+.dlr-solar .texto-ancho b{color:var(--tinta)}
+.dlr-solar .pasos{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;counter-reset:p}
+.dlr-solar .paso{padding:26px;background:#fff;border-radius:var(--radio-g);
+  border:1px solid var(--linea);position:relative}
+.dlr-solar .paso::before{counter-increment:p;content:counter(p);position:absolute;top:-17px;left:24px;
+  width:34px;height:34px;border-radius:50%;background:var(--azul);color:#fff;font-weight:800;
+  display:flex;align-items:center;justify-content:center;font-size:.95rem}
+.dlr-solar .paso h3{margin-top:12px}
+.dlr-solar .paso p{font-size:.95rem;margin:0}
+.dlr-solar .caja-destacada{background:var(--noche);color:#c3d2e6;border-radius:var(--radio-g);
+  padding:clamp(28px,5vw,52px)}
+.dlr-solar .caja-destacada>div{max-width:680px}
+.dlr-solar .caja-destacada h2{color:#fff}
+.dlr-solar .caja-destacada p{font-size:1.04rem}
+.dlr-solar .caja-destacada a{color:#6fa8ff}
+.dlr-solar .caja-destacada b{color:#fff}
+.dlr-solar .faq{max-width:780px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+.dlr-solar details{background:#fff;border:1px solid var(--linea);border-radius:var(--radio);padding:0 20px}
+.dlr-solar details[open]{border-color:rgba(1,109,253,.35)}
+.dlr-solar summary{cursor:pointer;list-style:none;padding:17px 0;font-weight:700;color:var(--tinta);
+  font-size:1.02rem;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.dlr-solar summary::-webkit-details-marker{display:none}
+.dlr-solar summary::after{content:"";width:11px;height:11px;flex:none;
+  border-right:2.4px solid var(--azul);border-bottom:2.4px solid var(--azul);
+  transform:rotate(45deg) translate(-3px,-3px)}
+.dlr-solar details[open] summary::after{transform:rotate(-135deg) translate(-3px,-3px)}
+.dlr-solar details p{margin:0;padding:0 0 18px;font-size:.99rem}
+.dlr-solar .contacto{background:var(--noche);color:#c3d2e6}
+.dlr-solar .contacto h2{color:#fff}
+.dlr-solar .contacto .plomo{color:#8fa6c4}
+.dlr-solar .caja-contacto{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.dlr-solar .datos{padding:0;margin:0}
+.dlr-solar .datos li{list-style:none;display:flex;gap:14px;align-items:flex-start;margin-bottom:20px}
+.dlr-solar .datos .ico{width:44px;height:44px;border-radius:13px;background:rgba(1,109,253,.16);
+  color:#6fa8ff;display:flex;align-items:center;justify-content:center;flex:none}
+.dlr-solar .datos .ico svg{width:21px;height:21px}
+.dlr-solar .datos b{display:block;color:#fff;font-size:1.02rem}
+.dlr-solar .datos a{color:#c3d2e6;text-decoration:underline}
+@media (max-width:900px){
+  .dlr-solar .pasos{grid-template-columns:repeat(2,1fr)}
+  .dlr-solar .filtro,.dlr-solar .caja-contacto{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  .dlr-solar .pasos{grid-template-columns:1fr}
+  .dlr-solar .aviso-precio{padding:20px}
+  .dlr-solar .acciones .btn,.dlr-solar .accion-llamar{width:100%}
+  .dlr-solar .micro{text-align:center;width:100%;padding-left:0}
+}

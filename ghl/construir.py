@@ -103,6 +103,35 @@ escribir('privacidad-ghl.html', 'Politica de privacidad y cookies', 'privacidad.
 escribir('gracias-ghl.html', 'Pagina de gracias', 'gracias.html',
          cuerpo('gracias.html', 'gracias'), clase_extra='centro')
 
+# --- landing de placas solares ---------------------------------------------
+# Es una pagina entera, no una seccion, y en GoHighLevel no existe app.js:
+# sin el, las clases .rev se quedarian con opacity 0 y la pagina saldria en
+# blanco. Por eso aqui se quitan .rev y .tilt, y se quita la escena 3D del
+# heroe, que depende del parallax y de imagenes que no estan en GHL.
+sol = io.open(os.path.join(RAIZ, 'placas-solares.html'), encoding='utf-8').read()
+m = re.search(r'</header>(.*?)<footer>', sol, re.S)
+if not m:
+    sys.exit('No encuentro el cuerpo de placas-solares.html')
+cuerpo_sol = m.group(1)
+cuerpo_sol = re.sub(r'<div class="escena" id="escena">.*?\n    </div>', '', cuerpo_sol, flags=re.S)
+cuerpo_sol = cuerpo_sol.replace(' class="heroe-rej"', '')
+cuerpo_sol = re.sub(r'\s(?:rev|tilt)(?=["\s])', '', cuerpo_sol)
+cuerpo_sol = cuerpo_sol.replace('class="filtro "', 'class="filtro"')
+cuerpo_sol = cuerpo_sol.replace('/aviso-legal.html', '/aviso-legal').replace('/privacidad.html', '/privacidad')
+if 'assets/img' in cuerpo_sol:
+    sys.exit('ERROR: el bloque de GHL referencia imagenes del repositorio, que alli no existen.')
+if '.rev' in cuerpo_sol or 'class="rev' in cuerpo_sol:
+    sys.exit('ERROR: quedan clases rev; en GHL la pagina saldria invisible.')
+css_sol = io.open(os.path.join(RAIZ, 'ghl', 'estilo-solar.css'), encoding='utf-8').read().strip()
+ruta = os.path.join(RAIZ, 'ghl', 'placas-solares-ghl.html')
+io.open(ruta, 'w', encoding='utf-8').write(
+    "<!-- Electricidad y Antenas DLR - landing de placas solares\n"
+    "     Pegar en GoHighLevel en un elemento Custom Code / HTML.\n"
+    "     Generado por ghl/construir.py a partir de placas-solares.html y de\n"
+    "     ghl/estilo-solar.css: no editar a mano. -->\n"
+    "<style>\n" + css_sol + "\n</style>\n\n<div class=\"dlr-solar\">" + cuerpo_sol.rstrip() + "\n</div>\n")
+print('%-28s %6d bytes' % ('placas-solares-ghl.html', os.path.getsize(ruta)))
+
 # --- banner de consentimiento: CSS extraido de estilo.css + el script ---
 css = io.open(os.path.join(RAIZ, 'assets/css/estilo.css'), encoding='utf-8').read()
 m = re.search(r'/\* ===== banner de cookies ===== \*/(.*?)(?=\n@media \(max-width:760px\))', css, re.S)

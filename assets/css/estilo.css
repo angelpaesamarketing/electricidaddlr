@@ -294,3 +294,78 @@ body.ck-visible .barra-movil{display:none}
   .accion-llamar{width:100%}
   .micro{text-align:center;width:100%;padding-left:0}
 }
+
+/* ===== landing de placas solares ===== */
+.pasos.pasos-4{grid-template-columns:repeat(4,1fr)}
+
+/* a quién le compensa */
+.filtro{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.filtro>div{background:#fff;border:1px solid var(--linea);border-radius:var(--radio-g);padding:26px 28px}
+.filtro h3{display:flex;align-items:center;gap:10px;margin-bottom:.8em}
+.filtro h3::before{content:"";width:26px;height:26px;border-radius:50%;flex:none;
+  background-repeat:no-repeat;background-position:center;background-size:15px}
+.filtro-si{border-color:rgba(19,185,129,.4)!important}
+.filtro-si h3::before{background-color:#e3f7ee;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2313b981' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m20 6-11 11-5-5'/%3E%3C/svg%3E")}
+.filtro-no h3::before{background-color:#f1f4f9;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237a8699' stroke-width='3.4' stroke-linecap='round'%3E%3Cpath d='M18 6 6 18M6 6l12 12'/%3E%3C/svg%3E")}
+.filtro ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:11px}
+.filtro li{font-size:.98rem}
+.filtro li b{color:var(--tinta)}
+.filtro-no li{color:var(--suave)}
+
+/* precio orientativo */
+.aviso-precio{margin-top:40px;background:var(--crema);border:1px solid var(--linea);
+  border-radius:var(--radio-g);padding:28px}
+.aviso-precio h3{margin-bottom:1em}
+.aviso-precio .tabla-env{background:#fff;margin-bottom:0}
+.nota-precio{font-size:.95rem;color:var(--suave);margin:16px 0 0}
+.nota-precio b{color:var(--tinta)}
+
+/* bloque de texto ancho */
+.texto-ancho{max-width:720px;margin:0 auto}
+.texto-ancho p{font-size:1.06rem}
+.texto-ancho b{color:var(--tinta)}
+
+/* comunidades */
+.caja-destacada{background:var(--noche);color:#c3d2e6;border-radius:var(--radio-g);
+  padding:clamp(28px,5vw,52px);position:relative;overflow:hidden}
+.caja-destacada::after{content:"";position:absolute;inset:auto -10% -40% auto;width:50%;aspect-ratio:1;
+  border-radius:50%;background:radial-gradient(circle,rgba(1,109,253,.35),transparent 65%)}
+.caja-destacada>div{position:relative;z-index:1;max-width:680px}
+.caja-destacada h2{color:#fff}
+.caja-destacada p{font-size:1.04rem}
+.caja-destacada a{color:#6fa8ff}
+.caja-destacada b{color:#fff}
+
+/* preguntas frecuentes */
+.faq{max-width:780px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+.faq details{background:#fff;border:1px solid var(--linea);border-radius:var(--radio);
+  padding:0 20px;transition:border-color .2s}
+.faq details[open]{border-color:rgba(1,109,253,.35);box-shadow:var(--sombra)}
+.faq summary{cursor:pointer;list-style:none;padding:17px 0;font-weight:700;color:var(--tinta);
+  font-size:1.02rem;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"";width:11px;height:11px;flex:none;border-right:2.4px solid var(--azul);
+  border-bottom:2.4px solid var(--azul);transform:rotate(45deg) translate(-3px,-3px);transition:transform .22s}
+.faq details[open] summary::after{transform:rotate(-135deg) translate(-3px,-3px)}
+.faq summary:focus-visible{outline:2px solid var(--azul);outline-offset:3px;border-radius:6px}
+.faq details p{margin:0;padding:0 0 18px;font-size:.99rem}
+
+/* desplegables del formulario, con el mismo aspecto que los campos */
+select{width:100%;padding:14px 16px;border-radius:13px;border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.06);color:#fff;font:inherit;margin-bottom:16px;
+  appearance:none;-webkit-appearance:none;cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238fa6c4' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 15px center;background-size:17px}
+select:focus{outline:none;border-color:var(--azul);background-color:rgba(1,109,253,.1)}
+select option{background:#0b1626;color:#fff}
+
+@media (max-width:900px){
+  .pasos.pasos-4{grid-template-columns:repeat(2,1fr)}
+  .filtro{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  .pasos.pasos-4{grid-template-columns:1fr}
+  .aviso-precio{padding:20px}
+}
