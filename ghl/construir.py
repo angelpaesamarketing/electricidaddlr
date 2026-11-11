@@ -4,7 +4,7 @@ paginas del repositorio, para que los textos no se dupliquen a mano.
 
     python3 ghl/construir.py
 """
-import io, re, os, sys
+import io, re, os, sys, base64
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -104,32 +104,45 @@ escribir('gracias-ghl.html', 'Pagina de gracias', 'gracias.html',
          cuerpo('gracias.html', 'gracias'), clase_extra='centro')
 
 # --- landing de placas solares ---------------------------------------------
-# Es una pagina entera, no una seccion, y en GoHighLevel no existe app.js:
-# sin el, las clases .rev se quedarian con opacity 0 y la pagina saldria en
-# blanco. Por eso aqui se quitan .rev y .tilt, y se quita la escena 3D del
-# heroe, que depende del parallax y de imagenes que no estan en GHL.
+# Es una pagina entera, no una seccion. En GoHighLevel no existe app.js, asi
+# que: las clases .rev se quitan (si no, la pagina entera quedaria con
+# opacity 0) y la escena 3D del heroe la mueve ghl/escena-solar.js, que se
+# pega en linea al final del bloque. Las imagenes van incrustadas como data
+# URI, porque alli no existe assets/img y asi el bloque no depende de ningun
+# archivo ni de ningun servidor externo.
 sol = io.open(os.path.join(RAIZ, 'placas-solares.html'), encoding='utf-8').read()
 m = re.search(r'</header>(.*?)<footer>', sol, re.S)
 if not m:
     sys.exit('No encuentro el cuerpo de placas-solares.html')
 cuerpo_sol = m.group(1)
-cuerpo_sol = re.sub(r'<div class="escena" id="escena">.*?\n    </div>', '', cuerpo_sol, flags=re.S)
-cuerpo_sol = cuerpo_sol.replace(' class="heroe-rej"', '')
 cuerpo_sol = re.sub(r'\s(?:rev|tilt)(?=["\s])', '', cuerpo_sol)
 cuerpo_sol = cuerpo_sol.replace('class="filtro "', 'class="filtro"')
 cuerpo_sol = cuerpo_sol.replace('/aviso-legal.html', '/aviso-legal').replace('/privacidad.html', '/privacidad')
-if 'assets/img' in cuerpo_sol:
-    sys.exit('ERROR: el bloque de GHL referencia imagenes del repositorio, que alli no existen.')
-if '.rev' in cuerpo_sol or 'class="rev' in cuerpo_sol:
+cuerpo_sol = cuerpo_sol.replace('id="escena"', 'id="dlr-escena"')
+
+def _incrusta(mm):
+    datos = base64.b64encode(io.open(os.path.join(RAIZ, mm.group(1)), 'rb').read()).decode('ascii')
+    return 'src="data:image/webp;base64,' + datos + '"'
+
+cuerpo_sol = re.sub(r'src="(assets/img/[a-z0-9-]+\.webp)"', _incrusta, cuerpo_sol)
+cuerpo_sol = re.sub(r'\s(?:srcset|sizes|fetchpriority)="[^"]*"', '', cuerpo_sol)
+if 'assets/' in cuerpo_sol:
+    sys.exit('ERROR: quedan rutas a assets/ en el bloque de GHL: ' +
+             str(re.findall(r'assets/[^"\')]+', cuerpo_sol)[:5]))
+if 'class="rev' in cuerpo_sol or ' rev"' in cuerpo_sol:
     sys.exit('ERROR: quedan clases rev; en GHL la pagina saldria invisible.')
 css_sol = io.open(os.path.join(RAIZ, 'ghl', 'estilo-solar.css'), encoding='utf-8').read().strip()
+js_escena = io.open(os.path.join(RAIZ, 'ghl', 'escena-solar.js'), encoding='utf-8').read()
+if ('<' + '/script>') in js_escena or ('<' + '/script>') in css_sol:
+    sys.exit('ERROR: el script o el CSS de la landing llevan una etiqueta de cierre de script.')
 ruta = os.path.join(RAIZ, 'ghl', 'placas-solares-ghl.html')
 io.open(ruta, 'w', encoding='utf-8').write(
     "<!-- Electricidad y Antenas DLR - landing de placas solares\n"
     "     Pegar en GoHighLevel en un elemento Custom Code / HTML.\n"
     "     Generado por ghl/construir.py a partir de placas-solares.html y de\n"
     "     ghl/estilo-solar.css: no editar a mano. -->\n"
-    "<style>\n" + css_sol + "\n</style>\n\n<div class=\"dlr-solar\">" + cuerpo_sol.rstrip() + "\n</div>\n")
+    "<style>\n" + css_sol + "\n</style>\n\n<div class=\"dlr-solar\">" + cuerpo_sol.rstrip() +
+    "\n</div>\n\n<script>\n" + js_escena.strip() + "\n</script>\n")
 print('%-28s %6d bytes' % ('placas-solares-ghl.html', os.path.getsize(ruta)))
 
 # --- banner de consentimiento: CSS extraido de estilo.css + el script ---

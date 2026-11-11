@@ -111,3 +111,38 @@
   .dlr-solar .acciones .btn,.dlr-solar .accion-llamar{width:100%}
   .dlr-solar .micro{text-align:center;width:100%;padding-left:0}
 }
+
+/* ===== escena 3D del héroe ===== */
+.dlr-solar .heroe-rej{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
+.dlr-solar .escena{position:relative;aspect-ratio:1/1;perspective:1200px;transform-style:preserve-3d}
+.dlr-solar .escena img{max-width:100%;height:auto;display:block}
+.dlr-solar .aura{position:absolute;inset:8% 8%;border-radius:50%;
+  background:radial-gradient(circle at 50% 45%,rgba(1,109,253,.3),rgba(1,109,253,.06) 55%,transparent 72%);
+  filter:blur(6px);animation:dlrRespira 7s ease-in-out infinite}
+@keyframes dlrRespira{0%,100%{transform:scale(1);opacity:.85}50%{transform:scale(1.09);opacity:1}}
+.dlr-solar .anillo{position:absolute;inset:6%;border-radius:50%;border:1px dashed rgba(1,109,253,.3);
+  animation:dlrGira 36s linear infinite}
+.dlr-solar .anillo.dos{inset:17%;border-style:solid;border-color:rgba(1,109,253,.14);
+  animation-duration:26s;animation-direction:reverse}
+@keyframes dlrGira{to{transform:rotate(360deg)}}
+.dlr-solar .pieza{position:absolute;transform-style:preserve-3d;will-change:transform}
+.dlr-solar .pieza img{filter:drop-shadow(0 30px 44px rgba(13,34,59,.22))}
+.dlr-solar .pieza-principal{inset:14% 10% auto 10%;width:80%}
+.dlr-solar .pieza-chica{width:25%;background:#fff;border-radius:20px;padding:10px;
+  border:1px solid var(--linea);
+  box-shadow:0 1px 2px rgba(13,34,59,.05),0 12px 32px -12px rgba(13,34,59,.18)}
+.dlr-solar .p-bombilla{top:4%;right:2%}
+.dlr-solar .p-cuadro{bottom:2%;right:8%;width:27%}
+.dlr-solar .chispa{position:absolute;inset:0;pointer-events:none}
+.dlr-solar .chispa path{stroke:var(--azul);stroke-width:2;fill:none;stroke-linecap:round;
+  stroke-dasharray:14 240;animation:dlrRecorre 3.6s linear infinite;opacity:.75}
+.dlr-solar .chispa path:nth-child(2){animation-delay:1.2s}
+.dlr-solar .chispa path:nth-child(3){animation-delay:2.4s}
+@keyframes dlrRecorre{to{stroke-dashoffset:-254}}
+@media (max-width:900px){
+  .dlr-solar .heroe-rej{grid-template-columns:1fr;gap:10px}
+  .dlr-solar .escena{max-width:330px;margin:4px auto 0;width:100%}
+}
+@media (prefers-reduced-motion:reduce){
+  .dlr-solar .aura,.dlr-solar .anillo,.dlr-solar .chispa path{animation:none}
+}

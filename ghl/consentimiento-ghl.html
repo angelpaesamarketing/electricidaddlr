@@ -4,6 +4,10 @@
      Generado por ghl/construir.py a partir de assets/js/consentimiento.js
      y del bloque de cookies de assets/css/estilo.css. -->
 <style>
+/* las reglas de clase de abajo ganan al [hidden] del navegador, que es solo
+   de la hoja de usuario-agente, asi que hay que forzarlo aqui o el panel
+   saldria siempre desplegado y con el boton de guardar visible */
+.ck-panel [hidden]{display:none!important}
 .ck-capa{position:fixed;left:0;right:0;bottom:0;z-index:60;padding:14px;display:none;
   background:linear-gradient(to top,rgba(5,12,23,.5),transparent)}
 .ck-capa.ck-abierta{display:block}
