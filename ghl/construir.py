@@ -139,7 +139,13 @@ m = re.search(r'</header>(.*?)<footer>', sol, re.S)
 mb = re.search(r'<div class="barra-movil">.*?\n</div>', sol, re.S)
 if not m or not mb:
     sys.exit('No encuentro el cuerpo o la barra movil de placas-solares.html')
-cuerpo_sol = m.group(1).rstrip() + '\n\n' + mb.group(0)
+# pie con los enlaces legales: sin ellos la landing no cumple ni con la LSSI ni
+# con los requisitos de destino de Google Ads
+PIE_LEGAL = """<div class="pie-legal">
+  <span>Electricidad y Antenas DLR · DLR EDSAYT S.L. · Torrevieja (Alicante)</span>
+  <span><a href="/aviso-legal">Aviso legal</a> · <a href="/privacidad">Privacidad</a> · <a href="#" data-cookies>Configurar cookies</a></span>
+</div>"""
+cuerpo_sol = m.group(1).rstrip() + '\n\n' + PIE_LEGAL + '\n\n' + mb.group(0)
 # sin app.js las clases .rev dejarian la pagina con opacity 0
 cuerpo_sol = re.sub(r'\s(?:rev|tilt)(?=["\s])', '', cuerpo_sol)
 cuerpo_sol = cuerpo_sol.replace('/aviso-legal.html', '/aviso-legal').replace('/privacidad.html', '/privacidad')

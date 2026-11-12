@@ -141,8 +141,14 @@
 .dlr-solar .barra-movil .btn{flex:1;padding:14px 10px;font-size:.98rem}
 @media (max-width:900px){
   .dlr-solar .barra-movil{display:flex}
-  .dlr-solar .contacto{padding-bottom:110px}
 }
+
+/* ===== pie con los enlaces legales ===== */
+.dlr-solar .pie-legal{background:#050c17;color:#7f93ad;padding:26px 22px;font-size:.88rem;
+  display:flex;flex-wrap:wrap;gap:8px 26px;justify-content:center;text-align:center}
+.dlr-solar .pie-legal a{color:#aebdd1;text-decoration:underline;text-underline-offset:2px}
+.dlr-solar .pie-legal a:hover{color:#fff}
+@media (max-width:900px){.dlr-solar .pie-legal{padding-bottom:96px}}
 
 /* factores del presupuesto, en la landing solar */
 .dlr-solar .intro-precio{font-size:1rem;margin-bottom:1.1em}
@@ -642,6 +648,11 @@
     </div>
   </div>
 </section>
+
+<div class="pie-legal">
+  <span>Electricidad y Antenas DLR · DLR EDSAYT S.L. · Torrevieja (Alicante)</span>
+  <span><a href="/aviso-legal">Aviso legal</a> · <a href="/privacidad">Privacidad</a> · <a href="#" data-cookies>Configurar cookies</a></span>
+</div>
 
 <div class="barra-movil">
   <a class="btn btn-azul" href="tel:+34652967349">
