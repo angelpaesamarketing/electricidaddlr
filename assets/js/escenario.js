@@ -50,12 +50,17 @@
 
   /* ---------- entorno: ancho completo y contenedores que rompen sticky ---------- */
 
-  var envoltura = escenario.closest ? escenario.closest('.dlr-solar') : null;
 
-  function arreglaEntorno() {
+  /* La landing va en varios bloques de código en GoHighLevel (con el formulario
+     nativo entre ellos), y cada uno queda dentro de una columna con ancho máximo
+     y relleno. Esto los saca a todo el ancho de la ventana. Se expone para que
+     el último bloque pueda llamarlo nada más cargarse. */
+  function abreAncestros(env) {
+    /* los contenedores con overflow oculto recortarían el bloque al sacarlo
+       de su columna, y además rompen position:sticky */
     var anchoDoc = document.documentElement.clientWidth;
     var clip = window.CSS && CSS.supports && CSS.supports('overflow', 'clip');
-    var nodo = (envoltura || escenario).parentElement;
+    var nodo = env.parentElement;
     while (nodo && nodo !== document.body && nodo !== document.documentElement) {
       var cs = getComputedStyle(nodo);
       var corta = /(hidden|auto|scroll)/.test(cs.overflowX + ' ' + cs.overflowY);
@@ -67,19 +72,29 @@
       }
       nodo = nodo.parentElement;
     }
-    if (envoltura) {
-      envoltura.style.width = '';
-      envoltura.style.maxWidth = '';
-      envoltura.style.marginLeft = '';
-      var r = envoltura.getBoundingClientRect();
-      if (r.left > 0.5 || r.width < anchoDoc - 1) {
-        var margen = parseFloat(getComputedStyle(envoltura).marginLeft) || 0;
-        envoltura.style.maxWidth = 'none';
-        envoltura.style.width = anchoDoc + 'px';
-        envoltura.style.marginLeft = (margen - r.left) + 'px';
-      }
-    }
   }
+
+  function anchoCompleto() {
+    var anchoDoc = document.documentElement.clientWidth;
+    var bloques = document.querySelectorAll('.dlr-solar');
+    if (!bloques.length) bloques = [escenario];
+    [].forEach.call(bloques, function (env) {
+      abreAncestros(env);
+      if (!env.classList.contains('dlr-solar')) return;
+      env.style.width = '';
+      env.style.maxWidth = '';
+      env.style.marginLeft = '';
+      var r = env.getBoundingClientRect();
+      if (r.left > 0.5 || r.width < anchoDoc - 1) {
+        var margen = parseFloat(getComputedStyle(env).marginLeft) || 0;
+        env.style.maxWidth = 'none';
+        env.style.width = anchoDoc + 'px';
+        env.style.marginLeft = (margen - r.left) + 'px';
+      }
+    });
+  }
+  window.dlrAnchoCompleto = anchoCompleto;
+  var arreglaEntorno = anchoCompleto;
 
   /* atajos: aparecen con el primer scroll y ya no se van */
   var atajos = document.getElementById('atajos');

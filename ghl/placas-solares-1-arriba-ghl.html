@@ -1,6 +1,8 @@
-<!-- Electricidad y Antenas DLR - landing de placas solares
-     Pegar en GoHighLevel en un elemento Custom Code / HTML. Va todo dentro:
-     estilos, imagenes y scripts. Generado por ghl/construir.py: no editar a mano. -->
+<!-- Electricidad y Antenas DLR - landing de placas solares, BLOQUE 1 DE 2 (arriba)
+     Va en un elemento Custom Code / HTML. Justo DEBAJO va el formulario nativo
+     de GoHighLevel, y debajo del formulario el bloque 2.
+     Este bloque lleva los estilos de toda la landing, las imágenes y el script.
+     Generado por ghl/construir.py: no editar a mano. -->
 <style>
 /* Electricidad y Antenas DLR - landing de placas solares, bloque autonomo.
    Todo acotado bajo .dlr-solar para no chocar con la plantilla de GoHighLevel. */
@@ -339,6 +341,21 @@
   .dlr-solar .gs-paso{padding:18px 14px 14px}
   .dlr-solar .gs-paso .btn{width:100%;padding:15px 16px;font-size:.98rem}
 }
+
+/* ===== cabecera del formulario de GoHighLevel ===== */
+.dlr-solar .form-cab{background:var(--crema);padding:clamp(48px,7vw,80px) 0 18px}
+.dlr-solar .form-cab .plomo{margin-bottom:22px}
+.dlr-solar .form-datos{list-style:none;padding:0;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:center;
+  gap:10px 26px;font-size:.95rem;color:var(--texto)}
+.dlr-solar .form-datos li{display:block}
+.dlr-solar .form-datos li::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;
+  background:var(--verde);margin-right:8px;vertical-align:middle;position:relative;top:-1px}
+@media (max-width:600px){.dlr-solar .form-datos{flex-direction:column;align-items:center;gap:8px}}
+.dlr-solar .form-datos b{color:var(--tinta)}
+/* hueco que ocupa el formulario de GHL; solo se ve en la página del repositorio */
+.dlr-solar .ghl-hueco{background:var(--crema);padding:0 0 clamp(48px,7vw,80px)}
+.dlr-solar .ghl-hueco p{max-width:560px;margin:0 auto;border:2px dashed var(--linea);border-radius:var(--radio);
+  padding:60px 20px;text-align:center;color:var(--suave);font-weight:600}
 </style>
 
 <div class="dlr-solar">
@@ -350,6 +367,15 @@
     <span class="atajo-txt">Llamar</span>
   </a>
   <a class="btn btn-azul" href="#estudio">Solicita presupuesto</a>
+</div>
+
+<div class="barra-movil">
+  <a class="btn btn-azul" href="tel:+34652967349">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg> Llamar
+  </a>
+  <a class="btn btn-wa" href="https://wa.me/34652967349?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20placas%20solares" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.1-.7.1l-.9 1.1c-.2.2-.3.2-.6.1a8 8 0 0 1-4-3.5c-.2-.3 0-.5.1-.7l.6-.8c.1-.2.1-.4 0-.6l-.9-2.2c-.2-.5-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.4-1.2 1.2-1.2 2.8s1.2 3.3 1.4 3.5c.2.2 2.4 3.7 5.8 5 2.9 1.1 3.4.9 4 .8.7-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3ZM12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Z"/></svg> WhatsApp
+  </a>
 </div>
 
 <!-- ===== ESCENARIO: la placa se instala al bajar ===== -->
@@ -462,219 +488,19 @@
   </div>
 </section>
 
-<!-- ===== A QUIÉN LE SALE A CUENTA ===== -->
-<section class="crema">
-  <div class="env">
-    <div class="centro">
-      <span class="etq">Seamos claros</span>
-      <h2>A quién le sale a cuenta y a quién no</h2>
-      <p class="plomo">Preferimos decírtelo en la primera llamada antes que hacerte perder una tarde. Si no te compensa, te lo decimos y no te insistimos.</p>
-    </div>
-    <div class="filtro">
-      <div class="filtro-si">
-        <h3>Suele compensar</h3>
-        <ul>
-          <li>Eres <b>propietario</b> de un chalet, adosado o bungalow con tejado o terraza propios.</li>
-          <li>Tu factura de luz pasa de <b>unos 90 € al mes</b> de media anual.</li>
-          <li>Tienes <b>aire acondicionado, bomba de piscina, pozo o deshumidificador</b>, que consumen justo cuando más sol hay.</li>
-          <li>Piensas quedarte en la casa, o venderla con la instalación ya hecha y legalizada.</li>
-          <li>Eres una <b>comunidad de propietarios</b> que quiere bajar el recibo de zonas comunes, ascensor o garaje.</li>
-        </ul>
-      </div>
-      <div class="filtro-no">
-        <h3>Normalmente no</h3>
-        <ul>
-          <li>Vives de <b>alquiler</b> o la vivienda no es tuya.</li>
-          <li>La factura está <b>por debajo de 50 € al mes</b>: el ahorro no llega a pagar la instalación en un plazo razonable.</li>
-          <li>Es un <b>piso sin cubierta propia</b> y la comunidad no se plantea el autoconsumo colectivo.</li>
-          <li>La casa queda <b>totalmente cerrada</b> la mayor parte del año, sin nada funcionando.</li>
-          <li>El tejado está <b>a la sombra</b> buena parte del día y no hay sitio alternativo.</li>
-        </ul>
-      </div>
-    </div>
+<!-- ===== CABECERA DEL FORMULARIO ===== -->
+<section class="form-cab" id="estudio">
+  <div class="env centro">
+    <span class="etq">Estudio</span>
+    <h2>¿Te compensa? Te lo decimos</h2>
+    <p class="plomo">Cuatro datos y te llamamos para decirte si en tu caso sale a cuenta. Si no sale, te lo diremos.</p>
+    <ul class="form-datos">
+      <li><b>Te llamamos en menos de 24 h</b> laborables, desde el 652 967 349</li>
+      <li><b>Sin compromiso</b> y sin insistir después</li>
+      <li><b>Torrevieja, Orihuela Costa</b> y toda la Vega Baja</li>
+    </ul>
   </div>
 </section>
-
-<!-- ===== QUÉ INCLUYE ===== -->
-<section>
-  <div class="env">
-    <div class="centro">
-      <span class="etq">Precio cerrado</span>
-      <h2>Qué incluye lo que te presupuestamos</h2>
-      <p class="plomo">Un solo precio, por escrito, sin partidas que aparecen después. Esto es lo que entra siempre.</p>
-    </div>
-    <div class="rejilla">
-      <article class="tarjeta">
-        <h3>Estudio previo real</h3>
-        <p>Miramos tu factura y tu curva de consumo horaria, no una media. Estudio de sombras sobre tu cubierta y dimensionado al consumo que tienes de verdad.</p>
-      </article>
-      <article class="tarjeta">
-        <h3>Material y montaje</h3>
-        <p>Paneles, inversor, estructura, protecciones y cableado. Estructura calculada para el viento de la costa y anclajes que no comprometen la impermeabilización.</p>
-      </article>
-      <article class="tarjeta">
-        <h3>Legalización completa</h3>
-        <p>Memoria técnica, certificado de instalación, registro de autoconsumo en Industria y alta de la compensación de excedentes con tu comercializadora.</p>
-      </article>
-      <article class="tarjeta">
-        <h3>Trámite de ayudas</h3>
-        <p>Miramos qué bonificaciones tiene tu municipio en ese momento y qué deducciones te aplican, y presentamos la documentación por ti.</p>
-      </article>
-      <article class="tarjeta">
-        <h3>Puesta en marcha</h3>
-        <p>Dejamos la monitorización configurada en tu móvil y te enseñamos a leerla, para que veas lo que produces y lo que vuelcas a la red.</p>
-      </article>
-      <article class="tarjeta">
-        <h3>Garantía y postventa</h3>
-        <p>Garantía del fabricante en paneles e inversor, y la nuestra en el montaje. Si algo falla, viene el mismo que lo instaló, no un servicio técnico de Madrid.</p>
-      </article>
-    </div>
-
-    <div class="aviso-precio">
-      <h3>Qué hace que tu presupuesto suba o baje</h3>
-      <p class="intro-precio">No publicamos tarifas porque no hay dos tejados iguales y cualquier precio cerrado en una web es una verdad a medias. Lo que sí podemos decirte es de qué depende el tuyo, para que sepas qué te vamos a preguntar y por qué:</p>
-      <ul class="factores">
-        <li><b>Cuánto consumes y cuándo.</b> Es lo primero. Una casa con aire y piscina necesita bastante más potencia que un adosado de dos personas.</li>
-        <li><b>El tipo de cubierta.</b> No cuesta lo mismo una terraza plana que un tejado de teja inclinado, y la orientación cambia cuántos paneles hacen falta para el mismo ahorro.</li>
-        <li><b>La distancia al cuadro.</b> Si el inversor queda lejos del cuadro general, hay más cableado y más obra.</li>
-        <li><b>Si quieres batería o no.</b> Es la partida que más encarece, y en la mayoría de casas de aquí no hace falta.</li>
-        <li><b>El estado de tu instalación.</b> A veces hay que tocar el cuadro o la puesta a tierra antes de conectar nada. Eso sale en la visita y va dentro del presupuesto, no después.</li>
-      </ul>
-      <p class="nota-precio">En la primera llamada, con tu factura delante, te damos el orden de magnitud para que decidas si merece la pena que vayamos a verlo. <b>El presupuesto es cerrado, por escrito y con la legalización incluida.</b> Lo que te decimos es lo que pagas.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ===== AYUDAS ===== -->
-<section class="crema">
-  <div class="env">
-    <div class="centro">
-      <span class="etq">Ayudas</span>
-      <h2>Sobre las subvenciones, la verdad</h2>
-    </div>
-    <div class="texto-ancho">
-      <p>Vas a encontrar webs que te prometen un porcentaje concreto de subvención antes de saber siquiera dónde vives. Nosotros no vamos a hacer eso, porque <b>las ayudas cambian cada año y son distintas en cada municipio</b>: las bonificaciones de IBI y de ICIO las decide cada ayuntamiento en su ordenanza fiscal, las convocatorias autonómicas abren y cierran, y las deducciones estatales se prorrogan o se dejan caer.</p>
-      <p>Lo que sí hacemos: <b>en el estudio te decimos exactamente qué tienes disponible el día que lo pides</b>, en tu municipio y para tu caso, con el importe calculado y los plazos de solicitud. Y presentamos nosotros la documentación.</p>
-      <p>Una advertencia que te ahorrará disgustos: <b>las bonificaciones de IBI casi nunca son automáticas</b>. Hay que pedirlas al ayuntamiento, y muchos dan un plazo corto desde que termina la instalación. Si se pasa, se pierde el año entero.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ===== COMUNIDADES ===== -->
-<section class="crema">
-  <div class="env">
-    <div class="caja-destacada">
-      <div>
-        <span class="etq">Comunidades de propietarios</span>
-        <h2>Autoconsumo colectivo para tu urbanización</h2>
-        <p>En las urbanizaciones de Orihuela Costa y Torrevieja, el recibo de zonas comunes, ascensores, bombeo y alumbrado de garaje se come buena parte de la cuota. El autoconsumo colectivo permite repartir una sola instalación entre los vecinos con coeficientes acordados.</p>
-        <p>Preparamos la <b>memoria técnica y el estudio de reparto</b> para que la junta pueda votarlo con números encima de la mesa, y nos sentamos con el administrador de fincas si hace falta. La Ley de Propiedad Horizontal rebaja la mayoría necesaria para este tipo de instalaciones.</p>
-        <p><a href="tel:+34652967349"><b>Llámanos al 652 967 349</b></a> y lo vemos antes de la próxima junta.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== FAQ ===== -->
-<section>
-  <div class="env">
-    <div class="centro">
-      <span class="etq">Dudas</span>
-      <h2>Lo que nos preguntan siempre</h2>
-    </div>
-    <div class="faq">
-      <details><summary>¿Cuánto se ahorra de verdad?</summary><p>Depende de cuánto consumas de día. En una vivienda de la Vega Baja con aire acondicionado y bomba de piscina, lo normal es cubrir entre el 50 % y el 70 % de la factura anual. Quien pasa el día fuera y consume casi todo de noche ahorra bastante menos, y te lo decimos antes de venderte nada.</p></details>
-      <details><summary>¿Qué pasa con la energía que me sobra?</summary><p>Se vierte a la red y tu comercializadora te la descuenta de la factura mediante la compensación de excedentes. Tramitamos el alta de esa compensación como parte de la instalación, que es un paso que algunos se dejan y luego el cliente no entiende por qué no le descuentan nada.</p></details>
-      <details><summary>¿Necesito batería?</summary><p>En la mayoría de viviendas de la zona, no. La batería encarece bastante la instalación y alarga la amortización. Tiene sentido si hay cortes de luz frecuentes o un consumo nocturno muy alto. Si no es tu caso, te lo diremos aunque vendamos menos.</p></details>
-      <details><summary>Vivo aquí solo unos meses al año. ¿Me compensa?</summary><p>Puede compensar si la casa tiene bomba de piscina, deshumidificador o aire funcionando en tu ausencia, que es lo habitual en los chalets de la costa. Si la casa queda totalmente cerrada y sin consumo, normalmente no sale a cuenta.</p></details>
-      <details><summary>¿Cuánto tarda?</summary><p>El montaje es de uno o dos días. La legalización y el alta de compensación con la distribuidora llevan algunas semanas más, pero de eso nos ocupamos nosotros y no tienes que hacer nada.</p></details>
-      <details><summary>¿Y si tengo tejado de teja?</summary><p>No hay problema. Se usa anclaje específico para teja que respeta la impermeabilización. Lo que sí miramos en la visita es el estado de la cubierta: si hay que repararla, mejor hacerlo antes de poner los paneles encima.</p></details>
-      <details><summary>¿Hay que pedir permiso a la comunidad?</summary><p>Para una vivienda unifamiliar, no. En una comunidad hace falta acuerdo de la junta, aunque la Ley de Propiedad Horizontal rebaja la mayoría necesaria para instalaciones de autoconsumo. Preparamos la documentación para que se pueda votar con datos.</p></details>
-      <details><summary>¿Quién viene a mi casa?</summary><p>Nosotros. No subcontratamos el montaje ni mandamos a un comercial a comisión que no va a volver a aparecer. El que te atiende por teléfono es el que hace la instalación.</p></details>
-    </div>
-  </div>
-</section>
-
-<!-- ===== FORMULARIO ===== -->
-<section id="estudio" class="contacto">
-  <div class="env">
-    <div class="centro">
-      <span class="etq">Estudio</span>
-      <h2>¿Te compensa? Te lo decimos</h2>
-      <p class="plomo">Cuatro datos y te llamamos para decirte si en tu caso sale a cuenta. Si no sale, te lo diremos.</p>
-    </div>
-    <div class="caja-contacto">
-      <div>
-        <ul class="datos">
-          <li>
-            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg></span>
-            <span><b>652 967 349</b><a href="tel:+34652967349">Llamar ahora</a> · <a href="https://wa.me/34652967349?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20placas%20solares" rel="noopener">WhatsApp</a></span>
-          </li>
-          <li>
-            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
-            <span><b>Dónde trabajamos</b>Torrevieja, Orihuela Costa, Guardamar, Rojales, Los Montesinos, Pilar de la Horadada y San Pedro del Pinatar.</span>
-          </li>
-          <li>
-            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="2" width="20" height="20" rx="6"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg></span>
-            <span><b>@electricidadyantenasdlr</b><a href="https://www.instagram.com/electricidadyantenasdlr/" rel="noopener">Instalaciones terminadas</a></span>
-          </li>
-        </ul>
-      </div>
-
-      <!-- En GoHighLevel este formulario se sustituye por el formulario nativo
-           con los MISMOS campos y redirección a /gracias. -->
-      <form id="formulario-solar">
-        <label for="nombre">Nombre</label>
-        <input id="nombre" name="nombre" type="text" autocomplete="name" required>
-
-        <label for="telefono">Teléfono</label>
-        <input id="telefono" name="telefono" type="tel" autocomplete="tel" inputmode="tel" required>
-
-        <label for="vivienda">¿Qué tipo de vivienda es?</label>
-        <select id="vivienda" name="vivienda" required>
-          <option value="">Elige una opción</option>
-          <option>Chalet o villa independiente</option>
-          <option>Adosado o bungalow</option>
-          <option>Piso con cubierta propia</option>
-          <option>Comunidad de propietarios</option>
-          <option>Local o nave</option>
-        </select>
-
-        <label for="factura">¿Cuánto pagas de luz al mes, más o menos?</label>
-        <select id="factura" name="factura" required>
-          <option value="">Elige una opción</option>
-          <option>Menos de 50 €</option>
-          <option>Entre 50 y 90 €</option>
-          <option>Entre 90 y 150 €</option>
-          <option>Más de 150 €</option>
-        </select>
-
-        <label for="poblacion">Población</label>
-        <input id="poblacion" name="poblacion" type="text" autocomplete="address-level2" required>
-
-        <button class="btn btn-wa" type="submit">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.1-.7.1l-.9 1.1c-.2.2-.3.2-.6.1a8 8 0 0 1-4-3.5c-.2-.3 0-.5.1-.7l.6-.8c.1-.2.1-.4 0-.6l-.9-2.2c-.2-.5-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.4-1.2 1.2-1.2 2.8s1.2 3.3 1.4 3.5c.2.2 2.4 3.7 5.8 5 2.9 1.1 3.4.9 4 .8.7-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3ZM12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Z"/></svg>
-          Enviar por WhatsApp
-        </button>
-        <p class="nota">Se abre WhatsApp con tus datos ya escritos; solo tienes que darle a enviar. Te contestamos en menos de 24 h laborables.</p>
-      </form>
-    </div>
-  </div>
-</section>
-
-<div class="pie-legal">
-  <span>Electricidad y Antenas DLR · DLR EDSAYT S.L. · Torrevieja (Alicante)</span>
-  <span><a href="/aviso-legal">Aviso legal</a> · <a href="/privacidad">Privacidad</a> · <a href="#" data-cookies>Configurar cookies</a></span>
-</div>
-
-<div class="barra-movil">
-  <a class="btn btn-azul" href="tel:+34652967349">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg> Llamar
-  </a>
-  <a class="btn btn-wa" href="https://wa.me/34652967349?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20placas%20solares" rel="noopener">
-    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.1-.7.1l-.9 1.1c-.2.2-.3.2-.6.1a8 8 0 0 1-4-3.5c-.2-.3 0-.5.1-.7l.6-.8c.1-.2.1-.4 0-.6l-.9-2.2c-.2-.5-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.4-1.2 1.2-1.2 2.8s1.2 3.3 1.4 3.5c.2.2 2.4 3.7 5.8 5 2.9 1.1 3.4.9 4 .8.7-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3ZM12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Z"/></svg> WhatsApp
-  </a>
-</div>
 </div>
 
 <script>
@@ -730,12 +556,17 @@
 
   /* ---------- entorno: ancho completo y contenedores que rompen sticky ---------- */
 
-  var envoltura = escenario.closest ? escenario.closest('.dlr-solar') : null;
 
-  function arreglaEntorno() {
+  /* La landing va en varios bloques de código en GoHighLevel (con el formulario
+     nativo entre ellos), y cada uno queda dentro de una columna con ancho máximo
+     y relleno. Esto los saca a todo el ancho de la ventana. Se expone para que
+     el último bloque pueda llamarlo nada más cargarse. */
+  function abreAncestros(env) {
+    /* los contenedores con overflow oculto recortarían el bloque al sacarlo
+       de su columna, y además rompen position:sticky */
     var anchoDoc = document.documentElement.clientWidth;
     var clip = window.CSS && CSS.supports && CSS.supports('overflow', 'clip');
-    var nodo = (envoltura || escenario).parentElement;
+    var nodo = env.parentElement;
     while (nodo && nodo !== document.body && nodo !== document.documentElement) {
       var cs = getComputedStyle(nodo);
       var corta = /(hidden|auto|scroll)/.test(cs.overflowX + ' ' + cs.overflowY);
@@ -747,19 +578,29 @@
       }
       nodo = nodo.parentElement;
     }
-    if (envoltura) {
-      envoltura.style.width = '';
-      envoltura.style.maxWidth = '';
-      envoltura.style.marginLeft = '';
-      var r = envoltura.getBoundingClientRect();
-      if (r.left > 0.5 || r.width < anchoDoc - 1) {
-        var margen = parseFloat(getComputedStyle(envoltura).marginLeft) || 0;
-        envoltura.style.maxWidth = 'none';
-        envoltura.style.width = anchoDoc + 'px';
-        envoltura.style.marginLeft = (margen - r.left) + 'px';
-      }
-    }
   }
+
+  function anchoCompleto() {
+    var anchoDoc = document.documentElement.clientWidth;
+    var bloques = document.querySelectorAll('.dlr-solar');
+    if (!bloques.length) bloques = [escenario];
+    [].forEach.call(bloques, function (env) {
+      abreAncestros(env);
+      if (!env.classList.contains('dlr-solar')) return;
+      env.style.width = '';
+      env.style.maxWidth = '';
+      env.style.marginLeft = '';
+      var r = env.getBoundingClientRect();
+      if (r.left > 0.5 || r.width < anchoDoc - 1) {
+        var margen = parseFloat(getComputedStyle(env).marginLeft) || 0;
+        env.style.maxWidth = 'none';
+        env.style.width = anchoDoc + 'px';
+        env.style.marginLeft = (margen - r.left) + 'px';
+      }
+    });
+  }
+  window.dlrAnchoCompleto = anchoCompleto;
+  var arreglaEntorno = anchoCompleto;
 
   /* atajos: aparecen con el primer scroll y ya no se van */
   var atajos = document.getElementById('atajos');
@@ -1125,58 +966,5 @@
   mide();
   pinta();
   requestAnimationFrame(late);
-})();
-
-/* Electricidad y Antenas DLR — formulario de la landing solar.
-   Los presupuestos entran por WhatsApp: al enviar, se abre la conversación
-   con los datos del formulario ya escritos, se deja un evento en dataLayer
-   para medirlo como conversión desde Tag Manager y la pestaña pasa a la
-   página de gracias, que recuerda que hay que darle a enviar.
-
-   OJO: este archivo se pega EN LINEA en GoHighLevel, así que no puede
-   contener en ningún sitio la cadena de cierre de script. */
-(function () {
-  'use strict';
-  var form = document.getElementById('formulario-solar');
-  if (!form) return;
-  var TELEFONO = '34652967349';
-
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    if (form.checkValidity && !form.checkValidity()) {
-      if (form.reportValidity) form.reportValidity();
-      return;
-    }
-    function v(n) { var c = form.elements[n]; return c ? String(c.value || '').trim() : ''; }
-    var texto =
-      'Hola, soy ' + v('nombre') + '. Quiero saber si me compensa poner placas solares.\n' +
-      '· Vivienda: ' + v('vivienda') + '\n' +
-      '· Factura de luz: ' + v('factura') + ' al mes\n' +
-      '· Población: ' + v('poblacion') + '\n' +
-      '· Teléfono: ' + v('telefono');
-    var url = 'https://wa.me/' + TELEFONO + '?text=' + encodeURIComponent(texto);
-
-    /* el mensaje se guarda para que la página de gracias pueda reabrir WhatsApp */
-    try { sessionStorage.setItem('dlr_wa_texto', texto); } catch (err) {}
-
-    /* WhatsApp se abre ya, dentro del clic, para que el navegador no lo bloquee */
-    var ventana = window.open(url, '_blank');
-    if (ventana) { try { ventana.opener = null; } catch (err) {} }
-
-    /* y esta pestaña pasa a la página de gracias, pero solo después de que
-       Tag Manager haya enviado la conversión: si se navega antes, la
-       petición se corta y la conversión se pierde */
-    var GRACIAS = /\.html$/.test(location.pathname) ? '/gracias-placas-solares.html' : '/gracias-placas-solares';
-    var hecho = false;
-    function aGracias() {
-      if (hecho) return;
-      hecho = true;
-      location.href = GRACIAS + (ventana ? '' : '?wa=0');
-    }
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({ event: 'dlr_solicitud_estudio', vivienda: v('vivienda'), factura: v('factura'),
-                            eventCallback: aGracias, eventTimeout: 1500 });
-    setTimeout(aGracias, 1800);
-  });
 })();
 </script>

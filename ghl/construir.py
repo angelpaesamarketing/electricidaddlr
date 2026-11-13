@@ -168,16 +168,15 @@ def acota(css, prefijo='.dlr-solar'):
 
 sol = io.open(os.path.join(RAIZ, 'placas-solares.html'), encoding='utf-8').read()
 m = re.search(r'</header>(.*?)<footer>', sol, re.S)
-mb = re.search(r'<div class="barra-movil">.*?\n</div>', sol, re.S)
-if not m or not mb:
-    sys.exit('No encuentro el cuerpo o la barra movil de placas-solares.html')
+if not m:
+    sys.exit('No encuentro el cuerpo de placas-solares.html')
 # pie con los enlaces legales: sin ellos la landing no cumple ni con la LSSI ni
 # con los requisitos de destino de Google Ads
 PIE_LEGAL = """<div class="pie-legal">
   <span>Electricidad y Antenas DLR · DLR EDSAYT S.L. · Torrevieja (Alicante)</span>
   <span><a href="/aviso-legal">Aviso legal</a> · <a href="/privacidad">Privacidad</a> · <a href="#" data-cookies>Configurar cookies</a></span>
 </div>"""
-cuerpo_sol = m.group(1).rstrip() + '\n\n' + PIE_LEGAL + '\n\n' + mb.group(0)
+cuerpo_sol = m.group(1).rstrip() + '\n\n' + PIE_LEGAL
 # sin app.js las clases .rev dejarian la pagina con opacity 0
 cuerpo_sol = re.sub(r'\s(?:rev|tilt)(?=["\s])', '', cuerpo_sol)
 cuerpo_sol = cuerpo_sol.replace('/aviso-legal.html', '/aviso-legal').replace('/privacidad.html', '/privacidad')
@@ -210,19 +209,46 @@ ini_f = estilo.index('/* factores del presupuesto, en la landing solar */')
 ini_e = estilo.index('/* ===== escenario: la placa se instala conforme se baja ===== */')
 css_sol = (io.open(os.path.join(RAIZ, 'ghl', 'estilo-solar.css'), encoding='utf-8').read().strip() +
            '\n\n' + acota(estilo[ini_f:ini_e].strip()) + '\n\n' + acota(estilo[ini_e:].strip()))
-js_sol = (io.open(os.path.join(RAIZ, 'assets', 'js', 'escenario.js'), encoding='utf-8').read().strip() +
-          '\n\n' +
-          io.open(os.path.join(RAIZ, 'assets', 'js', 'formulario-solar.js'), encoding='utf-8').read().strip())
+js_sol = io.open(os.path.join(RAIZ, 'assets', 'js', 'escenario.js'), encoding='utf-8').read().strip()
 if ('<' + '/script>') in js_sol or ('<' + '/script>') in css_sol or ('<' + '/style>') in css_sol:
     sys.exit('ERROR: el script o el CSS de la landing llevan una etiqueta de cierre.')
-ruta = os.path.join(RAIZ, 'ghl', 'placas-solares-ghl.html')
-io.open(ruta, 'w', encoding='utf-8').write(
-    "<!-- Electricidad y Antenas DLR - landing de placas solares\n"
-    "     Pegar en GoHighLevel en un elemento Custom Code / HTML. Va todo dentro:\n"
-    "     estilos, imagenes y scripts. Generado por ghl/construir.py: no editar a mano. -->\n"
-    "<style>\n" + css_sol + "\n</style>\n\n<div class=\"dlr-solar\">" + cuerpo_sol.rstrip() +
+# La landing se parte en dos bloques por el hueco del formulario: en GHL, entre
+# los dos va el elemento Formulario nativo, que crea el contacto y dispara el
+# flujo de la oportunidad. El primero lleva los estilos (un <style> en el cuerpo
+# vale para toda la página) y el script del escenario; el segundo, solo HTML y
+# una llamada para ponerse a ancho completo nada más cargarse.
+INI_HUECO = '<!-- ===== FORMULARIO DE GHL ====='
+FIN_HUECO = '<!-- ===== FIN DEL FORMULARIO DE GHL ===== -->'
+if cuerpo_sol.count(INI_HUECO) != 1 or cuerpo_sol.count(FIN_HUECO) != 1:
+    sys.exit('ERROR: no encuentro el hueco del formulario de GHL en placas-solares.html')
+parte_a = cuerpo_sol[:cuerpo_sol.index(INI_HUECO)].rstrip()
+parte_b = cuerpo_sol[cuerpo_sol.index(FIN_HUECO) + len(FIN_HUECO):].strip()
+if 'id="escenario"' not in parte_a or 'id="estudio"' not in parte_a:
+    sys.exit('ERROR: el primer bloque debe llevar el escenario y la cabecera del formulario')
+for f in ('placas-solares-ghl.html',):
+    p = os.path.join(RAIZ, 'ghl', f)
+    if os.path.exists(p): os.remove(p)
+
+ruta_a = os.path.join(RAIZ, 'ghl', 'placas-solares-1-arriba-ghl.html')
+io.open(ruta_a, 'w', encoding='utf-8').write(
+    "<!-- Electricidad y Antenas DLR - landing de placas solares, BLOQUE 1 DE 2 (arriba)\n"
+    "     Va en un elemento Custom Code / HTML. Justo DEBAJO va el formulario nativo\n"
+    "     de GoHighLevel, y debajo del formulario el bloque 2.\n"
+    "     Este bloque lleva los estilos de toda la landing, las imágenes y el script.\n"
+    "     Generado por ghl/construir.py: no editar a mano. -->\n"
+    "<style>\n" + css_sol + "\n</style>\n\n<div class=\"dlr-solar\">" + parte_a +
     "\n</div>\n\n<script>\n" + js_sol + "\n</script>\n")
-print('%-28s %6d bytes  (imagenes incrustadas: %d KB)' % ('placas-solares-ghl.html', os.path.getsize(ruta), PESO_IMG[0] // 1024))
+ruta_b = os.path.join(RAIZ, 'ghl', 'placas-solares-2-abajo-ghl.html')
+io.open(ruta_b, 'w', encoding='utf-8').write(
+    "<!-- Electricidad y Antenas DLR - landing de placas solares, BLOQUE 2 DE 2 (abajo)\n"
+    "     Va en un elemento Custom Code / HTML, justo DEBAJO del formulario de\n"
+    "     GoHighLevel. Los estilos vienen del bloque 1: en el editor de GHL este\n"
+    "     bloque puede verse sin formato, pero en la página publicada sale bien.\n"
+    "     Generado por ghl/construir.py: no editar a mano. -->\n"
+    "<div class=\"dlr-solar\">\n" + parte_b + "\n</div>\n\n"
+    "<script>window.dlrAnchoCompleto && window.dlrAnchoCompleto();</script>\n")
+print('%-34s %6d bytes  (imagenes incrustadas: %d KB)' % ('placas-solares-1-arriba-ghl.html', os.path.getsize(ruta_a), PESO_IMG[0] // 1024))
+print('%-34s %6d bytes' % ('placas-solares-2-abajo-ghl.html', os.path.getsize(ruta_b)))
 
 # --- banner de consentimiento: CSS extraido de estilo.css + el script ---
 css = io.open(os.path.join(RAIZ, 'assets/css/estilo.css'), encoding='utf-8').read()
