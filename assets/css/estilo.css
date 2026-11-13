@@ -317,11 +317,13 @@ body.ck-visible .barra-movil{display:none}
 .filtro li{font-size:.98rem}
 .filtro li b{color:var(--tinta)}
 .filtro-no li{color:var(--suave)}
+.filtro>div{box-shadow:var(--sombra)}
 
 /* precio orientativo */
 .aviso-precio{margin-top:40px;background:var(--crema);border:1px solid var(--linea);
   border-radius:var(--radio-g);padding:28px}
 .aviso-precio h3{margin-bottom:1em}
+.crema .aviso-precio{background:#fff}
 .aviso-precio .tabla-env{background:#fff;margin-bottom:0}
 .nota-precio{font-size:.95rem;color:var(--suave);margin:16px 0 0}
 .nota-precio b{color:var(--tinta)}

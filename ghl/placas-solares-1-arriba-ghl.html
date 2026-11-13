@@ -52,6 +52,7 @@
 .dlr-solar .filtro li{font-size:.98rem}
 .dlr-solar .filtro li b{color:var(--tinta)}
 .dlr-solar .filtro-no li{color:var(--suave)}
+.dlr-solar .filtro>div{box-shadow:var(--sombra)}
 .dlr-solar .rejilla{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
 .dlr-solar .tarjeta{background:#fff;border:1px solid var(--linea);border-radius:var(--radio-g);padding:26px}
 .dlr-solar .tarjeta h3{margin-bottom:.35em}
@@ -59,6 +60,7 @@
 .dlr-solar .aviso-precio{margin-top:40px;background:var(--crema);border:1px solid var(--linea);
   border-radius:var(--radio-g);padding:28px}
 .dlr-solar .aviso-precio h3{margin-bottom:1em}
+.dlr-solar .crema .aviso-precio{background:#fff}
 .dlr-solar .tabla-env{overflow-x:auto;border:1px solid var(--linea);border-radius:var(--radio);background:#fff}
 .dlr-solar table{border-collapse:collapse;width:100%;font-size:.95rem;min-width:480px}
 .dlr-solar th,.dlr-solar td{text-align:left;padding:12px 15px;border-bottom:1px solid var(--linea);
@@ -151,6 +153,78 @@
 .dlr-solar .pie-legal a{color:#aebdd1;text-decoration:underline;text-underline-offset:2px}
 .dlr-solar .pie-legal a:hover{color:#fff}
 @media (max-width:900px){.dlr-solar .pie-legal{padding-bottom:96px}}
+
+/* ===== formulario nativo de GoHighLevel =====
+   El formulario no está dentro de .dlr-solar: es el elemento Formulario de
+   GHL, entre los dos bloques. Estas reglas lo visten como el resto de la
+   landing. GHL genera para cada formulario reglas del tipo
+   ".form-xxxx #_builder-form ... !important" y estilos en línea; el id doble
+   (#_builder-form#_builder-form) pesa más que ellas sin depender del id del
+   formulario, que cambia si se duplica o se sustituye. */
+.c-form{background:#f5f8fc;box-shadow:0 0 0 100vmax #f5f8fc;clip-path:inset(0 -100vmax);
+  padding:0 0 clamp(48px,7vw,80px)!important;margin:0!important}
+.c-form .ghl-form-wrap{max-width:600px!important;padding:0 6px}
+.c-form .hl_form-builder--main{background:transparent!important}
+#_builder-form#_builder-form{background:#fff!important;border:1px solid #e3e8f0!important;
+  border-radius:26px!important;padding:clamp(22px,4vw,36px)!important;
+  box-shadow:0 1px 2px rgba(13,34,59,.05),0 30px 60px -28px rgba(13,34,59,.3)!important}
+#_builder-form#_builder-form :is(label,input,textarea,span,p,a,li,.text-element,.multiselect__placeholder,.multiselect__single){
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif!important}
+#_builder-form#_builder-form label.field-label,
+#_builder-form#_builder-form label.label-alignment{display:block;color:#0d223b!important;font-size:15px!important;
+  font-weight:650!important;line-height:1.3;margin:0 0 8px;text-align:left}
+#_builder-form#_builder-form label.label-alignment span{color:#016dfd!important}
+#_builder-form#_builder-form input.form-control,
+#_builder-form#_builder-form textarea,
+#_builder-form#_builder-form .multiselect .multiselect__tags{background:#f8fafd!important;color:#0d223b!important;
+  border:1.5px solid #dbe3ee!important;border-radius:13px!important;padding:14px 16px!important;
+  min-height:54px;height:auto;font-size:16px!important;line-height:1.4;box-shadow:none!important;
+  transition:border-color .15s,box-shadow .15s,background-color .15s}
+#_builder-form#_builder-form input.form-control:hover,
+#_builder-form#_builder-form textarea:hover,
+#_builder-form#_builder-form .multiselect .multiselect__tags:hover{border-color:#b9c7da!important}
+#_builder-form#_builder-form input.form-control:focus,
+#_builder-form#_builder-form textarea:focus,
+#_builder-form#_builder-form .multiselect--active .multiselect__tags{outline:none;border-color:#016dfd!important;
+  background:#fff!important;box-shadow:0 0 0 4px rgba(1,109,253,.14)!important}
+#_builder-form#_builder-form ::placeholder{color:#9aa6b8!important}
+/* desplegable */
+#_builder-form#_builder-form .multiselect,
+#_builder-form#_builder-form .multi_select_form{background:transparent!important;border-radius:13px!important;min-height:54px}
+#_builder-form#_builder-form .multiselect .multiselect__tags{padding-right:46px!important;display:flex;align-items:center}
+#_builder-form#_builder-form .multiselect__placeholder,
+#_builder-form#_builder-form .multiselect__single{background:transparent!important;font-size:16px!important;
+  line-height:1.4;min-height:0;margin:0!important;padding:0!important}
+#_builder-form#_builder-form .multiselect__placeholder{color:#9aa6b8!important}
+#_builder-form#_builder-form .multiselect__single{color:#0d223b!important}
+#_builder-form#_builder-form .multiselect__input{background:transparent!important}
+#_builder-form#_builder-form .multiselect__select{height:54px;width:46px;top:0;right:0}
+#_builder-form#_builder-form .multiselect__select::before{border-color:#7a8699 transparent transparent;top:68%}
+.multiselect__content-wrapper{border:1.5px solid #dbe3ee!important;border-radius:13px!important;
+  box-shadow:0 18px 40px -18px rgba(13,34,59,.35)!important;margin-top:6px}
+body .multiselect__option{font-size:16px;color:#0d223b;padding:13px 16px;min-height:0;line-height:1.35}
+body .multiselect__option.multiselect__option--highlight,
+body .multiselect__option:hover{background:#e8f1ff!important;color:#0d223b!important}
+body .multiselect__option.multiselect__option--selected{background:#016dfd!important;color:#fff!important;font-weight:650}
+body .multiselect__option::after{display:none!important}
+/* casillas (consentimiento) */
+#_builder-form#_builder-form input[type=checkbox]{border-color:#b9c7da!important;flex:none}
+#_builder-form#_builder-form input[type=checkbox]:checked{background:#016dfd!important;border-color:#016dfd!important}
+/* botón de envío */
+#_builder-form#_builder-form .form-builder--btn-submit{margin-top:22px!important}
+#_builder-form#_builder-form button.button-element{background:#016dfd!important;border:0!important;
+  border-radius:14px!important;padding:17px 22px!important;min-height:58px;cursor:pointer;
+  box-shadow:0 14px 30px -12px rgba(1,109,253,.65)!important;transition:background-color .15s,transform .15s}
+#_builder-form#_builder-form button.button-element:hover{background:#0048b5!important;transform:translateY(-1px)}
+#_builder-form#_builder-form button.button-element .button-text div,
+#_builder-form#_builder-form button.button-element p{color:#fff!important;font-size:17px!important;
+  font-weight:750!important;letter-spacing:-.01em;margin:0!important;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif!important}
+/* texto libre (aviso de privacidad) */
+#_builder-form#_builder-form .text-element{padding:14px 0 0!important;color:#7a8699!important;
+  font-size:13.5px!important;line-height:1.5!important}
+#_builder-form#_builder-form .text-element p{font-size:13.5px!important;margin:0}
+#_builder-form#_builder-form .text-element a{color:#016dfd!important;text-decoration:underline;text-underline-offset:2px}
 
 /* factores del presupuesto, en la landing solar */
 .dlr-solar .intro-precio{font-size:1rem;margin-bottom:1.1em}
