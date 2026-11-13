@@ -103,6 +103,38 @@ escribir('privacidad-ghl.html', 'Politica de privacidad y cookies', 'privacidad.
 escribir('gracias-ghl.html', 'Pagina de gracias', 'gracias.html',
          cuerpo('gracias.html', 'gracias'), clase_extra='centro')
 
+# --- gracias de la landing solar: con logo, el recordatorio de enviar el
+#     WhatsApp y su script. El logo va incrustado: en GHL no hay assets/img.
+_gs = cuerpo('gracias-placas-solares.html', 'gracias')
+_gs = _gs.replace('src="assets/img/logo-360.webp"', 'src="data:image/webp;base64,' + base64.b64encode(
+    io.open(os.path.join(RAIZ, 'assets', 'img', 'logo-360.webp'), 'rb').read()).decode('ascii') + '"')
+_gs = _gs.replace('<div class="gs-logo">', '<div class="gs-logo" style="display:block;margin:0 auto 26px;max-width:170px">')
+_gs = _gs.replace('<img src="data:image/webp', '<img style="width:100%;height:auto;display:block" src="data:image/webp', 1)
+if 'assets/' in _gs: sys.exit('ERROR: la gracias solar referencia assets/')
+_gs_js = io.open(os.path.join(RAIZ, 'assets', 'js', 'gracias-solar.js'), encoding='utf-8').read().strip()
+if ('<' + '/script>') in _gs_js: sys.exit('ERROR: gracias-solar.js lleva una etiqueta de cierre de script')
+_gs_css = """<style>
+.dlr-doc .gs-paso{background:var(--crema);border:1px solid var(--linea);border-radius:26px;
+  padding:22px 20px 18px;max-width:640px;margin:0 auto;text-align:center}
+.dlr-doc .gs-paso-tit{font-weight:700;color:var(--tinta);margin:0 0 14px}
+.dlr-doc .gs-paso .acciones{margin:0}
+.dlr-doc button.btn{font-family:inherit;line-height:1.2}
+.dlr-doc .btn-linea{background:#fff;color:var(--tinta);border-color:var(--linea)}
+.dlr-doc.centro{text-align:center}
+.dlr-doc.centro .pasos-g{text-align:left}
+.dlr-doc .gs-paso .btn{white-space:nowrap}
+@media (max-width:480px){
+  .dlr-doc .gs-paso{padding:18px 14px 14px}
+  .dlr-doc .gs-paso .btn{width:100%;padding:15px 16px;font-size:.98rem}
+}
+</style>
+"""
+ruta = os.path.join(RAIZ, 'ghl', 'gracias-placas-solares-ghl.html')
+io.open(ruta, 'w', encoding='utf-8').write(
+    (CABECERA % ('Pagina de gracias de placas solares', 'gracias-placas-solares.html')) + ESTILO + _gs_css + '\n' +
+    '<div class="dlr-doc centro">' + _gs + '\n</div>\n\n<script>\n' + _gs_js + '\n</script>\n')
+print('%-28s %6d bytes' % ('gracias-placas-solares-ghl.html', os.path.getsize(ruta)))
+
 # --- landing de placas solares ---------------------------------------------
 # Es una pagina entera. En GoHighLevel no existen ni estilo.css ni app.js, asi
 # que el bloque lleva TODO dentro: estilos acotados bajo .dlr-solar, las tres

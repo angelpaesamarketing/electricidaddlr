@@ -326,6 +326,19 @@
   .dlr-solar .caso-fotos .caso-grande{grid-row:auto;grid-column:1 / span 2}
   .dlr-solar .caso-fotos figure:not(.caso-grande) figcaption{font-size:.76rem;padding:18px 10px 8px;line-height:1.3}
 }
+
+/* ===== página de gracias de la landing solar ===== */
+.dlr-solar .gs-logo{display:none}
+.dlr-solar .gs-paso{background:var(--crema);border:1px solid var(--linea);border-radius:var(--radio-g);
+  padding:22px 20px 18px;max-width:640px;margin:0 auto}
+.dlr-solar .gs-paso-tit{font-weight:700;color:var(--tinta);margin:0 0 14px}
+.dlr-solar .gs-paso .acciones{margin:0;justify-content:center}
+.dlr-solar .gs-paso button.btn{font-family:inherit}
+.dlr-solar .gs-paso .btn{white-space:nowrap}
+@media (max-width:480px){
+  .dlr-solar .gs-paso{padding:18px 14px 14px}
+  .dlr-solar .gs-paso .btn{width:100%;padding:15px 16px;font-size:.98rem}
+}
 </style>
 
 <div class="dlr-solar">
@@ -1116,8 +1129,9 @@
 
 /* Electricidad y Antenas DLR — formulario de la landing solar.
    Los presupuestos entran por WhatsApp: al enviar, se abre la conversación
-   con los datos del formulario ya escritos. También deja un evento en
-   dataLayer para poder medirlo como conversión desde Tag Manager.
+   con los datos del formulario ya escritos, se deja un evento en dataLayer
+   para medirlo como conversión desde Tag Manager y la pestaña pasa a la
+   página de gracias, que recuerda que hay que darle a enviar.
 
    OJO: este archivo se pega EN LINEA en GoHighLevel, así que no puede
    contener en ningún sitio la cadena de cierre de script. */
@@ -1142,13 +1156,27 @@
       '· Teléfono: ' + v('telefono');
     var url = 'https://wa.me/' + TELEFONO + '?text=' + encodeURIComponent(texto);
 
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({ event: 'dlr_solicitud_estudio', vivienda: v('vivienda'), factura: v('factura') });
+    /* el mensaje se guarda para que la página de gracias pueda reabrir WhatsApp */
+    try { sessionStorage.setItem('dlr_wa_texto', texto); } catch (err) {}
 
-    /* se abre en pestaña nueva; si el navegador la bloquea, en la misma */
+    /* WhatsApp se abre ya, dentro del clic, para que el navegador no lo bloquee */
     var ventana = window.open(url, '_blank');
     if (ventana) { try { ventana.opener = null; } catch (err) {} }
-    else { location.href = url; }
+
+    /* y esta pestaña pasa a la página de gracias, pero solo después de que
+       Tag Manager haya enviado la conversión: si se navega antes, la
+       petición se corta y la conversión se pierde */
+    var GRACIAS = /\.html$/.test(location.pathname) ? '/gracias-placas-solares.html' : '/gracias-placas-solares';
+    var hecho = false;
+    function aGracias() {
+      if (hecho) return;
+      hecho = true;
+      location.href = GRACIAS + (ventana ? '' : '?wa=0');
+    }
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: 'dlr_solicitud_estudio', vivienda: v('vivienda'), factura: v('factura'),
+                            eventCallback: aGracias, eventTimeout: 1500 });
+    setTimeout(aGracias, 1800);
   });
 })();
 </script>

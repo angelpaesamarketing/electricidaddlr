@@ -1,7 +1,8 @@
 /* Electricidad y Antenas DLR — formulario de la landing solar.
    Los presupuestos entran por WhatsApp: al enviar, se abre la conversación
-   con los datos del formulario ya escritos. También deja un evento en
-   dataLayer para poder medirlo como conversión desde Tag Manager.
+   con los datos del formulario ya escritos, se deja un evento en dataLayer
+   para medirlo como conversión desde Tag Manager y la pestaña pasa a la
+   página de gracias, que recuerda que hay que darle a enviar.
 
    OJO: este archivo se pega EN LINEA en GoHighLevel, así que no puede
    contener en ningún sitio la cadena de cierre de script. */
@@ -26,12 +27,26 @@
       '· Teléfono: ' + v('telefono');
     var url = 'https://wa.me/' + TELEFONO + '?text=' + encodeURIComponent(texto);
 
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({ event: 'dlr_solicitud_estudio', vivienda: v('vivienda'), factura: v('factura') });
+    /* el mensaje se guarda para que la página de gracias pueda reabrir WhatsApp */
+    try { sessionStorage.setItem('dlr_wa_texto', texto); } catch (err) {}
 
-    /* se abre en pestaña nueva; si el navegador la bloquea, en la misma */
+    /* WhatsApp se abre ya, dentro del clic, para que el navegador no lo bloquee */
     var ventana = window.open(url, '_blank');
     if (ventana) { try { ventana.opener = null; } catch (err) {} }
-    else { location.href = url; }
+
+    /* y esta pestaña pasa a la página de gracias, pero solo después de que
+       Tag Manager haya enviado la conversión: si se navega antes, la
+       petición se corta y la conversión se pierde */
+    var GRACIAS = /\.html$/.test(location.pathname) ? '/gracias-placas-solares.html' : '/gracias-placas-solares';
+    var hecho = false;
+    function aGracias() {
+      if (hecho) return;
+      hecho = true;
+      location.href = GRACIAS + (ventana ? '' : '?wa=0');
+    }
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: 'dlr_solicitud_estudio', vivienda: v('vivienda'), factura: v('factura'),
+                            eventCallback: aGracias, eventTimeout: 1500 });
+    setTimeout(aGracias, 1800);
   });
 })();
