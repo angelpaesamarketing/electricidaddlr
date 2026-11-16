@@ -268,6 +268,10 @@ banner_css = (banner_css
 banner_css = re.sub(r'\nbody\.ck-visible \.barra-movil\{display:none\}', '', banner_css)
 banner_css += """
 /* la plantilla de GHL no trae los botones del sitio: los definimos aqui */
+/* ni la letra del sitio: sin esto el banner sale en Times */
+.ck-capa,.ck-capa *{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.ck-panel{color:#48566b;font-size:16px;line-height:1.55}
+.ck-panel h2{color:#0d223b;font-weight:800;letter-spacing:-.02em}
 .ck-panel .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;
   padding:13px 22px;border-radius:999px;font-weight:750;font-size:.96rem;
   border:1px solid transparent;cursor:pointer;font-family:inherit}
