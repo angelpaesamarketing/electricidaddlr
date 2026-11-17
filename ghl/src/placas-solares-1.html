@@ -1,0 +1,1044 @@
+<!-- Electricidad y Antenas DLR - landing de placas solares, BLOQUE 1 DE 2 (arriba)
+     Va en un elemento Custom Code / HTML. Justo DEBAJO va el formulario nativo
+     de GoHighLevel, y debajo del formulario el bloque 2.
+     Este bloque lleva los estilos de toda la landing, las imágenes y el script.
+     Generado por ghl/construir.py: no editar a mano. -->
+<style>
+/* Electricidad y Antenas DLR - landing de placas solares, bloque autonomo.
+   Todo acotado bajo .dlr-solar para no chocar con la plantilla de GoHighLevel. */
+.dlr-solar{--ancho:1140px;--tinta:#0d223b;--texto:#48566b;--suave:#7a8699;--linea:#e3e8f0;--crema:#f5f8fc;
+  --noche:#07101f;--azul:#016dfd;--azul-claro:#e8f1ff;--verde:#13b981;--radio:16px;--radio-g:26px;
+  font:17px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  color:var(--texto);text-align:left;box-sizing:border-box}
+.dlr-solar *{box-sizing:border-box}
+.dlr-solar .env{max-width:1140px;margin:0 auto;padding:0 22px}
+.dlr-solar section{padding:clamp(48px,7vw,88px) 0;position:relative}
+.dlr-solar .crema{background:var(--crema)}
+.dlr-solar .centro{text-align:center}
+.dlr-solar h1,.dlr-solar h2,.dlr-solar h3{color:var(--tinta);line-height:1.13;margin:0 0 .45em;
+  letter-spacing:-.025em}
+.dlr-solar h1{font-size:clamp(2rem,5.4vw,3.3rem);font-weight:850}
+.dlr-solar h1 span{color:var(--azul)}
+.dlr-solar h2{font-size:clamp(1.6rem,3.6vw,2.3rem);font-weight:800}
+.dlr-solar h3{font-size:1.1rem;font-weight:750;letter-spacing:-.015em}
+.dlr-solar p{margin:0 0 1em}
+.dlr-solar a{color:var(--azul);text-decoration:none}
+.dlr-solar .plomo{max-width:620px;margin:0 auto 44px;color:var(--suave);font-size:1.06rem}
+.dlr-solar .etq{display:inline-flex;align-items:center;gap:8px;font-size:.76rem;font-weight:750;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--azul);background:var(--azul-claro);
+  padding:7px 14px;border-radius:999px;margin-bottom:18px}
+.dlr-solar .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:15px 26px;border-radius:999px;font-weight:750;font-size:1rem;border:1px solid transparent;
+  cursor:pointer;text-decoration:none;white-space:nowrap}
+.dlr-solar .btn svg{width:20px;height:20px;flex:none}
+.dlr-solar .btn-azul{background:var(--azul);color:#fff;box-shadow:0 14px 30px -12px rgba(1,109,253,.8)}
+.dlr-solar .btn-linea{background:#fff;color:var(--tinta);border-color:var(--linea)}
+.dlr-solar .btn-g{padding:18px 32px;font-size:1.06rem}
+.dlr-solar .heroe{padding:clamp(34px,5vw,64px) 0 clamp(48px,7vw,80px)}
+.dlr-solar .heroe .lead{font-size:1.14rem;max-width:36em;color:var(--texto)}
+.dlr-solar .acciones{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;margin:30px 0 22px}
+.dlr-solar .accion-llamar{display:flex;flex-direction:column;gap:8px;align-items:flex-start;min-width:0}
+.dlr-solar .micro{font-size:.82rem;font-weight:650;color:var(--suave);padding-left:6px;line-height:1.3}
+.dlr-solar .avales{display:flex;flex-wrap:wrap;gap:10px 22px;font-size:.92rem;color:var(--suave);
+  font-weight:600}
+.dlr-solar .avales span{display:flex;align-items:center;gap:7px}
+.dlr-solar .avales svg{width:17px;height:17px;color:var(--verde)}
+.dlr-solar .filtro{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.dlr-solar .filtro>div{background:#fff;border:1px solid var(--linea);border-radius:var(--radio-g);
+  padding:26px 28px}
+.dlr-solar .filtro-si{border-color:rgba(19,185,129,.4)}
+.dlr-solar .filtro h3{margin-bottom:.8em}
+.dlr-solar .filtro ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:11px}
+.dlr-solar .filtro li{font-size:.98rem}
+.dlr-solar .filtro li b{color:var(--tinta)}
+.dlr-solar .filtro-no li{color:var(--suave)}
+.dlr-solar .filtro>div{box-shadow:var(--sombra)}
+.dlr-solar .rejilla{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.dlr-solar .tarjeta{background:#fff;border:1px solid var(--linea);border-radius:var(--radio-g);padding:26px}
+.dlr-solar .tarjeta h3{margin-bottom:.35em}
+.dlr-solar .tarjeta p{font-size:.97rem;margin:0}
+.dlr-solar .aviso-precio{margin-top:40px;background:var(--crema);border:1px solid var(--linea);
+  border-radius:var(--radio-g);padding:28px}
+.dlr-solar .aviso-precio h3{margin-bottom:1em}
+.dlr-solar .crema .aviso-precio{background:#fff}
+.dlr-solar .tabla-env{overflow-x:auto;border:1px solid var(--linea);border-radius:var(--radio);background:#fff}
+.dlr-solar table{border-collapse:collapse;width:100%;font-size:.95rem;min-width:480px}
+.dlr-solar th,.dlr-solar td{text-align:left;padding:12px 15px;border-bottom:1px solid var(--linea);
+  vertical-align:top}
+.dlr-solar th{background:var(--crema);color:var(--tinta);font-weight:750;font-size:.85rem}
+.dlr-solar tr:last-child td{border-bottom:none}
+.dlr-solar .nota-precio{font-size:.95rem;color:var(--suave);margin:16px 0 0}
+.dlr-solar .nota-precio b{color:var(--tinta)}
+.dlr-solar .texto-ancho{max-width:720px;margin:0 auto}
+.dlr-solar .texto-ancho p{font-size:1.06rem}
+.dlr-solar .texto-ancho b{color:var(--tinta)}
+.dlr-solar .pasos{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;counter-reset:p}
+.dlr-solar .paso{padding:26px;background:#fff;border-radius:var(--radio-g);
+  border:1px solid var(--linea);position:relative}
+.dlr-solar .paso::before{counter-increment:p;content:counter(p);position:absolute;top:-17px;left:24px;
+  width:34px;height:34px;border-radius:50%;background:var(--azul);color:#fff;font-weight:800;
+  display:flex;align-items:center;justify-content:center;font-size:.95rem}
+.dlr-solar .paso h3{margin-top:12px}
+.dlr-solar .paso p{font-size:.95rem;margin:0}
+.dlr-solar .caja-destacada{background:var(--noche);color:#c3d2e6;border-radius:var(--radio-g);
+  padding:clamp(28px,5vw,52px)}
+.dlr-solar .caja-destacada>div{max-width:680px}
+.dlr-solar .caja-destacada h2{color:#fff}
+.dlr-solar .caja-destacada p{font-size:1.04rem}
+.dlr-solar .caja-destacada a{color:#6fa8ff}
+.dlr-solar .caja-destacada b{color:#fff}
+.dlr-solar .faq{max-width:780px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+.dlr-solar details{background:#fff;border:1px solid var(--linea);border-radius:var(--radio);padding:0 20px}
+.dlr-solar details[open]{border-color:rgba(1,109,253,.35)}
+.dlr-solar summary{cursor:pointer;list-style:none;padding:17px 0;font-weight:700;color:var(--tinta);
+  font-size:1.02rem;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.dlr-solar summary::-webkit-details-marker{display:none}
+.dlr-solar summary::after{content:"";width:11px;height:11px;flex:none;
+  border-right:2.4px solid var(--azul);border-bottom:2.4px solid var(--azul);
+  transform:rotate(45deg) translate(-3px,-3px)}
+.dlr-solar details[open] summary::after{transform:rotate(-135deg) translate(-3px,-3px)}
+.dlr-solar details p{margin:0;padding:0 0 18px;font-size:.99rem}
+.dlr-solar .contacto{background:var(--noche);color:#c3d2e6}
+.dlr-solar .contacto h2{color:#fff}
+.dlr-solar .contacto .plomo{color:#8fa6c4}
+.dlr-solar .caja-contacto{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.dlr-solar .datos{padding:0;margin:0}
+.dlr-solar .datos li{list-style:none;display:flex;gap:14px;align-items:flex-start;margin-bottom:20px}
+.dlr-solar .datos .ico{width:44px;height:44px;border-radius:13px;background:rgba(1,109,253,.16);
+  color:#6fa8ff;display:flex;align-items:center;justify-content:center;flex:none}
+.dlr-solar .datos .ico svg{width:21px;height:21px}
+.dlr-solar .datos b{display:block;color:#fff;font-size:1.02rem}
+.dlr-solar .datos a{color:#c3d2e6;text-decoration:underline}
+@media (max-width:900px){
+  .dlr-solar .pasos{grid-template-columns:repeat(2,1fr)}
+  .dlr-solar .filtro,.dlr-solar .caja-contacto{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  .dlr-solar .pasos{grid-template-columns:1fr}
+  .dlr-solar .aviso-precio{padding:20px}
+  .dlr-solar .acciones .btn,.dlr-solar .accion-llamar{width:100%}
+  .dlr-solar .micro{text-align:center;width:100%;padding-left:0}
+}
+
+/* ===== formulario ===== */
+.dlr-solar form{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);
+  border-radius:var(--radio-g);padding:28px;margin:0}
+.dlr-solar label{display:block;font-size:.85rem;font-weight:700;color:#8fa6c4;margin:0 0 7px;
+  text-align:left}
+.dlr-solar input,.dlr-solar select{width:100%;padding:14px 16px;border-radius:13px;
+  border:1px solid rgba(255,255,255,.14);background-color:rgba(255,255,255,.06);color:#fff;
+  font:inherit;font-size:1rem;margin:0 0 16px;box-shadow:none;height:auto;line-height:1.4}
+.dlr-solar input:focus,.dlr-solar select:focus{outline:none;border-color:var(--azul);
+  background-color:rgba(1,109,253,.1)}
+.dlr-solar select{appearance:none;-webkit-appearance:none;cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238fa6c4' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 15px center;background-size:17px}
+.dlr-solar select option{background:#0b1626;color:#fff}
+.dlr-solar form .btn{width:100%}
+.dlr-solar .btn-wa{background:#25d366;color:#07321a;box-shadow:0 14px 30px -12px rgba(37,211,102,.8)}
+.dlr-solar .nota{font-size:.84rem;color:#6d8099;margin:14px 0 0;text-align:center}
+
+/* ===== barra fija de llamada en móvil ===== */
+.dlr-solar .barra-movil{position:fixed;left:0;right:0;bottom:0;z-index:50;display:none;gap:10px;
+  padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.95);
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-top:1px solid var(--linea)}
+.dlr-solar .barra-movil .btn{flex:1;padding:14px 10px;font-size:.98rem}
+@media (max-width:900px){
+  .dlr-solar .barra-movil{display:flex}
+}
+
+/* ===== pie con los enlaces legales ===== */
+.dlr-solar .pie-legal{background:#050c17;color:#7f93ad;padding:26px 22px;font-size:.88rem;
+  display:flex;flex-wrap:wrap;gap:8px 26px;justify-content:center;text-align:center}
+.dlr-solar .pie-legal a{color:#aebdd1;text-decoration:underline;text-underline-offset:2px}
+.dlr-solar .pie-legal a:hover{color:#fff}
+@media (max-width:900px){.dlr-solar .pie-legal{padding-bottom:96px}}
+
+/* ===== formulario nativo de GoHighLevel =====
+   El formulario no está dentro de .dlr-solar: es el elemento Formulario de
+   GHL, entre los dos bloques. Estas reglas lo visten como el resto de la
+   landing. GHL genera para cada formulario reglas del tipo
+   ".form-xxxx #_builder-form ... !important" y estilos en línea; el id doble
+   (#_builder-form#_builder-form) pesa más que ellas sin depender del id del
+   formulario, que cambia si se duplica o se sustituye. */
+.c-form{background:#f5f8fc;box-shadow:0 0 0 100vmax #f5f8fc;clip-path:inset(0 -100vmax);
+  padding:0 0 clamp(48px,7vw,80px)!important;margin:0!important}
+.c-form .ghl-form-wrap{max-width:600px!important;padding:0 6px}
+.c-form .hl_form-builder--main{background:transparent!important}
+#_builder-form#_builder-form{background:#fff!important;border:1px solid #e3e8f0!important;
+  border-radius:26px!important;padding:clamp(22px,4vw,36px)!important;
+  box-shadow:0 1px 2px rgba(13,34,59,.05),0 30px 60px -28px rgba(13,34,59,.3)!important}
+#_builder-form#_builder-form :is(label,input,textarea,span,p,a,li,.text-element,.multiselect__placeholder,.multiselect__single){
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif!important}
+#_builder-form#_builder-form label.field-label,
+#_builder-form#_builder-form label.label-alignment{display:block;color:#0d223b!important;font-size:15px!important;
+  font-weight:650!important;line-height:1.3;margin:0 0 8px;text-align:left}
+#_builder-form#_builder-form label.label-alignment span{color:#016dfd!important}
+#_builder-form#_builder-form input.form-control,
+#_builder-form#_builder-form textarea,
+#_builder-form#_builder-form .multiselect .multiselect__tags{background:#f8fafd!important;color:#0d223b!important;
+  border:1.5px solid #dbe3ee!important;border-radius:13px!important;padding:14px 16px!important;
+  min-height:54px;height:auto;font-size:16px!important;line-height:1.4;box-shadow:none!important;
+  transition:border-color .15s,box-shadow .15s,background-color .15s}
+#_builder-form#_builder-form input.form-control:hover,
+#_builder-form#_builder-form textarea:hover,
+#_builder-form#_builder-form .multiselect .multiselect__tags:hover{border-color:#b9c7da!important}
+#_builder-form#_builder-form input.form-control:focus,
+#_builder-form#_builder-form textarea:focus,
+#_builder-form#_builder-form .multiselect--active .multiselect__tags{outline:none;border-color:#016dfd!important;
+  background:#fff!important;box-shadow:0 0 0 4px rgba(1,109,253,.14)!important}
+#_builder-form#_builder-form ::placeholder{color:#9aa6b8!important}
+/* desplegable */
+#_builder-form#_builder-form .multiselect,
+#_builder-form#_builder-form .multi_select_form{background:transparent!important;border-radius:13px!important;min-height:54px}
+#_builder-form#_builder-form .multiselect .multiselect__tags{padding-right:46px!important;display:flex;align-items:center}
+#_builder-form#_builder-form .multiselect__placeholder,
+#_builder-form#_builder-form .multiselect__single{background:transparent!important;font-size:16px!important;
+  line-height:1.4;min-height:0;margin:0!important;padding:0!important}
+#_builder-form#_builder-form .multiselect__placeholder{color:#9aa6b8!important}
+#_builder-form#_builder-form .multiselect__single{color:#0d223b!important}
+#_builder-form#_builder-form .multiselect__input{background:transparent!important}
+#_builder-form#_builder-form .multiselect__select{height:54px;width:46px;top:0;right:0}
+#_builder-form#_builder-form .multiselect__select::before{border-color:#7a8699 transparent transparent;top:68%}
+.multiselect__content-wrapper{border:1.5px solid #dbe3ee!important;border-radius:13px!important;
+  box-shadow:0 18px 40px -18px rgba(13,34,59,.35)!important;margin-top:6px}
+body .multiselect__option{font-size:16px;color:#0d223b;padding:13px 16px;min-height:0;line-height:1.35}
+body .multiselect__option.multiselect__option--highlight,
+body .multiselect__option:hover{background:#e8f1ff!important;color:#0d223b!important}
+body .multiselect__option.multiselect__option--selected{background:#016dfd!important;color:#fff!important;font-weight:650}
+body .multiselect__option::after{display:none!important}
+/* casillas (consentimiento) */
+#_builder-form#_builder-form input[type=checkbox]{border-color:#b9c7da!important;flex:none}
+#_builder-form#_builder-form input[type=checkbox]:checked{background:#016dfd!important;border-color:#016dfd!important}
+/* botón de envío */
+#_builder-form#_builder-form .form-builder--btn-submit{margin-top:22px!important}
+#_builder-form#_builder-form button.button-element{background:#016dfd!important;border:0!important;
+  border-radius:14px!important;padding:17px 22px!important;min-height:58px;cursor:pointer;
+  box-shadow:0 14px 30px -12px rgba(1,109,253,.65)!important;transition:background-color .15s,transform .15s}
+#_builder-form#_builder-form button.button-element:hover{background:#0048b5!important;transform:translateY(-1px)}
+#_builder-form#_builder-form button.button-element .button-text div,
+#_builder-form#_builder-form button.button-element p{color:#fff!important;font-size:17px!important;
+  font-weight:750!important;letter-spacing:-.01em;margin:0!important;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif!important}
+/* texto libre (aviso de privacidad) */
+#_builder-form#_builder-form .text-element{padding:14px 0 0!important;color:#7a8699!important;
+  font-size:13.5px!important;line-height:1.5!important}
+#_builder-form#_builder-form .text-element p{font-size:13.5px!important;margin:0}
+#_builder-form#_builder-form .text-element a{color:#016dfd!important;text-decoration:underline;text-underline-offset:2px}
+
+/* factores del presupuesto, en la landing solar */
+.dlr-solar .intro-precio{font-size:1rem;margin-bottom:1.1em}
+.dlr-solar .factores{margin:0;padding-left:1.25em;display:flex;flex-direction:column;gap:11px}
+.dlr-solar .factores li{font-size:1rem}
+.dlr-solar .factores li b{color:var(--tinta)}
+
+/* ===== escenario: la placa se instala conforme se baja ===== */
+/* La altura extra es el recorrido de la animación. El panel fijo se ancla con
+   sticky; si algún contenedor lo impide (pasa en GoHighLevel), escenario.js
+   lo detecta y lo ancla a mano con la clase .esc-manual. */
+.dlr-solar .escenario{padding:0;height:420vh;position:relative;--esc-arriba:0px;--esc-abajo:0px;--esc-vh:100vh}
+@supports (height:100svh){.dlr-solar .escenario{--esc-vh:100svh}}
+.dlr-solar .esc-fijo{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+.dlr-solar .esc-manual .esc-fijo{position:absolute;left:0;right:0;top:0;will-change:transform}
+.dlr-solar .esc-cielo{position:absolute;inset:0;
+  background:linear-gradient(172deg,#bcd6f5 0%,#d5e6fb 30%,#eef5ff 58%,#ffffff 86%)}
+.dlr-solar .esc-cielo::after{content:"";position:absolute;inset:auto -10% -30% auto;width:70%;aspect-ratio:1;
+  border-radius:50%;background:radial-gradient(circle,rgba(1,109,253,.13),transparent 68%)}
+
+/* la casa: nunca más alta que el hueco libre de la pantalla */
+.dlr-solar .esc-casa{--casa-w:min(64%,1120px,calc((var(--esc-vh) - var(--esc-arriba) - var(--esc-abajo) - 12px)*1.5));
+  position:absolute;right:0;bottom:var(--esc-abajo);width:var(--casa-w);
+  -webkit-mask-image:linear-gradient(to right,transparent 0,rgba(0,0,0,.3) 16%,#000 32%),linear-gradient(to bottom,transparent 0,#000 15%);
+  -webkit-mask-composite:source-in;
+  mask-image:linear-gradient(to right,transparent 0,rgba(0,0,0,.3) 16%,#000 32%),linear-gradient(to bottom,transparent 0,#000 15%);
+  mask-composite:intersect}
+.dlr-solar .esc-casa .casa-base{display:block;width:100%;height:auto}
+/* la franja del tejado ya instalado, colocada sobre la foto base */
+.dlr-solar .esc-casa .casa-capa{position:absolute;left:20.703%;top:22.266%;width:66.406%;height:auto;
+  opacity:0;will-change:opacity}
+
+/* la placa en vuelo. Antes de que arranque el script es la foto, inclinada;
+   después escenario.js la convierte en una caja de seis caras (.esc-3d) y
+   deforma cada una con su matrix3d en cada fotograma. */
+.dlr-solar .esc-placa{--placa-w:min(32vw,440px);position:absolute;left:0;top:0;width:var(--placa-w);
+  aspect-ratio:1200/737;transform-origin:0 0;will-change:opacity;pointer-events:none;z-index:3;
+  transform:translate(58vw,20vh) rotate(-5deg)}
+.dlr-solar .esc-placa img{width:100%;height:100%;display:block}
+.dlr-solar .esc-placa.esc-3d{transform:none}
+.dlr-solar .cara{position:absolute;left:0;top:0;transform-origin:0 0;overflow:hidden;will-change:transform;
+  --oscuro:0}
+/* sombreado según la luz que recibe cada cara */
+.dlr-solar .cara .luz{position:absolute;inset:0;background:#02060c;opacity:var(--oscuro);pointer-events:none}
+/* cara de células, con el reflejo del cristal */
+.dlr-solar .cara-frente{--bx:50%;border-radius:2px}
+.dlr-solar .cara-frente .brillo{position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(104deg,rgba(255,255,255,0) 34%,rgba(190,220,255,.2) 44%,rgba(255,255,255,.42) 50%,rgba(190,220,255,.16) 56%,rgba(255,255,255,0) 66%);
+  background-size:320% 100%;background-position:var(--bx) 0;background-repeat:no-repeat}
+/* cantos: el marco de aluminio anodizado negro */
+.dlr-solar .cara-canto.canto-h{background:linear-gradient(to bottom,#4a5058 0%,#23272d 22%,#0e1013 70%,#2a2e34 100%)}
+.dlr-solar .cara-canto.canto-v{background:linear-gradient(to right,#4a5058 0%,#23272d 22%,#0e1013 70%,#2a2e34 100%)}
+/* dorso: lámina blanca, marco, caja de conexiones, cables y etiqueta */
+.dlr-solar .cara-dorso{background:
+  linear-gradient(to right,transparent 49.7%,rgba(0,0,0,.07) 49.7%,rgba(0,0,0,.07) 50.3%,transparent 50.3%),
+  linear-gradient(135deg,#f3f5f7,#dfe3e8);
+  box-shadow:inset 0 0 0 7px #15181d,inset 0 0 0 9px #3a4048;border-radius:2px}
+.dlr-solar .dorso-caja{position:absolute;left:44%;top:9%;width:12%;height:13%;border-radius:3px;
+  background:linear-gradient(#2b3037,#111418);box-shadow:0 1px 2px rgba(0,0,0,.4)}
+.dlr-solar .dorso-cable{position:absolute;top:21%;width:1.1%;height:34%;background:#111418;border-radius:3px}
+.dlr-solar .dorso-cable.c1{left:46.5%;transform:rotate(9deg);transform-origin:top}
+.dlr-solar .dorso-cable.c2{left:52.4%;transform:rotate(-9deg);transform-origin:top}
+.dlr-solar .dorso-etq{position:absolute;right:9%;bottom:12%;width:20%;height:22%;border-radius:2px;
+  background:repeating-linear-gradient(to bottom,#fff 0 3px,#c9cfd6 3px 4px),#fff;
+  box-shadow:0 0 0 1px #b9c0c8}
+/* sombra en el aire */
+.dlr-solar .cara-sombra{background:#0d223b;border-radius:6px;filter:blur(16px);opacity:.25;overflow:visible}
+
+/* los rótulos */
+.dlr-solar .esc-texto{position:absolute;top:var(--esc-arriba);bottom:var(--esc-abajo);left:0;right:0;
+  max-width:var(--ancho);margin:0 auto;z-index:4;pointer-events:none}
+.dlr-solar .esc-bloque{position:absolute;top:50%;left:22px;width:min(30em,35%);--k:1;--dy:16px;
+  transform:translateY(calc(-50% + var(--dy))) scale(var(--k));transform-origin:left center;
+  opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity .4s ease,transform .5s cubic-bezier(.2,.7,.3,1),visibility 0s linear .4s}
+.dlr-solar .esc-bloque.activo{opacity:1;visibility:visible;pointer-events:auto;--dy:0px;
+  transition:opacity .45s ease .08s,transform .55s cubic-bezier(.2,.7,.3,1) .08s,visibility 0s}
+.dlr-solar .esc-bloque:first-child{width:min(33em,42%)}
+.dlr-solar .esc-bloque h1{font-size:clamp(1.9rem,min(3.5vw,6.6vh),2.95rem);margin-bottom:.3em}
+.dlr-solar .esc-bloque h1 span{color:var(--azul)}
+.dlr-solar .esc-bloque h2{font-size:clamp(1.5rem,min(3.3vw,5.6vh),2.25rem);margin-bottom:.4em}
+.dlr-solar .esc-bloque p{font-size:clamp(1rem,min(1.2vw,2.4vh),1.1rem);max-width:27em;color:var(--texto)}
+.dlr-solar .esc-bloque .lead{font-size:clamp(1rem,min(1.25vw,2.5vh),1.13rem);max-width:31em}
+.dlr-solar .esc-bloque .acciones{margin:clamp(14px,3vh,30px) 0 clamp(10px,2.2vh,22px)}
+.dlr-solar .esc-bloque .etq{margin-bottom:clamp(8px,1.8vh,18px)}
+.dlr-solar .esc-num{display:inline-block;font-size:.78rem;font-weight:800;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--azul);background:var(--azul-claro);
+  padding:7px 14px;border-radius:999px;margin-bottom:16px}
+
+.dlr-solar .esc-pista{position:absolute;left:50%;bottom:calc(var(--esc-abajo) + 16px);transform:translateX(-50%);
+  z-index:5;display:flex;align-items:center;gap:7px;color:var(--tinta);background:rgba(255,255,255,.92);
+  padding:8px 15px 8px 17px;border-radius:999px;box-shadow:0 8px 22px -10px rgba(13,34,59,.45);
+  font-size:.8rem;font-weight:700;transition:opacity .4s;pointer-events:none;white-space:nowrap}
+.dlr-solar .esc-pista svg{width:17px;height:17px;color:var(--azul);animation:escBaja 1.9s ease-in-out infinite}
+@keyframes escBaja{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+
+@media (max-width:900px){
+  .dlr-solar .escenario{height:360vh}
+  /* en vertical la casa ocupa la parte baja y los rótulos la alta */
+  .dlr-solar .esc-casa{--casa-w:max(106%,min(150%,calc((var(--esc-vh) - var(--esc-arriba) - var(--esc-abajo))*.63)));
+    right:auto;left:50%;
+    margin-left:clamp(calc(50% - var(--casa-w)),calc(var(--casa-w)*-.557),-50%);
+    -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 30%);
+    -webkit-mask-composite:source-over;
+    mask-image:linear-gradient(to bottom,transparent 0,#000 30%);mask-composite:add}
+  .dlr-solar .esc-placa{--placa-w:min(60vw,290px)}
+  .dlr-solar .esc-bloque,.dlr-solar .esc-bloque:first-child{top:16px;left:20px;right:20px;width:auto;--dy:12px;
+    transform:translateY(var(--dy)) scale(var(--k));transform-origin:left top}
+  .dlr-solar .esc-bloque h1{font-size:clamp(1.65rem,7.4vw,2.5rem)}
+  .dlr-solar .esc-bloque h2{font-size:clamp(1.4rem,6vw,1.9rem)}
+  .dlr-solar .esc-bloque p,.dlr-solar .esc-bloque .lead{font-size:1rem}
+  .dlr-solar .esc-bloque .avales,.dlr-solar .esc-bloque .btn-linea{display:none}
+  .dlr-solar .esc-bloque .acciones{margin:16px 0 0}
+  .dlr-solar .esc-bloque .accion-llamar{width:100%}
+  .dlr-solar .esc-bloque .accion-llamar .btn{width:100%}
+  /* en móvil este texto puede caer sobre la foto: va en pastilla para que se lea */
+  .dlr-solar .esc-bloque .micro{align-self:center;width:auto;padding:3px 11px;border-radius:999px;
+    background:rgba(255,255,255,.86);color:var(--tinta)}
+}
+/* sin animación: el escenario pasa a ser una sección normal, con todo a la vista */
+@media (prefers-reduced-motion:reduce){
+  .dlr-solar .escenario{height:auto}
+  .dlr-solar .esc-fijo{position:relative;height:auto;overflow:hidden;padding:28px 0 0}
+  .dlr-solar .esc-texto{position:static;display:flex;flex-direction:column;gap:38px;padding:0 22px}
+  .dlr-solar .esc-bloque,.dlr-solar .esc-bloque:first-child{position:static;width:auto;max-width:36em;transform:none;
+    opacity:1;visibility:visible;pointer-events:auto;transition:none}
+  .dlr-solar .esc-casa{position:relative;left:auto;right:auto;bottom:auto;margin:36px 0 0;width:100%;
+    -webkit-mask-image:none;mask-image:none}
+  .dlr-solar .esc-casa .casa-capa{opacity:1}
+  .dlr-solar .esc-placa,.dlr-solar .esc-pista{display:none}
+}
+
+/* ===== atajos: llamar y presupuesto, arriba a la derecha tras el primer scroll ===== */
+.dlr-solar .atajos{position:fixed;top:calc(12px + env(safe-area-inset-top,0px));
+  right:max(14px,env(safe-area-inset-right,0px));z-index:45;display:flex;gap:8px;
+  opacity:0;visibility:hidden;transform:translateY(-10px);
+  transition:opacity .3s ease,transform .3s ease,visibility 0s linear .3s}
+.dlr-solar .atajos.visible{opacity:1;visibility:visible;transform:none;
+  transition:opacity .3s ease,transform .3s ease,visibility 0s}
+.dlr-solar .atajos .btn{padding:11px 18px;font-size:.93rem;box-shadow:0 10px 26px -12px rgba(13,34,59,.55)}
+.dlr-solar .atajos .btn svg{width:17px;height:17px}
+@media (max-width:520px){
+  .dlr-solar .atajos{gap:6px;right:10px}
+  .dlr-solar .atajos .btn{padding:10px 13px;font-size:.86rem}
+}
+
+/* ===== logo del escenario, arriba a la izquierda (cuando no hay cabecera fija) ===== */
+.dlr-solar .esc-logo{position:absolute;z-index:6;top:calc(12px + env(safe-area-inset-top,0px));
+  left:max(22px,calc((100% - var(--ancho))/2 + 22px));display:block;line-height:0}
+.dlr-solar .esc-logo img{height:46px;width:auto;display:block}
+@media (max-width:900px){
+  .dlr-solar .esc-logo{left:16px}
+  .dlr-solar .esc-logo img{height:36px}
+}
+@media (max-width:400px){
+  .dlr-solar .esc-logo{left:12px}
+  .dlr-solar .esc-logo img{height:31px}
+  /* en pantallas estrechas el botón de llamar se queda en icono para dejar sitio al logo */
+  .dlr-solar .atajos .atajo-txt{display:none}
+  .dlr-solar .atajos .btn-linea{padding:10px 12px}
+}
+@media (prefers-reduced-motion:reduce){
+  .dlr-solar .esc-logo{position:static;margin:0 22px 24px}
+}
+
+/* ===== caso real: las fotos de la obra ===== */
+.dlr-solar .caso-fotos{display:grid;grid-template-columns:1.62fr 1fr;grid-template-rows:auto auto;gap:14px}
+.dlr-solar .caso-fotos figure{margin:0;position:relative;border-radius:var(--radio);overflow:hidden;background:var(--crema)}
+.dlr-solar .caso-fotos img{display:block;width:100%;height:100%;object-fit:cover}
+.dlr-solar .caso-fotos .caso-grande{grid-row:1 / span 2}
+.dlr-solar .caso-fotos figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 16px 12px;color:#fff;
+  font-size:.9rem;font-weight:600;background:linear-gradient(to top,rgba(5,12,23,.72),rgba(5,12,23,0))}
+@media (max-width:760px){
+  .dlr-solar .caso-fotos{grid-template-columns:1fr 1fr}
+  .dlr-solar .caso-fotos .caso-grande{grid-row:auto;grid-column:1 / span 2}
+  .dlr-solar .caso-fotos figure:not(.caso-grande) figcaption{font-size:.76rem;padding:18px 10px 8px;line-height:1.3}
+}
+
+/* ===== página de gracias de la landing solar ===== */
+.dlr-solar .gs-logo{display:none}
+.dlr-solar .gs-paso{background:var(--crema);border:1px solid var(--linea);border-radius:var(--radio-g);
+  padding:22px 20px 18px;max-width:640px;margin:0 auto}
+.dlr-solar .gs-paso-tit{font-weight:700;color:var(--tinta);margin:0 0 14px}
+.dlr-solar .gs-paso .acciones{margin:0;justify-content:center}
+.dlr-solar .gs-paso button.btn{font-family:inherit}
+.dlr-solar .gs-paso .btn{white-space:nowrap}
+@media (max-width:480px){
+  .dlr-solar .gs-paso{padding:18px 14px 14px}
+  .dlr-solar .gs-paso .btn{width:100%;padding:15px 16px;font-size:.98rem}
+}
+
+/* ===== cabecera del formulario de GoHighLevel ===== */
+.dlr-solar .form-cab{background:var(--crema);padding:clamp(48px,7vw,80px) 0 18px}
+.dlr-solar .form-cab .plomo{margin-bottom:22px}
+.dlr-solar .form-datos{list-style:none;padding:0;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:center;
+  gap:10px 26px;font-size:.95rem;color:var(--texto)}
+.dlr-solar .form-datos li{display:block}
+.dlr-solar .form-datos li::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;
+  background:var(--verde);margin-right:8px;vertical-align:middle;position:relative;top:-1px}
+@media (max-width:600px){.dlr-solar .form-datos{flex-direction:column;align-items:center;gap:8px}}
+.dlr-solar .form-datos b{color:var(--tinta)}
+/* hueco que ocupa el formulario de GHL; solo se ve en la página del repositorio */
+.dlr-solar .ghl-hueco{background:var(--crema);padding:0 0 clamp(48px,7vw,80px)}
+.dlr-solar .ghl-hueco p{max-width:560px;margin:0 auto;border:2px dashed var(--linea);border-radius:var(--radio);
+  padding:60px 20px;text-align:center;color:var(--suave);font-weight:600}
+</style>
+
+<div class="dlr-solar">
+
+<!-- ===== ATAJOS: llamar y presupuesto, siempre a mano tras el primer scroll ===== -->
+<div class="atajos" id="atajos">
+  <a class="btn btn-linea" href="tel:+34652967349" aria-label="Llamar al 652 967 349">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
+    <span class="atajo-txt">Llamar</span>
+  </a>
+  <a class="btn btn-azul" href="#estudio">Solicita presupuesto</a>
+</div>
+
+<div class="barra-movil">
+  <a class="btn btn-azul" href="tel:+34652967349">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg> Llamar
+  </a>
+  <a class="btn btn-wa" href="https://wa.me/34652967349?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20placas%20solares" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.1-.7.1l-.9 1.1c-.2.2-.3.2-.6.1a8 8 0 0 1-4-3.5c-.2-.3 0-.5.1-.7l.6-.8c.1-.2.1-.4 0-.6l-.9-2.2c-.2-.5-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.4-1.2 1.2-1.2 2.8s1.2 3.3 1.4 3.5c.2.2 2.4 3.7 5.8 5 2.9 1.1 3.4.9 4 .8.7-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3ZM12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Z"/></svg> WhatsApp
+  </a>
+</div>
+
+<!-- ===== ESCENARIO: la placa se instala al bajar ===== -->
+<section class="escenario" id="escenario">
+  <div class="esc-fijo">
+
+    <div class="esc-cielo" aria-hidden="true"></div>
+
+    <a class="esc-logo" id="escLogo" href="/" aria-label="Electricidad y Antenas DLR, inicio">
+      <img src="{{IMG:logo-360.webp}}" width="360" height="117" alt="Electricidad y Antenas DLR">
+    </a>
+
+    <div class="esc-casa" id="escCasa">
+      <img class="casa-base" src="{{IMG:solar/casa-base.webp}}"
+          
+           width="1600" height="1067"
+           alt="Chalet de la Costa Blanca visto desde arriba, con la cubierta plana donde se instala la fotovoltaica"
+           decoding="async">
+      <img class="casa-capa" src="{{IMG:solar/casa-capa.webp}}" width="1063" height="204"
+           alt="" decoding="async">
+    </div>
+
+    <div class="esc-placa" id="escPlaca" aria-hidden="true">
+      <img src="{{IMG:solar/placa.webp}}"
+          
+           width="1200" height="737"
+           alt="">
+    </div>
+
+    <div class="esc-texto">
+      <article class="esc-bloque" data-ini="0" data-fin="0.20">
+        <span class="etq">Torrevieja · Orihuela Costa · Vega Baja</span>
+        <h1>Placas solares en Torrevieja, <span>instaladas por quien te las vende</span></h1>
+        <p class="lead">Somos el electricista de toda la vida de la zona, instalador autorizado desde 2003. Ni call center, ni comercial a comisión, ni subcontratas: el que sube a tu tejado es el mismo que te coge el teléfono.</p>
+        <div class="acciones">
+          <div class="accion-llamar">
+            <span class="micro">Te decimos por teléfono si te compensa</span>
+            <a class="btn btn-azul btn-g" href="tel:+34652967349">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
+              Llamar al 652 967 349
+            </a>
+          </div>
+          <a class="btn btn-linea btn-g" href="#estudio">Pedir estudio</a>
+        </div>
+        <div class="avales">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="m20 6-11 11-5-5"/></svg> Instalador autorizado</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="m20 6-11 11-5-5"/></svg> Desde 2003</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="m20 6-11 11-5-5"/></svg> Legalización incluida</span>
+        </div>
+      </article>
+
+      <article class="esc-bloque" data-ini="0.26" data-fin="0.46">
+        <span class="esc-num">01 · Estudio</span>
+        <h2>Primero tu factura, después el tejado</h2>
+        <p>Miramos tu consumo hora a hora, no una media. Subimos a ver la cubierta, medimos sombras y revisamos el cuadro. De ahí sale cuántos paneles necesitas de verdad.</p>
+      </article>
+
+      <article class="esc-bloque" data-ini="0.50" data-fin="0.70">
+        <span class="esc-num">02 · Proyecto</span>
+        <h2>Ni un panel de más</h2>
+        <p>Dimensionamos para tu consumo real. Sobredimensionar es la forma más común de que una instalación no se amortice nunca, y vender de más es muy fácil cuando nadie va a volver a verte.</p>
+      </article>
+
+      <article class="esc-bloque" data-ini="0.74" data-fin="0.95">
+        <span class="esc-num">03 · Instalación</span>
+        <h2>Montada y legalizada</h2>
+        <p>Uno o dos días de montaje. Después, la memoria técnica, el registro de autoconsumo y el alta de compensación de excedentes. Eso lo hacemos nosotros: tú no tramitas nada.</p>
+      </article>
+
+      <article class="esc-bloque esc-cierre" data-ini="0.955" data-fin="1">
+        <span class="esc-num">Y ya está</span>
+        <h2>A producir</h2>
+        <p>Te dejamos la monitorización en el móvil y te enseñamos a leerla, para que veas lo que produces y lo que vuelcas a la red. Si algo falla, viene el mismo que lo instaló.</p>
+      </article>
+    </div>
+
+    <div class="esc-pista" id="escPista" aria-hidden="true">
+      <span>Baja para verlo</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== CASO REAL ===== -->
+<section class="caso-real" id="caso-real">
+  <div class="env">
+    <div class="centro">
+      <span class="etq">Caso real</span>
+      <h2>Una instalación nuestra, tal como quedó</h2>
+      <p class="plomo">Chalet junto al mar, con la fotovoltaica montada sobre la cubierta plana de grava y las placas sobre soportes lastrados. Las fotos son del dron, sin retocar.</p>
+    </div>
+    <div class="caso-fotos">
+      <figure class="caso-grande">
+        <img src="{{IMG:solar/caso-1.webp}}" width="1200" height="900" loading="lazy" decoding="async"
+             alt="Chalet con piscina en la Costa Blanca con la instalación de placas solares terminada en la cubierta">
+        <figcaption>La vivienda con la instalación terminada.</figcaption>
+      </figure>
+      <figure>
+        <img src="{{IMG:solar/caso-2.webp}}" width="900" height="675" loading="lazy" decoding="async"
+             alt="Cubierta del chalet con los cuatro grupos de placas solares">
+        <figcaption>Los cuatro grupos de placas, de cerca.</figcaption>
+      </figure>
+      <figure>
+        <img src="{{IMG:solar/caso-3.webp}}" width="900" height="675" loading="lazy" decoding="async"
+             alt="El chalet desde otro ángulo, con las placas en la cubierta">
+        <figcaption>La misma cubierta desde el otro lado.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CABECERA DEL FORMULARIO ===== -->
+<section class="form-cab" id="estudio">
+  <div class="env centro">
+    <span class="etq">Estudio</span>
+    <h2>¿Te compensa? Te lo decimos</h2>
+    <p class="plomo">Cuatro datos y te llamamos para decirte si en tu caso sale a cuenta. Si no sale, te lo diremos.</p>
+    <ul class="form-datos">
+      <li><b>Te llamamos en menos de 24 h</b> laborables, desde el 652 967 349</li>
+      <li><b>Sin compromiso</b> y sin insistir después</li>
+      <li><b>Torrevieja, Orihuela Costa</b> y toda la Vega Baja</li>
+    </ul>
+  </div>
+</section>
+</div>
+
+<script>
+/* Electricidad y Antenas DLR — la placa se instala conforme bajas.
+
+   Cómo funciona:
+   - La placa es un objeto 3D de verdad: una caja con su cara de células, su
+     dorso, y los cuatro cantos del marco de aluminio. Son seis capas HTML.
+   - En cada fotograma se calculan los ocho vértices de la caja girada, se
+     proyectan a pantalla con perspectiva, y cada cara se deforma con la
+     matrix3d que lleva su rectángulo a los cuatro vértices que le tocan.
+     Solo se pintan las caras que miran al espectador, y cada una se sombrea
+     según cómo le da la luz.
+   - Al posarse, los vértices de la cara de células se llevan a las cuatro
+     esquinas exactas de una de las placas de la foto (medidas sobre la
+     imagen), así que encaja al píxel en cualquier pantalla.
+   - El panel fijo se ancla con position:sticky. Si un contenedor lo rompe
+     (GoHighLevel envuelve los bloques en capas con overflow oculto), se
+     arregla el contenedor o, si no se puede, se ancla a mano.
+
+   OJO: este archivo se pega EN LINEA en GoHighLevel, así que no puede
+   contener en ningún sitio la cadena de cierre de script. */
+(function () {
+  'use strict';
+
+  var escenario = document.getElementById('escenario');
+  if (!escenario) return;
+  var fijo = escenario.querySelector('.esc-fijo');
+  var placa = document.getElementById('escPlaca');
+  var casa = document.getElementById('escCasa');
+  var capa = casa && casa.querySelector('.casa-capa');
+  var pista = escenario.querySelector('.esc-pista');
+  var bloques = [].slice.call(escenario.querySelectorAll('.esc-bloque'));
+  if (!fijo || !placa || !casa || !bloques.length) return;
+
+  /* Esquinas de la quinta placa del tejado en la foto, en fracción del ancho
+     y el alto de la imagen, en el orden de las esquinas de la cara de
+     células: arriba-izquierda, arriba-derecha, abajo-derecha, abajo-izquierda. */
+  var DIANA = [
+    [0.50716, 0.34619],
+    [0.54720, 0.27783],
+    [0.60840, 0.28271],
+    [0.57031, 0.35400]
+  ];
+  var PERSPECTIVA = 1500;
+  var GROSOR = 0.03;                 /* grosor del marco respecto al ancho */
+  var LUZ = (function () {           /* de dónde viene la luz: arriba-izquierda, de frente */
+    var v = [-0.42, -0.55, 0.72], n = Math.hypot(v[0], v[1], v[2]);
+    return [v[0] / n, v[1] / n, v[2] / n];
+  })();
+
+  var sinMovimiento = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- entorno: ancho completo y contenedores que rompen sticky ---------- */
+
+
+  /* La landing va en varios bloques de código en GoHighLevel (con el formulario
+     nativo entre ellos), y cada uno queda dentro de una columna con ancho máximo
+     y relleno. Esto los saca a todo el ancho de la ventana. Se expone para que
+     el último bloque pueda llamarlo nada más cargarse. */
+  function abreAncestros(env) {
+    /* los contenedores con overflow oculto recortarían el bloque al sacarlo
+       de su columna, y además rompen position:sticky */
+    var anchoDoc = document.documentElement.clientWidth;
+    var clip = window.CSS && CSS.supports && CSS.supports('overflow', 'clip');
+    var nodo = env.parentElement;
+    while (nodo && nodo !== document.body && nodo !== document.documentElement) {
+      var cs = getComputedStyle(nodo);
+      var corta = /(hidden|auto|scroll)/.test(cs.overflowX + ' ' + cs.overflowY);
+      if (corta) {
+        var desplaza = /(auto|scroll)/.test(cs.overflowY) && nodo.scrollHeight > nodo.clientHeight + 4;
+        if (desplaza) break; /* es el contenedor que de verdad hace scroll: no se toca */
+        var estrecho = nodo.clientWidth < anchoDoc - 2;
+        nodo.style.setProperty('overflow', (estrecho || !clip) ? 'visible' : 'clip', 'important');
+      }
+      nodo = nodo.parentElement;
+    }
+  }
+
+  function anchoCompleto() {
+    var anchoDoc = document.documentElement.clientWidth;
+    var bloques = document.querySelectorAll('.dlr-solar');
+    if (!bloques.length) bloques = [escenario];
+    [].forEach.call(bloques, function (env) {
+      abreAncestros(env);
+      if (!env.classList.contains('dlr-solar')) return;
+      env.style.width = '';
+      env.style.maxWidth = '';
+      env.style.marginLeft = '';
+      var r = env.getBoundingClientRect();
+      if (r.left > 0.5 || r.width < anchoDoc - 1) {
+        var margen = parseFloat(getComputedStyle(env).marginLeft) || 0;
+        env.style.maxWidth = 'none';
+        env.style.width = anchoDoc + 'px';
+        env.style.marginLeft = (margen - r.left) + 'px';
+      }
+    });
+  }
+  window.dlrAnchoCompleto = anchoCompleto;
+  var arreglaEntorno = anchoCompleto;
+
+  /* atajos: aparecen con el primer scroll y ya no se van */
+  var atajos = document.getElementById('atajos');
+  function vigilaAtajos() {
+    if (!atajos) return;
+    var y = window.pageYOffset || document.documentElement.scrollTop || 0;
+    atajos.classList.toggle('visible', y > 24 || escenario.getBoundingClientRect().top < -24);
+  }
+  document.addEventListener('scroll', vigilaAtajos, { passive: true, capture: true });
+
+  /* huecos que tapan la cabecera fija y la barra inferior del móvil */
+  function mideHuecos() {
+    var arriba = 0, abajo = 0;
+    var cab = document.getElementById('cabecera');
+    if (cab) {
+      var pc = getComputedStyle(cab).position;
+      if (pc === 'sticky' || pc === 'fixed') arriba = cab.offsetHeight;
+    }
+    /* el logo y los atajos flotantes: si ya hay cabecera fija con su logo y sus
+       botones, sobran; si no, se les reserva la franja de arriba para que los
+       rótulos no los pisen */
+    var logo = document.getElementById('escLogo');
+    if (arriba > 0) {
+      if (atajos) atajos.style.display = 'none';
+      if (logo) logo.style.display = 'none';
+    } else if (atajos || logo) {
+      if (atajos) atajos.style.display = '';
+      if (logo) logo.style.display = '';
+      arriba = Math.max(atajos ? atajos.offsetHeight : 0, logo ? logo.offsetHeight : 0) + 26;
+    }
+    var barra = document.querySelector('.barra-movil');
+    if (barra && getComputedStyle(barra).display !== 'none') abajo = barra.offsetHeight;
+    escenario.style.setProperty('--esc-arriba', arriba + 'px');
+    escenario.style.setProperty('--esc-abajo', abajo + 'px');
+    return { arriba: arriba, abajo: abajo };
+  }
+
+  arreglaEntorno();
+  var huecos = mideHuecos();
+  vigilaAtajos();
+
+  if (sinMovimiento) {
+    addEventListener('resize', function () { arreglaEntorno(); mideHuecos(); });
+    return;
+  }
+
+  /* ---------- la placa como caja de seis caras ---------- */
+
+  function crea(clase, dentro) {
+    var d = document.createElement('div');
+    d.className = 'cara ' + clase;
+    d.innerHTML = (dentro || '') + '<b class="luz"></b>';
+    placa.appendChild(d);
+    return d;
+  }
+  var foto = placa.querySelector('img');
+  var sombra = document.createElement('div');
+  sombra.className = 'cara cara-sombra';
+  placa.appendChild(sombra);
+  var elDorso = crea('cara-dorso', '<i class="dorso-caja"></i><i class="dorso-cable c1"></i><i class="dorso-cable c2"></i><i class="dorso-etq"></i>');
+  var elArriba = crea('cara-canto canto-h');
+  var elAbajo = crea('cara-canto canto-h');
+  var elIzq = crea('cara-canto canto-v');
+  var elDcha = crea('cara-canto canto-v');
+  var elFrente = crea('cara-frente', '<i class="brillo"></i>');
+  if (foto) elFrente.insertBefore(foto, elFrente.firstChild);
+  placa.classList.add('esc-3d');
+
+  /* vértices: 0-3 la cara de células (AI, AD, BD, BI), 4-7 el dorso, mismos x,y.
+     Cada cara lista sus vértices de forma que, vista desde fuera, su rectángulo
+     HTML (0,0)-(ancho,0)-(ancho,alto)-(0,alto) caiga sobre ellos en ese orden. */
+  var CARAS = [
+    { el: elFrente, v: [0, 1, 2, 3], n: [0, 0, 1], t: 'wh' },
+    { el: elDorso, v: [5, 4, 7, 6], n: [0, 0, -1], t: 'wh' },
+    { el: elDcha, v: [1, 5, 6, 2], n: [1, 0, 0], t: 'dh' },
+    { el: elIzq, v: [4, 0, 3, 7], n: [-1, 0, 0], t: 'dh' },
+    { el: elArriba, v: [4, 5, 1, 0], n: [0, -1, 0], t: 'wd' },
+    { el: elAbajo, v: [3, 2, 6, 7], n: [0, 1, 0], t: 'wd' }
+  ];
+
+  /* ---------- utilidades ---------- */
+
+  function entre(a, b, t) { return a + (b - a) * t; }
+  function limita(v, a, b) { return v < a ? a : (v > b ? b : v); }
+  function tramo(v, a, b) { return limita((v - a) / (b - a), 0, 1); }
+  var RAD = Math.PI / 180;
+
+  function trig(pose) {
+    return { sx: Math.sin(pose.rx * RAD), cx: Math.cos(pose.rx * RAD),
+             sy: Math.sin(pose.ry * RAD), cy: Math.cos(pose.ry * RAD),
+             sz: Math.sin(pose.rz * RAD), cz: Math.cos(pose.rz * RAD) };
+  }
+  function gira(x, y, z, T) {
+    var x1 = x * T.cz - y * T.sz, y1 = x * T.sz + y * T.cz;   /* giro en Z */
+    var x2 = x1 * T.cy + z * T.sy, z2 = -x1 * T.sy + z * T.cy; /* giro en Y */
+    return [x2, y1 * T.cx - z2 * T.sx, y1 * T.sx + z2 * T.cx]; /* giro en X */
+  }
+
+  /* los ocho vértices de la caja, proyectados a pantalla */
+  function proyecta(pose, T, w, h, d, ox, oy) {
+    var hw = w * pose.s / 2, hh = h * pose.s / 2, hd = d * pose.s / 2;
+    var base = [[-hw, -hh], [hw, -hh], [hw, hh], [-hw, hh]];
+    var out = [];
+    for (var i = 0; i < 8; i++) {
+      var b = base[i % 4];
+      var g = gira(b[0], b[1], i < 4 ? hd : -hd, T);
+      var k = PERSPECTIVA / (PERSPECTIVA - g[2]);
+      out.push([ox + (pose.x + g[0] - ox) * k, oy + (pose.y + g[1] - oy) * k]);
+    }
+    return out;
+  }
+
+  function area2(q) {
+    var s = 0;
+    for (var i = 0; i < 4; i++) { var a = q[i], b = q[(i + 1) % 4]; s += a[0] * b[1] - b[0] * a[1]; }
+    return s;
+  }
+
+  /* matrix3d que lleva la caja w×h (origen 0,0) a las cuatro esquinas q */
+  function matriz(w, h, q) {
+    var x0 = q[0][0], y0 = q[0][1], x1 = q[1][0], y1 = q[1][1];
+    var x2 = q[2][0], y2 = q[2][1], x3 = q[3][0], y3 = q[3][1];
+    var dx1 = x1 - x2, dx2 = x3 - x2, sx = x0 - x1 + x2 - x3;
+    var dy1 = y1 - y2, dy2 = y3 - y2, sy = y0 - y1 + y2 - y3;
+    var det = dx1 * dy2 - dx2 * dy1;
+    if (Math.abs(det) < 1e-7) return null;
+    var g = (sx * dy2 - dx2 * sy) / det;
+    var hh = (dx1 * sy - sx * dy1) / det;
+    var a = x1 - x0 + g * x1, b = x3 - x0 + hh * x3;
+    var d = y1 - y0 + g * y1, e = y3 - y0 + hh * y3;
+    return 'matrix3d(' +
+      (a / w) + ',' + (d / w) + ',0,' + (g / w) + ',' +
+      (b / h) + ',' + (e / h) + ',0,' + (hh / h) + ',' +
+      '0,0,1,0,' +
+      x0 + ',' + y0 + ',0,1)';
+  }
+
+  /* ---------- medidas que solo cambian al redimensionar ---------- */
+
+  var M = null;
+
+  function mide() {
+    arreglaEntorno();
+    huecos = mideHuecos();
+    var sw = fijo.clientWidth, sh = fijo.clientHeight;
+    var movil = sw <= 900;
+    var arriba = huecos.arriba, util = sh - huecos.arriba - huecos.abajo;
+
+    /* cada rótulo se encoge lo justo si no cabe en la pantalla */
+    var hueroAbajo = arriba + util, textoAbajo = 0;
+    bloques.forEach(function (b, i) {
+      b.style.setProperty('--k', '1');
+      var alto = b.offsetHeight || 1;
+      var libre;
+      if (!movil) libre = util - 24;
+      else if (i === 0) libre = util - 16 - Math.max(150, util * 0.26); /* deja sitio a la placa */
+      else libre = util * 0.47;                                          /* por encima de la casa */
+      var k = limita(libre / alto, 0.6, 1);
+      b.style.setProperty('--k', k.toFixed(4));
+      if (i === 0) hueroAbajo = arriba + (movil ? 16 + alto * k : util);
+      else if (movil) textoAbajo = Math.max(textoAbajo, arriba + 16 + alto * k);
+    });
+
+    /* tamaño de la caja y de cada cara */
+    var w = placa.offsetWidth || 1, h = placa.offsetHeight || 1, d = Math.max(6, w * GROSOR);
+    CARAS.forEach(function (c) {
+      c.fw = c.t === 'dh' ? d : w;
+      c.fh = c.t === 'wd' ? d : h;
+      c.el.style.width = c.fw + 'px';
+      c.el.style.height = c.fh + 'px';
+    });
+    sombra.style.width = w + 'px';
+    sombra.style.height = h + 'px';
+
+    /* la diana, en coordenadas del panel fijo */
+    var cx0 = casa.offsetLeft, cy0 = casa.offsetTop, cw = casa.offsetWidth, ch = casa.offsetHeight;
+    var diana = DIANA.map(function (f) { return [cx0 + f[0] * cw, cy0 + f[1] * ch]; });
+    var dcx = (diana[0][0] + diana[1][0] + diana[2][0] + diana[3][0]) / 4;
+    var dcy = (diana[0][1] + diana[1][1] + diana[2][1] + diana[3][1]) / 4;
+    var ladoLargo = Math.hypot(diana[1][0] - diana[0][0], diana[1][1] - diana[0][1]);
+    var escalaFin = ladoLargo * 1.5 / w;
+
+    /* las poses del vuelo: la placa arranca flotando sobre la casa, que ya se ve */
+    var P;
+    if (!movil) {
+      /* arriba, en el cielo, para que la casa y el paisaje queden a la vista */
+      var s0d = 0.86;
+      var y0d = Math.max(arriba + h * s0d * 0.5 + 18, cy0 + ch * 0.03);
+      P = [
+        { p: 0.00, x: Math.max(dcx + sw * 0.03, sw * 0.71), y: y0d, rx: -16, ry: -30, rz: 6, s: s0d },
+        { p: 0.22, x: Math.max(dcx + sw * 0.03, sw * 0.71), y: y0d + util * 0.02, rx: -4, ry: 70, rz: 2, s: s0d * 0.96 }
+      ];
+    } else {
+      /* en pantallas muy bajas el aviso de bajar no cabe: se quita y la placa gana sitio */
+      var sinPista = (arriba + util - 58) - (hueroAbajo + 12) < 150;
+      if (pista) pista.style.display = sinPista ? 'none' : '';
+      var techo = hueroAbajo + 12, suelo = arriba + util - (sinPista ? 16 : 58);
+      var s0 = limita((suelo - techo) * 0.70 / h, 0.4, 0.9);
+      var y0 = (techo + suelo) / 2;
+      P = [
+        { p: 0.00, x: sw * 0.50, y: y0, rx: -16, ry: -28, rz: 6, s: s0 },
+        { p: 0.22, x: sw * 0.52, y: y0, rx: -4, ry: 70, rz: 2, s: s0 * 0.96 }
+      ];
+    }
+    var alza = movil ? util * 0.17 : util * 0.20;
+    var k3 = { p: 0.68, x: dcx - sw * 0.01, y: dcy - alza, rx: 34, ry: 292, rz: -16, s: Math.max(escalaFin * 1.9, 0.34) };
+    if (movil && textoAbajo) {
+      var minimo = textoAbajo + 8 + h * k3.s * 0.5;
+      if (k3.y < minimo) k3.y = Math.min(minimo, dcy - 12);
+    }
+    var k1 = P[1];
+    P.push({ p: 0.46, x: entre(k1.x, k3.x, 0.5), y: entre(k1.y, k3.y, 0.42), rx: 14, ry: 190, rz: -5,
+             s: entre(k1.s, k3.s, 0.5) });
+    P.push(k3);
+    /* pose de aproximación: ya orientada como el tejado, encima de la diana */
+    var fin = { p: 0.86, x: dcx, y: dcy, rx: 56, ry: 360, rz: -34, s: escalaFin };
+    P.push(fin);
+
+    var ox = sw * 0.6, oy = arriba + util * 0.42;
+    /* cuánto asoma el dorso por detrás de la cara al posarse */
+    var pf = proyecta(fin, trig(fin), w, h, d, ox, oy), grosorFin = [];
+    for (var i = 0; i < 4; i++) grosorFin.push([pf[i + 4][0] - pf[i][0], pf[i + 4][1] - pf[i][1]]);
+
+    M = { sw: sw, sh: sh, w: w, h: h, d: d, movil: movil, diana: diana, grosorFin: grosorFin,
+          P: P, ox: ox, oy: oy };
+  }
+
+  /* ---------- fotograma ---------- */
+
+  var manual = false, pM = -1, tAnterior = 0, visible = true, pendiente = false;
+  /* Tiempo de respuesta del amortiguado, en segundos. La rueda del ratón mueve
+     el scroll a saltos de unos 100 px; con esto la placa los recorre de forma
+     continua en vez de teletransportarse. En táctil el scroll ya es continuo y
+     basta con menos. */
+  var TAU = matchMedia('(hover: none)').matches ? 0.07 : 0.15;
+
+  /* curva suave que pasa por todas las poses sin detenerse en ninguna
+     (Hermite con tangentes por diferencias; sale y llega con velocidad cero) */
+  function curva(P, clave, i, u) {
+    var a = P[i], b = P[i + 1], h = b.p - a.p;
+    var ma = i > 0 ? (b[clave] - P[i - 1][clave]) / (b.p - P[i - 1].p) : 0;
+    var mb = i < P.length - 2 ? (P[i + 2][clave] - a[clave]) / (P[i + 2].p - a.p) : 0;
+    var u2 = u * u, u3 = u2 * u;
+    return (2 * u3 - 3 * u2 + 1) * a[clave] + (u3 - 2 * u2 + u) * h * ma +
+           (-2 * u3 + 3 * u2) * b[clave] + (u3 - u2) * h * mb;
+  }
+
+  function pinta(ahora) {
+    pendiente = false;
+    if (!M) mide();
+    if (!ahora) ahora = performance.now();
+    var caja = escenario.getBoundingClientRect();
+    var recorrido = escenario.offsetHeight - fijo.offsetHeight;
+    var avance = limita(-caja.top, 0, recorrido);
+    var p = recorrido > 0 ? avance / recorrido : 0;
+
+    /* ¿sigue funcionando el anclaje? Si el panel fijo se ha ido con el scroll
+       es que algún contenedor rompe sticky: se ancla a mano desde ahora. */
+    if (!manual && avance > 8 && avance < recorrido - 8) {
+      var tf = fijo.getBoundingClientRect().top;
+      if (tf < -6) { manual = true; escenario.classList.add('esc-manual'); }
+    }
+    if (manual) fijo.style.transform = 'translate3d(0,' + avance.toFixed(1) + 'px,0)';
+
+    /* el progreso que se pinta persigue al del scroll */
+    if (pM < 0) pM = p;
+    else {
+      var dt = Math.min(0.05, Math.max(0, (ahora - tAnterior) / 1000));
+      pM += (p - pM) * (1 - Math.exp(-dt / TAU));
+      if (Math.abs(p - pM) < 0.0003) pM = p;
+    }
+    tAnterior = ahora;
+    p = pM;
+
+    /* pose del vuelo, sobre una curva continua */
+    var P = M.P, i = 0;
+    while (i < P.length - 2 && p > P[i + 1].p) i++;
+    var a = P[i], b = P[i + 1];
+    var t = tramo(p, a.p, b.p);
+    var pose = { x: curva(P, 'x', i, t), y: curva(P, 'y', i, t), rx: curva(P, 'rx', i, t),
+                 ry: curva(P, 'ry', i, t), rz: curva(P, 'rz', i, t),
+                 s: Math.max(0.05, curva(P, 's', i, t)) };
+    /* flota mientras vuela; se va calmando al acercarse al tejado */
+    var peso = 1 - tramo(p, 0.45, 0.8);
+    if (peso > 0) {
+      var osc = Math.sin(ahora / 1300) * peso, osc2 = Math.sin(ahora / 2100) * (1 - tramo(p, 0, 0.2));
+      pose.y += osc * (M.movil ? 4 : 7); pose.rz += osc * 1.2; pose.rx += osc * 1.8; pose.ry += osc2 * 6;
+    }
+    var T = trig(pose);
+    var q = proyecta(pose, T, M.w, M.h, M.d, M.ox, M.oy);
+
+    /* al final los vértices se llevan a las esquinas de la placa de la foto */
+    if (i === P.length - 2) {
+      /* se posa frenando: rápido al principio, suave al llegar */
+      var e = 1 - Math.pow(1 - tramo(t, 0.2, 1), 3);
+      for (var n = 0; n < 4; n++) {
+        var dx = M.diana[n][0], dy = M.diana[n][1];
+        q[n][0] = entre(q[n][0], dx, e);
+        q[n][1] = entre(q[n][1], dy, e);
+        q[n + 4][0] = entre(q[n + 4][0], dx + M.grosorFin[n][0], e);
+        q[n + 4][1] = entre(q[n + 4][1], dy + M.grosorFin[n][1], e);
+      }
+    }
+
+    /* cada cara: se pinta solo si mira al espectador, deformada y sombreada */
+    for (var c = 0; c < CARAS.length; c++) {
+      var cara = CARAS[c], v = cara.v;
+      var cq = [q[v[0]], q[v[1]], q[v[2]], q[v[3]]];
+      var m = area2(cq) > 3 ? matriz(cara.fw, cara.fh, cq) : null;
+      if (!m) { if (cara.vis !== false) { cara.el.style.visibility = 'hidden'; cara.vis = false; } continue; }
+      if (cara.vis !== true) { cara.el.style.visibility = 'visible'; cara.vis = true; }
+      cara.el.style.transform = m;
+      var g = gira(cara.n[0], cara.n[1], cara.n[2], T);
+      var luz = Math.max(0, g[0] * LUZ[0] + g[1] * LUZ[1] + g[2] * LUZ[2]);
+      cara.el.style.setProperty('--oscuro', ((1 - luz) * 0.5).toFixed(3));
+    }
+    /* el reflejo del cristal se desplaza con el giro */
+    var giro = ((pose.ry % 360) + 360) % 360;
+    elFrente.style.setProperty('--bx', (130 - (giro > 180 ? giro - 360 : giro) * 1.6).toFixed(1) + '%');
+
+    /* sombra en el aire: la silueta de la placa, desplazada y difuminada */
+    var fs = 1 - tramo(p, 0.62, 0.86), sq = [];
+    for (var s = 0; s < 4; s++) sq.push([q[s][0] + 16 * fs + 2, q[s][1] + 44 * fs * pose.s + 3]);
+    var ms = Math.abs(area2(sq)) > 3 ? matriz(M.w, M.h, sq) : null;
+    if (ms) sombra.style.transform = ms;
+    sombra.style.opacity = ms ? (0.1 + 0.2 * fs).toFixed(3) : '0';
+
+    if (capa) capa.style.opacity = tramo(p, 0.875, 0.94).toFixed(3);
+    placa.style.opacity = (1 - tramo(p, 0.915, 0.965)).toFixed(3);
+
+    for (var j = 0; j < bloques.length; j++) {
+      var bl = bloques[j];
+      var activo = p >= +bl.getAttribute('data-ini') && p <= +bl.getAttribute('data-fin');
+      if (activo !== bl.classList.contains('activo')) bl.classList.toggle('activo', activo);
+    }
+    if (pista) pista.style.opacity = p > 0.05 ? '0' : '1';
+  }
+
+  function pide() { if (!pendiente) { pendiente = true; requestAnimationFrame(pinta); } }
+
+  /* mientras el escenario está a la vista se pinta cada fotograma: la placa
+     flota y además va alcanzando al scroll. Fuera de la vista, se para. */
+  function late() {
+    if (visible) pide();
+    requestAnimationFrame(late);
+  }
+
+  function remide() { M = null; pide(); }
+
+  document.addEventListener('scroll', pide, { passive: true, capture: true });
+  addEventListener('resize', remide, { passive: true });
+  addEventListener('orientationchange', remide, { passive: true });
+  addEventListener('load', remide);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(remide);
+  [].forEach.call(escenario.querySelectorAll('img'), function (im) {
+    if (!im.complete) im.addEventListener('load', remide, { once: true });
+  });
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (es) { visible = es[0].isIntersecting; if (visible) pide(); })
+      .observe(escenario);
+  }
+
+  mide();
+  pinta();
+  requestAnimationFrame(late);
+})();
+</script>
