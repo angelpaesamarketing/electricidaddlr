@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<style>
+:root{--tinta:#0d223b;--azul:#016dfd;--azul-hondo:#0048b5;--noche:#07101f;--sol:#ffb21a;--verde:#13b981;--wa:#25d366}
+*{box-sizing:border-box;margin:0}
+body{font-family:"Inter Display","Inter",sans-serif;background:#ccc}
+.lienzo{position:relative;overflow:hidden;width:1080px}
+.f45{height:1350px}.f916{height:1920px}
+h1{font-weight:850;letter-spacing:-.035em;line-height:1.02}
+.logo{height:74px}
+.cta{display:inline-flex;align-items:center;gap:18px;font-weight:800;font-size:40px;border-radius:999px;padding:30px 50px}
+.cta svg{width:42px;height:42px}
+.tel{font-weight:800;letter-spacing:-.01em}
+.chip{display:inline-flex;align-items:center;gap:12px;font-weight:700;font-size:28px;border-radius:999px;padding:14px 26px}
+.chip svg{width:28px;height:28px}
+
+/* ---------- A: El sol paga (oscuro) ---------- */
+.A{background:radial-gradient(900px 700px at 82% 8%,rgba(255,178,26,.55),rgba(255,120,30,.12) 45%,transparent 70%),linear-gradient(170deg,#0b2550 0%,var(--noche) 70%);color:#fff}
+.A .sol{position:absolute;right:-120px;top:-120px;width:520px;height:520px;border-radius:50%;
+  background:radial-gradient(circle,#fff6d8 0%,#ffd25e 30%,rgba(255,178,26,.6) 52%,transparent 70%)}
+.A .placa{position:absolute;filter:drop-shadow(0 60px 80px rgba(0,0,0,.6))}
+.A .etq{color:var(--sol);font-weight:750;font-size:30px;letter-spacing:.12em;text-transform:uppercase}
+.A h1{font-size:118px}
+.A h1 em{font-style:normal;color:var(--sol)}
+.A .sub{font-size:38px;line-height:1.3;color:#c9d6ea;font-weight:500}
+.A .cta{background:var(--sol);color:#1d1200;box-shadow:0 24px 50px -16px rgba(255,178,26,.8)}
+.A .chip{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.18)}
+.A .chip svg{color:var(--verde)}
+.A .pie{position:absolute;left:0;right:0;bottom:0;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 70px}
+.A .pie .tel{color:var(--tinta);font-size:46px}
+
+/* ---------- B: Llave en mano (claro) ---------- */
+.B{background:linear-gradient(180deg,#f5f8fc,#e8f1ff);color:var(--tinta)}
+.B .etq{display:inline-block;background:var(--azul);color:#fff;font-weight:750;font-size:28px;letter-spacing:.1em;text-transform:uppercase;padding:14px 26px;border-radius:999px}
+.B h1{font-size:104px}
+.B h1 span{color:var(--azul)}
+.B ul{list-style:none;padding:0}
+.B li{display:flex;align-items:center;gap:22px;font-size:40px;font-weight:650;margin-bottom:26px}
+.B li i{flex:none;width:58px;height:58px;border-radius:50%;background:var(--azul);display:grid;place-items:center}
+.B li i svg{width:32px;height:32px;color:#fff}
+.B .placa{position:absolute;filter:drop-shadow(0 50px 60px rgba(13,34,59,.35))}
+.B .cta{background:var(--azul);color:#fff;box-shadow:0 24px 50px -16px rgba(1,109,253,.8)}
+.B .chip{background:#fff;color:var(--tinta);box-shadow:0 8px 20px -10px rgba(13,34,59,.3)}
+.B .chip svg{color:var(--verde)}
+
+/* ---------- C: Factura (dolor -> solución) ---------- */
+.C{background:#fff;color:var(--tinta)}
+.C .arriba{position:absolute;left:0;right:0;top:0;background:var(--tinta);color:#fff}
+.C .factura{position:absolute;background:#fff;color:var(--tinta);border-radius:22px;padding:34px 38px;width:470px;
+  box-shadow:0 40px 70px -20px rgba(0,0,0,.5);transform:rotate(-5deg)}
+.C .factura small{display:block;font-size:24px;font-weight:600;color:#7a8699;letter-spacing:.08em;text-transform:uppercase}
+.C .factura b{display:block;font-size:44px;font-weight:800;margin:6px 0 18px}
+.C .factura .fila{display:flex;justify-content:space-between;font-size:26px;color:#48566b;padding:10px 0;border-top:1px solid #e3e8f0}
+.C .factura .sube{color:#e5484d;font-weight:800}
+.C .pregunta{font-size:88px}
+.C .pregunta em{font-style:normal;color:#ff6b6b}
+.C h1{font-size:100px}
+.C h1 span{color:var(--azul)}
+.C .sub{font-size:38px;line-height:1.3;color:#48566b;font-weight:500}
+.C .cta{background:var(--wa);color:#07321a;box-shadow:0 24px 50px -16px rgba(37,211,102,.8)}
+.C .placa{position:absolute;filter:drop-shadow(0 40px 50px rgba(13,34,59,.35))}
+</style></head><body>
+
+<!-- SVGs reutilizados -->
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="ok" viewBox="0 0 24 24"><path d="m20 6-11 11-5-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.1-.7.1l-.9 1.1c-.2.2-.3.2-.6.1a8 8 0 0 1-4-3.5c-.2-.3 0-.5.1-.7l.6-.8c.1-.2.1-.4 0-.6l-.9-2.2c-.2-.5-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.4-1.2 1.2-1.2 2.8s1.2 3.3 1.4 3.5c.2.2 2.4 3.7 5.8 5 2.9 1.1 3.4.9 4 .8.7-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3ZM12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Z"/></symbol>
+  <symbol id="tel" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></symbol>
+</svg>
+
+<!-- ===== A 4:5 ===== -->
+<div class="lienzo f45 A" id="A-4x5">
+  <div class="sol"></div>
+  <img class="placa" src="../../../assets/img/solar-960.webp" style="width:640px;right:-90px;top:330px;transform:rotate(-4deg)">
+  <div style="position:absolute;left:70px;top:70px;width:700px">
+    <div class="etq">Torrevieja · Orihuela Costa</div>
+    <h1 style="margin-top:26px">Que el <em>sol</em> pague tu factura</h1>
+    <p class="sub" style="margin-top:34px;width:560px">Placas solares llave en mano, de la mano de electricistas autorizados.</p>
+    <div style="display:flex;flex-direction:column;gap:16px;margin-top:40px;align-items:flex-start">
+      <span class="chip"><svg><use href="#ok"/></svg>Estudio gratis en 24 h</span>
+      <span class="chip"><svg><use href="#ok"/></svg>Legalización incluida</span>
+      <span class="chip"><svg><use href="#ok"/></svg>Desde 2003</span>
+    </div>
+  </div>
+  <div style="position:absolute;left:70px;bottom:210px"><span class="cta"><svg><use href="#wa"/></svg>Pide tu estudio gratis</span></div>
+  <div class="pie" style="height:150px"><img class="logo" src="../../../assets/img/logo-720.webp"><span class="tel">652 967 349</span></div>
+</div>
+
+<!-- ===== A 9:16 ===== -->
+<div class="lienzo f916 A" id="A-9x16">
+  <div class="sol" style="width:640px;height:640px"></div>
+  <div style="position:absolute;left:70px;right:70px;top:250px">
+    <div class="etq">Torrevieja · Orihuela Costa</div>
+    <h1 style="margin-top:26px;font-size:132px">Que el <em>sol</em> pague tu factura</h1>
+    <p class="sub" style="margin-top:34px;font-size:42px;width:820px">Placas solares llave en mano, de la mano de electricistas autorizados.</p>
+  </div>
+  <img class="placa" src="../../../assets/img/solar-960.webp" style="width:560px;left:260px;top:800px;transform:rotate(-4deg)">
+  <div style="position:absolute;left:0;right:0;bottom:350px;text-align:center"><span class="cta" style="font-size:44px;padding:34px 60px"><svg><use href="#wa"/></svg>Pide tu estudio gratis</span>
+    <div style="margin-top:26px;font-size:34px;color:#c9d6ea;font-weight:600">Presupuesto en 24 h · <b style="color:#fff">652 967 349</b></div></div>
+  <div class="pie" style="height:330px;align-items:flex-start;padding-top:60px;justify-content:center"><img class="logo" style="height:90px" src="../../../assets/img/logo-720.webp"></div>
+</div>
+
+<!-- ===== B 4:5 ===== -->
+<div class="lienzo f45 B" id="B-4x5">
+  <img class="placa" src="../../../assets/img/solar-960.webp" style="width:560px;right:-110px;top:420px;transform:rotate(6deg)">
+  <div style="position:absolute;left:70px;top:70px;right:70px">
+    <img class="logo" src="../../../assets/img/logo-720.webp">
+    <h1 style="margin-top:56px">Placas solares <span>llave en mano</span></h1>
+    <ul style="margin-top:56px;width:640px">
+      <li><i><svg><use href="#ok"/></svg></i>Estudio de sombras</li>
+      <li><i><svg><use href="#ok"/></svg></i>Dimensionado a tu consumo</li>
+      <li><i><svg><use href="#ok"/></svg></i>Legalización y excedentes</li>
+      <li><i><svg><use href="#ok"/></svg></i>Instalación y mantenimiento</li>
+    </ul>
+  </div>
+  <div style="position:absolute;left:70px;right:70px;bottom:70px;display:flex;align-items:center;justify-content:space-between">
+    <span class="cta"><svg><use href="#tel"/></svg>652 967 349</span>
+    <div style="text-align:right;font-size:30px;font-weight:700;line-height:1.35">Presupuesto gratis<br><span style="color:#13b981">en menos de 24 h</span></div>
+  </div>
+</div>
+
+<!-- ===== B 9:16 ===== -->
+<div class="lienzo f916 B" id="B-9x16">
+  <div style="position:absolute;left:70px;top:250px;right:70px">
+    <img class="logo" src="../../../assets/img/logo-720.webp">
+    <h1 style="margin-top:50px;font-size:120px">Placas solares <span>llave en mano</span></h1>
+    <ul style="margin-top:56px">
+      <li><i><svg><use href="#ok"/></svg></i>Estudio de sombras</li>
+      <li><i><svg><use href="#ok"/></svg></i>Dimensionado a tu consumo</li>
+      <li><i><svg><use href="#ok"/></svg></i>Legalización y excedentes</li>
+      <li><i><svg><use href="#ok"/></svg></i>Instalación y mantenimiento</li>
+    </ul>
+  </div>
+  <img class="placa" src="../../../assets/img/solar-960.webp" style="width:560px;right:-60px;top:1040px;transform:rotate(6deg)">
+  <div style="position:absolute;left:70px;bottom:400px">
+    <span class="chip" style="margin-bottom:26px"><svg><use href="#ok"/></svg>Instalador autorizado · Desde 2003</span><br>
+    <span class="cta" style="font-size:44px;padding:34px 56px"><svg><use href="#tel"/></svg>652 967 349</span>
+    <div style="margin-top:22px;font-size:34px;font-weight:700">Presupuesto gratis <span style="color:#13b981">en 24 h</span></div>
+  </div>
+</div>
+
+<!-- ===== C 4:5 ===== -->
+<div class="lienzo f45 C" id="C-4x5">
+  <div class="arriba" style="height:640px;padding:70px">
+    <h2 class="pregunta" style="font-weight:850;letter-spacing:-.035em;line-height:1.02;width:500px;font-size:80px">¿Tu factura de la luz <em>no para de subir?</em></h2>
+  </div>
+  <div class="factura" style="right:50px;top:170px;width:430px">
+    <small>Factura de la luz</small><b>Importe a pagar</b>
+    <div class="fila"><span>Enero</span><span>████ €</span></div>
+    <div class="fila"><span>Junio</span><span>████ €</span></div>
+    <div class="fila"><span>Agosto</span><span class="sube">▲ ████ €</span></div>
+  </div>
+  <div style="position:absolute;left:70px;top:710px;width:600px">
+    <h1>Produce <span>tu propia luz</span></h1>
+    <p class="sub" style="margin-top:26px">Placas solares en tu casa, instaladas y legalizadas por DLR.</p>
+  </div>
+  <img class="placa" src="../../../assets/img/solar-960.webp" style="width:430px;right:40px;top:700px;transform:rotate(-3deg)">
+  <div style="position:absolute;left:70px;right:70px;bottom:70px;display:flex;align-items:center;justify-content:space-between">
+    <span class="cta"><svg><use href="#wa"/></svg>Escríbenos</span>
+    <img class="logo" src="../../../assets/img/logo-720.webp">
+  </div>
+</div>
+
+<!-- ===== C 9:16 ===== -->
+<div class="lienzo f916 C" id="C-9x16">
+  <div class="arriba" style="height:1000px;padding:250px 70px 0">
+    <h2 class="pregunta" style="font-weight:850;letter-spacing:-.035em;line-height:1.02;font-size:104px">¿Tu factura de la luz <em>no para de subir?</em></h2>
+  </div>
+  <div class="factura" style="left:300px;top:640px">
+    <small>Factura de la luz</small><b>Importe a pagar</b>
+    <div class="fila"><span>Enero</span><span>████ €</span></div>
+    <div class="fila"><span>Junio</span><span>████ €</span></div>
+    <div class="fila"><span>Agosto</span><span class="sube">▲ ████ €</span></div>
+  </div>
+  <div style="position:absolute;left:70px;top:1100px;width:560px">
+    <h1 style="font-size:104px">Produce <span>tu propia luz</span></h1>
+  </div>
+  <img class="placa" src="../../../assets/img/solar-960.webp" style="width:340px;right:60px;top:1060px;transform:rotate(-3deg)">
+  <div style="position:absolute;left:0;right:0;bottom:360px;text-align:center">
+    <span class="cta" style="font-size:44px;padding:34px 60px"><svg><use href="#wa"/></svg>Pide tu estudio gratis</span>
+    <div style="margin-top:22px;font-size:34px;font-weight:700;color:#48566b">DLR · Electricistas desde 2003 · <span style="color:var(--tinta)">652 967 349</span></div>
+  </div>
+</div>
+</body></html>
