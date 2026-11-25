@@ -66,3 +66,29 @@ Mándanos un WhatsApp con una foto de tu última factura y te decimos qué insta
   Eventos: PageView · Contact (llamar / WhatsApp) · Lead (página de gracias).
 - Pendiente y recomendado: sustituir el render de la placa por FOTOS REALES de
   instalaciones de DLR en cuanto David las pase.
+
+---
+
+## D · «¿Tu factura no para de subir?» sobre obra real  ← recomendado
+
+Mismo concepto que el C, pero con una **foto real** de una instalación de DLR
+en Orihuela Costa (cubierta plana, módulos negros), en vez del render.
+Archivos: `solar-D-4x5.png` y `solar-D-9x16.png`.
+Fuente: `fuente/creativos-foto.html`; regenerar con
+`node campanas/placas-solares/render-foto.js`.
+
+Fotos de David guardadas en `fotos/`:
+- `obra-orihuela-cubierta.jpg` — la que se usa en el creativo D
+- `obra-orihuela-aerea.jpg` — plano más abierto, con piscina y la furgoneta de DLR
+- `obra-teja-vertical.jpg` — tejado de teja, vertical, para stories
+
+**Texto principal**
+Si cada factura de la luz te da un susto, es momento de producir tu propia energía. ⚡
+Diseñamos e instalamos tu sistema fotovoltaico a medida de tu casa y tu consumo,
+con toda la legalización incluida.
+Electricistas autorizados en Torrevieja y la Vega Baja desde 2003.
+👉 Pide tu estudio gratis, sin compromiso.
+
+**Título:** Produce tu propia luz con placas solares
+**Descripción:** Estudio gratis en menos de 24 h
+**Botón:** Más información → landing de placas solares

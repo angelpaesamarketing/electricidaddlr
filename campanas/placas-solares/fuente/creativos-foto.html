@@ -1,0 +1,105 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8">
+<style>
+:root{--tinta:#0d223b;--noche:#07101f;--azul:#016dfd;--rojo:#e5484d;--verde:#13b981}
+*{box-sizing:border-box;margin:0}
+body{background:#777;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.lienzo{position:relative;overflow:hidden;background:var(--noche)}
+.f45{width:1080px;height:1350px}
+.f916{width:1080px;height:1920px}
+.foto{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.velo-arr{position:absolute;left:0;right:0;top:0;background:linear-gradient(to bottom,rgba(7,16,31,.95) 0%,rgba(7,16,31,.88) 45%,rgba(7,16,31,0) 100%)}
+.velo-aba{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(to top,rgba(7,16,31,.97) 0%,rgba(7,16,31,.9) 55%,rgba(7,16,31,0) 100%)}
+h1{color:#fff;font-weight:850;letter-spacing:-.035em;line-height:1.02}
+.rojo{color:var(--rojo)}
+.azulc{color:#4b9bff}
+.etq{display:inline-block;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.26);
+  color:#fff;font-size:22px;font-weight:750;letter-spacing:.09em;text-transform:uppercase;
+  padding:11px 20px;border-radius:999px;backdrop-filter:blur(6px)}
+.sub{color:#cdd9ea;font-size:34px;line-height:1.35;font-weight:500}
+.factura{position:absolute;background:#fff;color:var(--tinta);border-radius:22px;padding:28px 32px;
+  box-shadow:0 40px 80px -24px rgba(0,0,0,.7);transform:rotate(2deg)}
+.factura small{display:block;font-size:20px;font-weight:600;color:#7a8699;letter-spacing:.08em;text-transform:uppercase}
+.factura b{display:block;font-size:36px;font-weight:800;margin:5px 0 14px}
+.factura .fila{display:flex;justify-content:space-between;gap:30px;font-size:24px;color:#48566b;padding:9px 0;border-top:1px solid #e3e8f0}
+.factura .sube{color:var(--rojo);font-weight:800}
+.factura .ejemplo{margin-top:12px;font-size:16px;color:#9aa6b8;font-weight:600}
+.cta{display:inline-flex;align-items:center;gap:16px;background:var(--azul);color:#fff;font-weight:800;
+  font-size:40px;border-radius:999px;padding:28px 46px;box-shadow:0 24px 50px -16px rgba(1,109,253,.9)}
+.pie{position:absolute;left:0;right:0;bottom:0;background:#fff;display:flex;align-items:center;
+  justify-content:space-between;padding:0 56px}
+.pie img{width:260px}
+.pie .tel{font-size:42px;font-weight:850;color:var(--tinta)}
+.avales{display:flex;flex-wrap:wrap;gap:14px;margin-top:26px}
+.avales span{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.22);color:#fff;font-size:25px;font-weight:700;padding:12px 20px;border-radius:999px}
+.avales i{color:var(--verde);font-style:normal;font-weight:900}
+</style></head><body>
+
+<!-- ===== D 4:5 · foto real ===== -->
+<div class="lienzo f45" id="D-4x5">
+  <img class="foto" src="../fotos/obra-orihuela-cubierta.jpg">
+  <div class="velo-arr" style="height:620px"></div>
+  <div class="velo-aba" style="height:720px"></div>
+
+  <div style="position:absolute;left:64px;top:62px;width:600px">
+    <span class="etq">Instalación real · Orihuela Costa</span>
+    <h1 style="font-size:78px;margin-top:26px">¿Tu factura de la luz <span class="rojo">no para de subir?</span></h1>
+  </div>
+
+  <div class="factura" style="right:66px;top:340px;width:372px">
+    <small>Factura de la luz</small><b>Importe a pagar</b>
+    <div class="fila"><span>Enero</span><span>82 €</span></div>
+    <div class="fila"><span>Junio</span><span>109 €</span></div>
+    <div class="fila"><span>Agosto</span><span class="sube">▲ 164 €</span></div>
+    <div class="ejemplo">Ejemplo ilustrativo</div>
+  </div>
+
+  <div style="position:absolute;left:64px;right:64px;bottom:270px">
+    <h1 style="font-size:84px">Produce <span class="azulc">tu propia luz</span></h1>
+    <p class="sub" style="margin-top:18px">Placas solares instaladas y legalizadas por el electricista de la zona.</p>
+    <div class="avales">
+      <span><i>✓</i> Autorizado</span><span><i>✓</i> Desde 2003</span><span><i>✓</i> Estudio gratis</span>
+    </div>
+  </div>
+
+  <div class="pie" style="height:170px">
+    <img src="../../../assets/img/logo-720.webp">
+    <span class="cta" style="font-size:34px;padding:22px 38px">Pide tu estudio gratis</span>
+  </div>
+</div>
+
+<!-- ===== D 9:16 · foto real ===== -->
+<div class="lienzo f916" id="D-9x16">
+  <img class="foto" src="../fotos/obra-orihuela-cubierta.jpg">
+  <div class="velo-arr" style="height:900px"></div>
+  <div class="velo-aba" style="height:1000px"></div>
+
+  <div style="position:absolute;left:64px;top:230px;width:660px">
+    <span class="etq">Instalación real · Orihuela Costa</span>
+    <h1 style="font-size:92px;margin-top:28px">¿Tu factura de la luz <span class="rojo">no para de subir?</span></h1>
+  </div>
+
+  <div class="factura" style="right:70px;top:660px;width:372px">
+    <small>Factura de la luz</small><b>Importe a pagar</b>
+    <div class="fila"><span>Enero</span><span>82 €</span></div>
+    <div class="fila"><span>Junio</span><span>109 €</span></div>
+    <div class="fila"><span>Agosto</span><span class="sube">▲ 164 €</span></div>
+    <div class="ejemplo">Ejemplo ilustrativo</div>
+  </div>
+
+  <div style="position:absolute;left:64px;right:64px;bottom:430px">
+    <h1 style="font-size:92px">Produce <span class="azulc">tu propia luz</span></h1>
+    <p class="sub" style="margin-top:20px">Placas solares instaladas y legalizadas por el electricista de la zona.</p>
+    <div class="avales">
+      <span><i>✓</i> Autorizado</span><span><i>✓</i> Desde 2003</span><span><i>✓</i> Estudio gratis</span>
+    </div>
+    <div style="margin-top:34px"><span class="cta">Pide tu estudio gratis</span></div>
+  </div>
+
+  <div class="pie" style="height:190px">
+    <img src="../../../assets/img/logo-720.webp">
+    <span class="tel">652 967 349</span>
+  </div>
+</div>
+
+</body></html>
