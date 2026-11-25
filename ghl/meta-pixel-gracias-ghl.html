@@ -1,0 +1,24 @@
+<!-- ============================================================
+     Electricidad y Antenas DLR · Lead de Meta (SOLO página de gracias)
+     ------------------------------------------------------------
+     DÓNDE: en la PÁGINA DE GRACIAS de placas solares,
+            Page Settings > Tracking Code > FOOTER (o un elemento Custom HTML).
+     ORDEN: esta página debe llevar también el bloque de cookies y el
+            del píxel; este trozo va DESPUÉS de los dos.
+     ============================================================ -->
+<script>
+(function () {
+  'use strict';
+  var enviado = false;
+  function lead() {
+    if (enviado || typeof fbq !== 'function') return;
+    if (!(window.dlrMeta && window.dlrMeta.concedido())) return;
+    enviado = true;
+    fbq('track', 'Lead', { content_name: 'Placas solares', content_category: 'Formulario landing' });
+  }
+  window.dlrMetaAlConceder = lead;   /* si acepta las cookies estando ya aquí */
+  lead();
+  var reloj = setInterval(function () { lead(); if (enviado) clearInterval(reloj); }, 400);
+  setTimeout(function () { clearInterval(reloj); }, 20000);
+})();
+</script>

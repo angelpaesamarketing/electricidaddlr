@@ -1,0 +1,72 @@
+<!-- ============================================================
+     Electricidad y Antenas DLR · Píxel de Meta para GoHighLevel
+     ------------------------------------------------------------
+     DÓNDE: GHL > Sites > (el funnel de placas solares) > Settings >
+            Tracking Code > HEAD  (o Settings > Tracking Code del sitio)
+     ORDEN: PEGAR DESPUÉS del bloque de cookies (consentimiento-ghl.html).
+     ANTES DE PEGAR: cambia PON_AQUI_EL_ID_DEL_PIXEL por el ID real.
+
+     Qué hace:
+       - Carga el píxel con el consentimiento REVOCADO (fbq consent revoke).
+       - Solo lo concede si el visitante acepta "Publicidad" en el banner.
+       - Dispara PageView, y Contact al pulsar Llamar o WhatsApp.
+       - El Lead va en la página de gracias (ver el otro bloque).
+     ============================================================ -->
+<script>
+(function () {
+  'use strict';
+
+  var PIXEL_ID = 'PON_AQUI_EL_ID_DEL_PIXEL';
+
+  /* ---------- 1. Código base del píxel (el de Meta, tal cual) ---------- */
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+  (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+  /* ---------- 2. Sin consentimiento no se envía nada ---------- */
+  fbq('consent', 'revoke');
+  fbq('init', PIXEL_ID);
+
+  /* ---------- 3. Leer la decisión del banner de cookies ---------- */
+  function aceptaPublicidad() {
+    try {
+      if (window.dlrConsent && typeof window.dlrConsent.estado === 'function') {
+        var e = window.dlrConsent.estado();
+        return !!(e && e.publicidad);
+      }
+      var bruto = localStorage.getItem('dlr_consent');
+      if (!bruto) return false;
+      return !!JSON.parse(bruto).publicidad;
+    } catch (e) { return false; }
+  }
+
+  var concedido = false;
+  function conceder() {
+    if (concedido || !aceptaPublicidad()) return;
+    concedido = true;
+    fbq('consent', 'grant');
+    fbq('track', 'PageView');
+    if (window.dlrMetaAlConceder) { try { window.dlrMetaAlConceder(); } catch (e) {} }
+  }
+
+  conceder();                                   /* visitante que ya aceptó antes */
+  var reloj = setInterval(function () {         /* o que acepta ahora en el banner */
+    conceder();
+    if (concedido) clearInterval(reloj);
+  }, 400);
+  setTimeout(function () { clearInterval(reloj); }, 120000);
+
+  /* ---------- 4. Contact: clic en Llamar o en WhatsApp ---------- */
+  document.addEventListener('click', function (ev) {
+    var a = ev.target.closest && ev.target.closest('a[href^="tel:"], a[href*="wa.me"], a[href*="api.whatsapp.com"]');
+    if (!a || !concedido) return;
+    fbq('track', 'Contact', { metodo: a.getAttribute('href').indexOf('tel:') === 0 ? 'telefono' : 'whatsapp' });
+  }, true);
+
+  window.dlrMeta = { concedido: function () { return concedido; } };
+})();
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=PON_AQUI_EL_ID_DEL_PIXEL&ev=PageView&noscript=1"></noscript>
