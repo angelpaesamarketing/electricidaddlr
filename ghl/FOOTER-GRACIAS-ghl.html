@@ -1,0 +1,22 @@
+<!-- ============================================================
+     Electricidad y Antenas DLR · Lead de Meta
+     SOLO en la página de gracias de placas solares:
+     Page Settings > Tracking Code > FOOTER
+     (esa página debe llevar también el bloque de cookies y el del píxel)
+     ============================================================ -->
+<script>
+(function () {
+  'use strict';
+  var enviado = false;
+  function lead() {
+    if (enviado || typeof fbq !== 'function') return;
+    if (!(window.dlrMeta && window.dlrMeta.activo())) return;
+    enviado = true;
+    fbq('track', 'Lead', { content_name: 'Placas solares', content_category: 'Landing GHL' });
+  }
+  window.dlrMetaAlArrancar = lead;
+  lead();
+  var reloj = setInterval(function () { lead(); if (enviado) clearInterval(reloj); }, 400);
+  setTimeout(function () { clearInterval(reloj); }, 30000);
+})();
+</script>
