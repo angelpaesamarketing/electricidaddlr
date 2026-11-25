@@ -7,7 +7,8 @@
 
      Si el visitante no acepta "Publicidad", NO se carga nada de Meta.
      Al aceptar, se carga el píxel y se envía PageView.
-     Eventos: PageView · Contact (llamar / WhatsApp) · Lead (gracias).
+     Eventos: PageView · Contact (llamar / WhatsApp) ·
+              Lead (automático en cualquier URL que contenga "gracias").
      ============================================================ -->
 <script>
 (function () {
@@ -41,9 +42,20 @@
     fbq('init', PIXEL_ID);
     fbq('track', 'PageView');
 
+    /* Lead: la página de gracias, reconocida por su URL.
+       Añade aquí cualquier otra ruta de gracias que tengas. */
+    if (esGracias()) {
+      fbq('track', 'Lead', { content_name: 'Placas solares', content_category: 'Landing GHL' });
+    }
+
     if (typeof window.dlrMetaAlArrancar === 'function') {
       try { window.dlrMetaAlArrancar(); } catch (e) {}
     }
+  }
+
+  function esGracias() {
+    var ruta = (location.pathname || '').toLowerCase();
+    return ruta.indexOf('gracias') !== -1 || ruta.indexOf('thank') !== -1;
   }
 
   arrancar();
