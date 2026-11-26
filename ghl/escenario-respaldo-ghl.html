@@ -42,6 +42,9 @@
 (function () {
   'use strict';
 
+  if (window.dlrEscRespaldo) return;   /* por si el bloque se pega dos veces */
+  window.dlrEscRespaldo = true;
+
   function arranca() {
     var esc = document.getElementById('escenario') ||
               document.querySelector('.dlr-solar .escenario');
