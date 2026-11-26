@@ -1,0 +1,117 @@
+<!-- ============================================================
+     Electricidad y Antenas DLR · Respaldo de la sección animada
+     ------------------------------------------------------------
+     En algunos móviles la animación de la placa se rompe (el panel
+     fijo deja de quedarse quieto) y aparece una franja enorme en
+     blanco antes de la siguiente sección.
+
+     Este bloque lo detecta y pasa la sección a versión plana: los
+     textos y la foto uno debajo de otro, sin animación. Nunca deja
+     hueco vacío.
+
+     DÓNDE: en la página de placas solares, al final del bloque de
+            la landing, o en Page Settings > Tracking Code > FOOTER.
+     ============================================================ -->
+<style>
+/* !important porque el guion de la animación escribe estilos en línea
+   en cada fotograma, y si no, ganarían ellos. */
+.dlr-solar .escenario.esc-plano{height:auto!important}
+.dlr-solar .escenario.esc-plano .esc-fijo{position:relative!important;height:auto!important;
+  overflow:visible!important;padding:28px 0 0!important;transform:none!important;top:auto!important;left:auto!important;right:auto!important}
+.dlr-solar .escenario.esc-plano .esc-cielo{z-index:0!important}
+.dlr-solar .escenario.esc-plano .esc-casa{z-index:1!important}
+.dlr-solar .escenario.esc-plano .esc-texto{position:relative!important;z-index:4!important;display:flex!important;
+  flex-direction:column!important;gap:34px!important;padding:0 22px!important;pointer-events:auto!important;
+  top:auto!important;bottom:auto!important;left:auto!important;right:auto!important;height:auto!important}
+.dlr-solar .escenario.esc-plano .esc-bloque,
+.dlr-solar .escenario.esc-plano .esc-bloque:first-child{position:static!important;width:auto!important;
+  max-width:36em!important;transform:none!important;opacity:1!important;visibility:visible!important;
+  pointer-events:auto!important;transition:none!important;top:auto!important;left:auto!important;
+  filter:none!important;clip-path:none!important}
+.dlr-solar .escenario.esc-plano .esc-casa{position:relative!important;left:auto!important;right:auto!important;
+  bottom:auto!important;top:auto!important;margin:34px 0 0!important;width:100%!important;height:auto!important;
+  transform:none!important;-webkit-mask-image:none!important;mask-image:none!important;opacity:1!important}
+.dlr-solar .escenario.esc-plano .esc-casa img{position:relative!important;width:100%!important;height:auto!important;
+  transform:none!important;opacity:1!important;-webkit-mask-image:none!important;mask-image:none!important}
+.dlr-solar .escenario.esc-plano .esc-casa .casa-capa{position:absolute!important;inset:0!important}
+.dlr-solar .escenario.esc-plano .esc-placa,
+.dlr-solar .escenario.esc-plano .esc-pista{display:none!important}
+.dlr-solar .escenario.esc-plano .esc-logo{position:static!important;margin:0 22px 24px!important}
+</style>
+<script>
+(function () {
+  'use strict';
+
+  function arranca() {
+    var esc = document.getElementById('escenario') ||
+              document.querySelector('.dlr-solar .escenario');
+    if (!esc) return false;
+    var fijo = esc.querySelector('.esc-fijo');
+    var bloques = [].slice.call(esc.querySelectorAll('.esc-bloque'));
+    if (!fijo || !bloques.length) return false;
+
+    var yaPlano = false;
+    function plano(motivo) {
+      if (yaPlano) return;
+      yaPlano = true;
+      esc.classList.add('esc-plano');
+      window.removeEventListener('scroll', vigila);
+      if (window.console && console.info) console.info('[DLR] escenario plano:', motivo);
+    }
+
+    /* 1 · Un ancestro con overflow recortado rompe position:sticky.
+          Si lo hay y no es el que hace scroll, no habrá animación. */
+    function stickyRoto() {
+      if (getComputedStyle(fijo).position !== 'sticky') return false;
+      var n = fijo.parentElement;
+      while (n && n !== document.body && n !== document.documentElement) {
+        var cs = getComputedStyle(n);
+        var ov = cs.overflowX + ' ' + cs.overflowY;
+        if (/(hidden|clip)/.test(ov)) return true;
+        if (/(auto|scroll)/.test(cs.overflowY) && n.scrollHeight > n.clientHeight + 4) return false;
+        n = n.parentElement;
+      }
+      return false;
+    }
+
+    /* 2 · Al cargar: si la sección es altísima y no se ve ni un bloque,
+          es que el guion de la animación no ha arrancado. */
+    function nadaVisible() {
+      var alto = window.innerHeight || 600;
+      if (esc.offsetHeight < alto * 2) return false;
+      for (var i = 0; i < bloques.length; i++) {
+        var cs = getComputedStyle(bloques[i]);
+        if (cs.visibility !== 'hidden' && parseFloat(cs.opacity) > 0.05) return false;
+      }
+      return true;
+    }
+
+    /* 3 · Durante el scroll: estamos dentro de la sección pero el panel
+          se ha ido hacia arriba. Ese es justo el hueco en blanco. */
+    function vigila() {
+      if (yaPlano) return;
+      var r = esc.getBoundingClientRect();
+      var alto = window.innerHeight || 600;
+      var dentro = r.top < -40 && r.bottom > alto + 40;
+      if (!dentro) return;
+      var f = fijo.getBoundingClientRect();
+      if (f.bottom < alto * 0.6) plano('el panel no se queda fijo');
+    }
+
+    if (stickyRoto()) { plano('sticky roto por un contenedor'); return true; }
+
+    setTimeout(function () { if (nadaVisible()) plano('la animación no arrancó'); }, 1400);
+    window.addEventListener('scroll', vigila, { passive: true });
+    window.addEventListener('resize', vigila, { passive: true });
+    setTimeout(vigila, 300);
+    return true;
+  }
+
+  if (arranca()) return;
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', arranca);
+  }
+  var reloj = setInterval(function () { if (arranca()) clearInterval(reloj); }, 300);
+  setTimeout(function () { clearInterval(reloj); }, 15000);
+})();
+</script>
