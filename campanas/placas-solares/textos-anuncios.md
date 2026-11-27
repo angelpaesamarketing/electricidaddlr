@@ -92,3 +92,32 @@ Electricistas autorizados en Torrevieja y la Vega Baja desde 2003.
 **Título:** Produce tu propia luz con placas solares
 **Descripción:** Estudio gratis en menos de 24 h
 **Botón:** Más información → landing de placas solares
+
+
+---
+
+## Cambio de zona · noviembre de 2026
+
+DLR cubre toda la franja costera **de Alicante a Cartagena / Mar Menor**, no solo
+la Vega Baja. En los creativos D el rótulo pasa de «Instalación real · Orihuela
+Costa» a «Instalación real · De Alicante a Murcia».
+
+Formatos del creativo D: `solar-D-4x5.png` (feed), `solar-D-1x1.png`,
+`solar-D-1911.png` (enlaces y columna derecha) y `solar-D-9x16.png` (stories y reels).
+
+**Texto principal actualizado**
+Si cada factura de la luz te da un susto, es momento de producir tu propia energía. ⚡
+Diseñamos e instalamos tu sistema fotovoltaico a medida de tu casa y tu consumo,
+con toda la legalización incluida.
+Electricistas autorizados en toda la costa, de Alicante a Cartagena, desde 2003.
+👉 Pide tu estudio gratis, sin compromiso.
+
+**Segmentación por chinchetas, no por un radio único** (si no, entra todo el interior):
+Alicante +10 · Santa Pola +10 · Guardamar +10 · Torrevieja +15 · Orihuela +15 ·
+Pilar de la Horadada +10 · San Pedro del Pinatar +10 · San Javier +10 ·
+Los Alcázares +10 · Cartagena +15. Siempre «personas que viven en esta ubicación».
+
+Con esta zona, 12 €/día se queda corto: conviene subir a 18-20 €/día.
+
+**Pendiente:** la landing y el SEO siguen diciendo «Torrevieja · Orihuela Costa ·
+Vega Baja», y alguien de Cartagena o Alicante puede pensar que no se le da servicio.
