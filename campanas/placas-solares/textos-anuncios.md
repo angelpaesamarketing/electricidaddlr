@@ -100,7 +100,7 @@ Electricistas autorizados en Torrevieja y la Vega Baja desde 2003.
 
 DLR cubre toda la franja costera **de Alicante a Cartagena / Mar Menor**, no solo
 la Vega Baja. En los creativos D el rótulo pasa de «Instalación real · Orihuela
-Costa» a «Instalación real · De Alicante a Murcia».
+Costa» a «Instalación real · Toda la costa de Alicante a Murcia».
 
 Formatos del creativo D: `solar-D-4x5.png` (feed), `solar-D-1x1.png`,
 `solar-D-1911.png` (enlaces y columna derecha) y `solar-D-9x16.png` (stories y reels).
